@@ -1,0 +1,131 @@
+<resources>
+    <string name="app_name">BackindApps</string>
+    <string name="title_activity_main">MainActivity</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_onboarding">OnboardingActivity</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+
+
+    <string name="desc_login">Backind membantu anda menemukan tempat wisata impian dan homestay terdekat!</string>
+    <string name="facebook">FACEBOOK</string>
+    <string name="google">GOOGLE</string>
+    <string name="lupa_pass">LUPA PASSWORD?</string>
+    <string name="belum_punya_akun">BELUM PUNYA AKUN?</string>
+    <string name="sudah_punya_akun">SUDAH PUNYA AKUN?</string>
+    <string name="daftar_sekarang">Daftar</string>
+    <string name="login">Login</string>
+    <string name="action_sign_in_short">Login</string>
+    <string name="prompt_email">ALAMAT EMAIL</string>
+    <string name="prompt_password">KATA SANDI</string>
+    <string name="action_sign_in">Login</string>
+
+    <string name="nama_depan">NAMA DEPAN</string>
+    <string name="nama_belakang">NAMA BELAKANG</string>
+    <string name="kata_sandi">KATA SANDI</string>
+    <string name="ulangi_kata_sandi">ULANGI KATA SANDI</string>
+    <string name="daftar">Daftar</string>
+
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."
+    </string>
+
+    <string name="kosong"> </string>
+    <string name="skip">MULAI</string>
+    <string name="start">GOT IT</string>
+
+    <string name="slide_1_title">Cari dan Booking Wisata</string>
+    <string name="slide_1_desc">Kamu dengan mudah bisa mencari, menemukan dan booking tiket Wisata</string>
+
+    <string name="slide_2_title">Cari Homestay Pilihanmu</string>
+    <string name="slide_2_desc">Kamu bisa menemukan homestay sesuai pilhanmu</string>
+
+    <string name="slide_3_title">Cari Homestay dan Wisata Sekaligus</string>
+    <string name="slide_3_desc">Kamu bisa langsung booking homestay dan wisata sekaligus</string>
+    <string name="title_activity_tab_menu">TabMenu</string>
+    <string name="title_activity_bottom_menu">BottomMenu</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">My Booking</string>
+    <string name="title_notifications">My Profile</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- Login -->
+    <string name="welcome">Selamat Datang</string>
+    <string name="backpacker">Backpacker!</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="lupasandi">Lupa Sandi?</string>
+    <string name="belumpunya">Belum punya akun?</string>
+
+
+    <!-- Daftar -->
+    <string name="daftarakun">Daftar Akun</string>
+    <string name="namalengkap">Nama Lengkap</string>
+    <string name="email">Email</string>
+    <string name="jeniskelamin">Jenis Kelamin</string>
+    <string name="sudahpunya">Sudah punya akun?</string>
+
+    <!-- Page Screens -->
+    <string name="populer">Daftar Akun</string>
+    <string name="mulaidari">Nama Lengkap</string>
+    <string name="transaksi">Transaksi</string>
+    <string name="tagihan">Tagihan</string>
+    <string name="riwayat">Riwayat</string>
+    <string name="tempatwisata">Tempat Wisata</string>
+    <string name="homestay">Homestay</string>
+    <string name="tiket">/ tiket</string>
+    <string name="review">Reviews</string>
+    <string name="bukajam">Buka jam</string>
+    <string name="malam">/ malam</string>
+    <string name="checkin">Check in</string>
+    <string name="checkout">Check out</string>
+    <string name="fasilitas">Fasilitas</string>
+
+    <!-- Beli Tiket -->
+    <string name="belitiket">Beli Tiket</string>
+    <string name="budget">Budget</string>
+    <string name="tanggal">Tanggal</string>
+    <string name="jumlahtiket">Jumlah Tiket</string>
+    <string name="totalharga">Total Harga</string>
+    <string name="sisabudget">Sisa Budget</string>
+
+    <!-- Pembayaran -->
+    <string name="detailbayar">Detail Bayar</string>
+    <string name="tikets">Tiket</string>
+    <string name="orang">Orang</string>
+
+
+    <!-- Profil -->
+    <string name="profil">Profil</string>
+    <string name="ubahprofil">Ubah Profil</string>
+    <string name="katasandi">Ubah Kata Sandi</string>
+    <string name="logout">Logout</string>
+    <string name="carihomestay">Cari Homestay</string>
+
+
+    <!-- Button -->
+    <string name="beli">Beli</string>
+    <string name="pesan">Pesan</string>
+    <string name="detail">Detail</string>
+    <string name="batalpesan">Batal Pesan</string>
+
+    <!-- Laporan Pembayaran -->
+    <string name="bataswaktu">BATAS WAKTU PEMBAYARAN</string>
+    <string name="jumlahtagihan">Jumlah Tagihan</string>
+    <string name="transfertepat">Transfer tepat 3 digit terakhir untuk proses verifikasi</string>
+    <string name="transferrekening">Transfer dapat dilakukan kesalah satu rekening tujuan Backind berikut : </string>
+    <string name="nomortagihan">Pemesananmu dicatat dengan nomor tagihan pembayaran :</string>
+    <string name="verifikasi">Backind akan melakukan verifikasi paling lama 30 menit setelah kamu melakukan pembayaran</string>
+    <string name="informasipemesan">Informasi Pemesan</string>
+    <string name="notelp">No Telp</string>
+
+</resources>
