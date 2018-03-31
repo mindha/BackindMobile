@@ -1,9 +1,7 @@
 package backind.backind.Activity;
 
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.RequiresApi;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 
@@ -44,7 +42,7 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(LoginActivity.this, BayarActivity.class));
+                startActivity(new Intent(LoginActivity.this, BeliTiketActivity.class));
             }
         });
 

@@ -1,6 +1,7 @@
 package backind.backind.Activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.ColorDrawable;
@@ -11,22 +12,25 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import backind.backind.R;
 
-public class BayarActivity extends AppCompatActivity {
+public class BeliTiketActivity extends AppCompatActivity {
 
     TextView txtJumlahTiket;
     ImageButton btnMinus, btnPlus;
+    Button btnBeli;
     int n;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_bayar);
+        setContentView(R.layout.activity_beli_tiket);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         //status bar
         Window window = this.getWindow();
@@ -46,6 +50,7 @@ public class BayarActivity extends AppCompatActivity {
         txtJumlahTiket = findViewById(R.id.jumlah);
         btnMinus = findViewById(R.id.btnMinus);
         btnPlus = findViewById(R.id.btnPlus);
+        btnBeli = findViewById(R.id.belitiket);
 
         btnMinus.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,6 +78,13 @@ public class BayarActivity extends AppCompatActivity {
                     toast.show();
                 }
 
+            }
+        });
+
+        btnBeli.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(BeliTiketActivity.this, KonfirmasiActivity.class));
             }
         });
     }

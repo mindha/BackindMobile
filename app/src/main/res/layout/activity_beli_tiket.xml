@@ -10,7 +10,7 @@
     android:paddingBottom="35dp"
     android:orientation="vertical"
     android:layout_height="match_parent"
-    tools:context=".Activity.BayarActivity">
+    tools:context=".Activity.BeliTiketActivity">
 
     <LinearLayout
         android:id="@+id/email_login_form"

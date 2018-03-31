@@ -15,14 +15,14 @@ import android.widget.Button;
 
 import backind.backind.R;
 
+public class PembayaranActivity extends AppCompatActivity {
 
-public class KonfirmasiActivity extends AppCompatActivity {
 
-    private Button btnBayar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_konfirmasi);
+        setContentView(R.layout.activity_pembayaran);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         //status bar
         Window window = this.getWindow();
@@ -39,15 +39,6 @@ public class KonfirmasiActivity extends AppCompatActivity {
         upArrow.setColorFilter(ContextCompat.getColor(this, R.color.colorHitam), PorterDuff.Mode.SRC_ATOP);
         getSupportActionBar().setHomeAsUpIndicator(upArrow);
 
-
-        btnBayar = findViewById(R.id.bayar);
-
-        btnBayar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(KonfirmasiActivity.this, PembayaranActivity.class));
-            }
-        });
 
     }
 }

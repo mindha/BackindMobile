@@ -26,13 +26,27 @@
                 android:value="backind.backind.Activity.LoginActivity" />
         </activity>
         <activity
-            android:name=".Activity.BayarActivity"
+            android:name=".Activity.BeliTiketActivity"
             android:parentActivityName=".Activity.RegisterActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="backind.backind.Activity.RegisterActivity" />
         </activity>
-        <activity android:name=".Activity.KonfirmasiActivity"></activity>
+        <activity
+            android:name=".Activity.KonfirmasiActivity"
+            android:parentActivityName=".Activity.BeliTiketActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="backind.backind.Activity.BeliTiketActivity" />
+        </activity>
+        <activity
+            android:name=".Activity.PembayaranActivity"
+            android:parentActivityName=".Activity.KonfirmasiActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="backind.backind.Activity.KonfirmasiActivity" />
+
+        </activity>
     </application>
 
 </manifest>

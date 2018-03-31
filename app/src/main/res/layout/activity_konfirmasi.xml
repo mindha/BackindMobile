@@ -1,9 +1,145 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorWhite"
+    android:gravity="center_horizontal"
+    android:paddingLeft="35dp"
+    android:paddingRight="35dp"
+    android:paddingBottom="35dp"
+    android:orientation="vertical"
     tools:context=".Activity.KonfirmasiActivity">
 
-</android.support.constraint.ConstraintLayout>
+    <LinearLayout
+        android:id="@+id/email_login_form"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/backindMontserratBold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/padding10"
+            android:text="@string/tempatwisata"
+            android:fontFamily="@font/montserrat_medium"
+            android:textColor="@color/colorHitam"
+            android:textSize="16dp" />
+
+
+
+        <TextView
+            android:id="@+id/namatiket"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/activity_horizontal_margin"
+            android:text="Kampung Gajah"
+            android:fontFamily="@font/montserrat_regular"
+            android:textColor="@color/colorHitam"
+            android:layout_marginTop="@dimen/padding5"
+            android:textSize="20dp" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/tanggal"
+            android:fontFamily="@font/montserrat_regular"
+            android:layout_marginTop="20dp"/>
+        <TextView
+            android:id="@+id/tanggal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat_medium"
+            android:text="23 Januari 2020"
+            android:layout_marginTop="@dimen/padding5"
+            android:layout_marginBottom="@dimen/dots_height"
+            android:textColor="@color/colorHitam"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat_regular"
+            android:text="@string/jumlahtiket"/>
+        <TextView
+            android:id="@+id/tiket"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat_medium"
+            android:text="5"
+            android:layout_marginTop="@dimen/padding5"
+            android:layout_marginBottom="@dimen/dots_height"
+            android:textColor="@color/colorHitam"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat_regular"
+            android:text="@string/totalharga"/>
+        <TextView
+            android:id="@+id/harga"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat_medium"
+            android:text="Rp 100.000,-"
+            android:layout_marginTop="@dimen/padding5"
+            android:layout_marginBottom="@dimen/dots_height"
+            android:textColor="@color/colorHitam"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/sisabudget"
+                android:fontFamily="@font/montserrat_medium"
+                android:textColor="@color/colorPink"/>
+            <TextView
+                android:id="@+id/budget"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:text="Rp 20.000,-"
+                android:fontFamily="@font/montserrat_medium"
+                android:textColor="@color/colorPink"/>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="70dp">
+            <Button
+                android:id="@+id/cari"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/btn_style_purple"
+                android:textColor="@color/colorWhite"
+                android:text="@string/cari"
+                android:textAllCaps="false"
+                android:paddingLeft="@dimen/dots_height"
+                android:paddingRight="@dimen/dots_height"
+                android:textSize="@dimen/activity_vertical_margin"
+                android:fontFamily="@font/montserrat_medium"
+
+                />
+            <Button
+                android:id="@+id/bayar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/btn_style_orange"
+                android:textColor="@color/colorWhite"
+                android:text="@string/bayar"
+                android:textAllCaps="false"
+                android:paddingLeft="@dimen/dots_height"
+                android:paddingRight="@dimen/dots_height"
+                android:textSize="@dimen/activity_vertical_margin"
+                android:layout_marginLeft="@dimen/padding5"
+                android:fontFamily="@font/montserrat_medium"
+                />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>
