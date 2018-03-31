@@ -92,7 +92,7 @@
 
     <!-- Beli Tiket -->
     <string name="belitiket">Beli Tiket</string>
-    <string name="budget">Budget</string>
+    <string name="budget">Budget </string>
     <string name="tanggal">Tanggal</string>
     <string name="jumlahtiket">Jumlah Tiket</string>
     <string name="totalharga">Total Harga</string>
