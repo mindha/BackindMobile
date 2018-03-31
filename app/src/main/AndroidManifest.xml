@@ -33,7 +33,7 @@
                 android:value="backind.backind.Activity.RegisterActivity" />
         </activity>
         <activity
-            android:name=".Activity.KonfirmasiActivity"
+            android:name=".Activity.DetailBayarTiketActivity"
             android:parentActivityName=".Activity.BeliTiketActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -41,10 +41,10 @@
         </activity>
         <activity
             android:name=".Activity.PembayaranActivity"
-            android:parentActivityName=".Activity.KonfirmasiActivity">
+            android:parentActivityName=".Activity.DetailBayarTiketActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="backind.backind.Activity.KonfirmasiActivity" />
+                android:value="backind.backind.Activity.DetailBayarTiketActivity" />
 
         </activity>
     </application>

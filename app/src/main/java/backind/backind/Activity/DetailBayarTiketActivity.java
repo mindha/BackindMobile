@@ -16,13 +16,13 @@ import android.widget.Button;
 import backind.backind.R;
 
 
-public class KonfirmasiActivity extends AppCompatActivity {
+public class DetailBayarTiketActivity extends AppCompatActivity {
 
     private Button btnBayar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_konfirmasi);
+        setContentView(R.layout.activity_detail_bayar_tiket);
 
         //status bar
         Window window = this.getWindow();
@@ -45,7 +45,7 @@ public class KonfirmasiActivity extends AppCompatActivity {
         btnBayar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(KonfirmasiActivity.this, PembayaranActivity.class));
+                startActivity(new Intent(DetailBayarTiketActivity.this, PembayaranActivity.class));
             }
         });
 

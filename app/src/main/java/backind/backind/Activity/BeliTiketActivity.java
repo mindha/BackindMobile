@@ -84,7 +84,7 @@ public class BeliTiketActivity extends AppCompatActivity {
         btnBeli.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(BeliTiketActivity.this, KonfirmasiActivity.class));
+                startActivity(new Intent(BeliTiketActivity.this, DetailBayarTiketActivity.class));
             }
         });
     }

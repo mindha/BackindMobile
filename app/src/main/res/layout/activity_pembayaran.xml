@@ -176,6 +176,7 @@
                 android:text="@string/batalpesan"
                 android:fontFamily="@font/montserrat_medium"
                 android:textAllCaps="false"
+                android:layout_marginBottom="@dimen/padding5"
                 android:textColor="@android:color/white"
                 android:textSize="20dp"/>
 
