@@ -16,7 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/dots_height"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="120dp"
+        android:layout_marginBottom="130dp"
         android:gravity="center"
         android:orientation="horizontal">
 
@@ -44,8 +44,7 @@
         android:textColor="@android:color/white"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="25dp"
-        android:layout_marginTop="25dp"/>
+        android:layout_marginBottom="50dp"/>
 
 </RelativeLayout>
 
