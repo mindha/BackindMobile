@@ -52,7 +52,7 @@
     <string name="title_activity_tab_menu">TabMenu</string>
     <string name="title_activity_bottom_menu">BottomMenu</string>
     <string name="title_home">Home</string>
-    <string name="title_dashboard">My Booking</string>
+    <string name="title_dashboard">My History</string>
     <string name="title_notifications">My Profile</string>
 
     <!-- TODO: Remove or change this placeholder text -->
@@ -128,5 +128,6 @@
     <string name="verifikasi">Backind akan melakukan verifikasi paling lama 30 menit setelah kamu melakukan pembayaran</string>
     <string name="informasipemesan">Informasi Pemesan</string>
     <string name="notelp">No Telp</string>
+    <string name="title_activity_menu">MenuActivity</string>
 
 </resources>
