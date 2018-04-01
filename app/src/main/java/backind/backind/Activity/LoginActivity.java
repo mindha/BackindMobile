@@ -30,7 +30,6 @@ public class LoginActivity extends AppCompatActivity {
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         window.setStatusBarColor(ContextCompat.getColor(this, R.color.colorWhite));
 
-
         txtDaftar = (TextView)findViewById(R.id.daftar);
         btnLogin = (Button) findViewById(R.id.login);
         txtDaftar.setOnClickListener(new View.OnClickListener() {

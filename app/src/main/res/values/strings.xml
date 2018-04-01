@@ -41,13 +41,13 @@
     <string name="skip">MULAI</string>
     <string name="start">GOT IT</string>
 
-    <string name="slide_1_title">Cari dan Booking Wisata</string>
-    <string name="slide_1_desc">Kamu dengan mudah bisa mencari, menemukan dan booking tiket Wisata</string>
+    <string name="slide_1_title">Cari Tempat Wisata Pilihanmu</string>
+    <string name="slide_1_desc">Kamu dengan mudah bisa mencari, menemukan dan booking tiket wisata</string>
 
     <string name="slide_2_title">Cari Homestay Pilihanmu</string>
     <string name="slide_2_desc">Kamu bisa menemukan homestay sesuai pilhanmu</string>
 
-    <string name="slide_3_title">Cari Homestay dan Wisata Sekaligus</string>
+    <string name="slide_3_title">Atur Budget cari Homestay dan Wisata sekaligus</string>
     <string name="slide_3_desc">Kamu bisa langsung booking homestay dan wisata sekaligus</string>
     <string name="title_activity_tab_menu">TabMenu</string>
     <string name="title_activity_bottom_menu">BottomMenu</string>
