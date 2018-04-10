@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -16,6 +17,8 @@ import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
@@ -86,20 +89,27 @@ public class HomeFragment extends Fragment {
             @Override
             public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
                 if (scrollRange == -1) {
+                    Window window = getActivity().getWindow();
+                    window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+                    window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+                    window.setStatusBarColor(ContextCompat.getColor(getActivity(), R.color.colorWhite));
                     scrollRange = appBarLayout.getTotalScrollRange();
                 }
                 if (scrollRange + verticalOffset == 0) {
-                    AppBarLayout.LayoutParams p = (AppBarLayout.LayoutParams) collapsingToolbar.getLayoutParams();
-                    p.setScrollFlags(0);
-                    collapsingToolbar.setLayoutParams(p);
-//                    collapsingToolbar.setTitle(getString(R.string.app_name));
-//                    isShow = true;
+                    Window window = getActivity().getWindow();
+                    window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+                    window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+                    window.setStatusBarColor(ContextCompat.getColor(getActivity(), R.color.colorPrimary));
+                    collapsingToolbar.setTitle("Home");
+                    isShow = true;
                 } else if (isShow) {
-                    AppBarLayout.LayoutParams p = (AppBarLayout.LayoutParams) collapsingToolbar.getLayoutParams();
-                    p.setScrollFlags(0);
-                    collapsingToolbar.setLayoutParams(p);
-//                    collapsingToolbar.setTitle(" ");
-//                    isShow = false;
+                    //status bar
+                    Window window = getActivity().getWindow();
+                    window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+                    window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+                    window.setStatusBarColor(ContextCompat.getColor(getActivity(), R.color.colorWhite));
+                    collapsingToolbar.setTitle(" ");
+                    isShow = false;
                 }
             }
         });
@@ -113,9 +123,9 @@ public class HomeFragment extends Fragment {
     private void setupSlider() {
         sliderView.setDurationScroll(800);
         List<Fragment> fragments = new ArrayList<>();
-        fragments.add(FragmentSlider.newInstance(String.valueOf(getResources().getDrawable(R.drawable.img_slider_1))));
-        fragments.add(FragmentSlider.newInstance(String.valueOf(getResources().getDrawable(R.drawable.img_slider_2))));
-        fragments.add(FragmentSlider.newInstance(String.valueOf(getResources().getDrawable(R.drawable.img_slider_3))));
+        fragments.add(FragmentSlider.newInstance("http://4.bp.blogspot.com/-wBLaglBgvHI/Wsx1SJFpzII/AAAAAAAADOY/ycrraRu1hJEpNKfZ57Ngu0K5DOueZVvJACK4BGAYYCw/s1600/img_slider_1.png"));
+        fragments.add(FragmentSlider.newInstance("http://1.bp.blogspot.com/-qTuGbLKylHw/Wsx1SHhquXI/AAAAAAAADOU/gs4k4cTBjuIvdzOAVCRQUG1zIHEcK-SjACK4BGAYYCw/s1600/img_slider_2.png"));
+        fragments.add(FragmentSlider.newInstance("http://4.bp.blogspot.com/-WMIGm511kz4/Wsx1Rz1GryI/AAAAAAAADOQ/pz9gkghxtCMJNu8rWQmRBOor3vpKqLQOACK4BGAYYCw/s1600/img_slider_3.png"));
 
         mAdapter = new SliderPagerAdapter(getFragmentManager(), fragments);
         sliderView.setAdapter(mAdapter);
@@ -127,48 +137,25 @@ public class HomeFragment extends Fragment {
 
 
     private void prepareKota() {
-        int[] covers = new int[]{
-                R.drawable.album1,
-                R.drawable.album2,
-                R.drawable.album3,
-                R.drawable.album4,
-                R.drawable.album5,
-                R.drawable.album6,
-                R.drawable.album7,
-                R.drawable.album8,
-                R.drawable.album9,
-                R.drawable.album10,
-                R.drawable.album11};
+        String[] covers = new String[]{
+                "https://demajesticbandung.com/wp-content/uploads/2017/03/1a-bandung-dari-masa-ke-masa.jpg",
+                "https://cdn-image.hipwee.com/wp-content/uploads/2017/11/hipwee-wisata-jogja-1080x630.jpg",
+                "https://cdns.klimg.com/resized/670x335/p/headline/5-destinasi-wisata-kekinian-wajib-kunju-fc3462.jpg",
+                "http://www.nationsonline.org/gallery/Indonesia/Jakarta-Panorama.jpg"};
 
-        Kota a = new Kota("Maroon5", 13, covers[0]);
+        Kota a = new Kota("Bandung", 20000, covers[0]);
         kotaList.add(a);
 
-        a = new Kota("Sugar Ray", 8, covers[1]);
+        a = new Kota("Jogjakarta", 10000, covers[1]);
         kotaList.add(a);
 
-        a = new Kota("Bon Jovi", 11, covers[2]);
+        a = new Kota("Malang", 30000, covers[2]);
         kotaList.add(a);
 
-        a = new Kota("The Corrs", 12, covers[3]);
+        a = new Kota("Jakarta", 50000, covers[3]);
         kotaList.add(a);
 
-        a = new Kota("The Cranberries", 14, covers[4]);
-        kotaList.add(a);
 
-        a = new Kota("Westlife", 1, covers[5]);
-        kotaList.add(a);
-
-        a = new Kota("Black Eyed Peas", 11, covers[6]);
-        kotaList.add(a);
-
-        a = new Kota("VivaLaVida", 14, covers[7]);
-        kotaList.add(a);
-
-        a = new Kota("The Cardigans", 11, covers[8]);
-        kotaList.add(a);
-
-        a = new Kota("Pussycat Dolls", 17, covers[9]);
-        kotaList.add(a);
 
         adapter.notifyDataSetChanged();
     }

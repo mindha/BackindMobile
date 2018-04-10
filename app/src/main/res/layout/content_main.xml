@@ -8,12 +8,27 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".Activity.HomeFragment"
     tools:showIn="@layout/fragment_home">
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycler_view"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:clipToPadding="false"
-        android:scrollbars="vertical" />
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:fontFamily="@font/montserrat_medium"
+            android:layout_margin="@dimen/padding10"
+            android:textSize="@dimen/margin20"
+            android:textColor="@color/colorHitam"
+            android:layout_height="wrap_content"
+            android:text="@string/populer"/>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clipToPadding="false"
+            android:scrollbars="vertical" />
+    </LinearLayout>
+
+
 
 </RelativeLayout>

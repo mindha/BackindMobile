@@ -54,7 +54,7 @@ public class KotaAdapter extends RecyclerView.Adapter<KotaAdapter.MyViewHolder> 
     public void onBindViewHolder(final MyViewHolder holder, int position) {
         Kota album = kotaList.get(position);
         holder.kota.setText(album.getName());
-        holder.startFrom.setText("Mulai dari " +album.getStartFrom() );
+        holder.startFrom.setText("Mulai dari Rp " +album.getStartFrom() +",-");
 
         // loading album cover using Glide library
         Glide.with(mContext).load(album.getThumnail()).into(holder.thumbnail);

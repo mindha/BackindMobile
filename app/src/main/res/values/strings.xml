@@ -75,7 +75,7 @@
     <string name="sudahpunya">Sudah punya akun?</string>
 
     <!-- Page Screens -->
-    <string name="populer">Daftar Akun</string>
+    <string name="populer">Populer</string>
     <string name="mulaidari">Nama Lengkap</string>
     <string name="transaksi">Transaksi</string>
     <string name="tagihan">Tagihan</string>
@@ -129,5 +129,9 @@
     <string name="informasipemesan">Informasi Pemesan</string>
     <string name="notelp">No Telp</string>
     <string name="title_activity_menu">MenuActivity</string>
+    <string name="title_activity_list_bisnis">ListBisnisActivity</string>
+    <string name="tab_text_1">Tab 1</string>
+    <string name="tab_text_2">Tab 2</string>
+    <string name="tab_text_3">Tab 3</string>
 
 </resources>

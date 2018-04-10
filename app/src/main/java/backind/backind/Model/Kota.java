@@ -1,11 +1,10 @@
 package backind.backind.Model;
 
 public class Kota {
-    private String name;
+    private String name, thumnail;
     private int startFrom;
-    private int thumnail;
 
-    public Kota(String name, int startFrom, int thumnail) {
+    public Kota(String name, int startFrom, String thumnail) {
         this.name = name;
         this.startFrom = startFrom;
         this.thumnail = thumnail;
@@ -30,11 +29,11 @@ public class Kota {
         this.startFrom = startFrom;
     }
 
-    public int getThumnail() {
+    public String getThumnail() {
         return thumnail;
     }
 
-    public void setThumnail(int thumnail) {
+    public void setThumnail(String thumnail) {
         this.thumnail = thumnail;
     }
 }
