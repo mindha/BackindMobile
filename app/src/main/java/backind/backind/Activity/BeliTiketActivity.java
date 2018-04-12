@@ -69,12 +69,12 @@ public class BeliTiketActivity extends AppCompatActivity {
         btnPlus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (n < 5) {
+                if (n < 10) {
                     n++;
                     txtJumlahTiket.setText(String.valueOf(n));
                 } else {
                     Context context = getApplicationContext();
-                    Toast toast = Toast.makeText(context, "Maksimal pembelian tiket hanya 5", Toast.LENGTH_SHORT);
+                    Toast toast = Toast.makeText(context, "Maksimal pembelian tiket hanya 10 Tiket", Toast.LENGTH_SHORT);
                     toast.show();
                 }
 
