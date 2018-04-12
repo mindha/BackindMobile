@@ -2,6 +2,7 @@ package backind.backind.Activity;
 
 import android.app.ActionBar;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Rect;
 import android.net.Uri;
@@ -19,6 +20,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
@@ -27,6 +29,7 @@ import com.bumptech.glide.Glide;
 import java.util.ArrayList;
 import java.util.List;
 
+import backind.backind.Adapter.HomestayAdapter;
 import backind.backind.Adapter.KotaAdapter;
 import backind.backind.Model.Kota;
 import backind.backind.R;
@@ -155,11 +158,8 @@ public class HomeFragment extends Fragment {
         a = new Kota("Jakarta", 50000, covers[3]);
         kotaList.add(a);
 
-
-
         adapter.notifyDataSetChanged();
     }
-
 
 
     public class GridSpacingItemDecoration extends RecyclerView.ItemDecoration {
