@@ -1,45 +1,45 @@
 package backind.backind.Activity;
 
-import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Rect;
-import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.design.widget.AppBarLayout;
-import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.LinearLayout;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import backind.backind.Adapter.KotaAdapter;
 import backind.backind.Adapter.TourismAdapter;
-import backind.backind.Model.TourismModel;
-import backind.backind.Model.TourismModel;
+import backind.backind.Model.HomestayDetails;
+import backind.backind.Model.Bisnis;
 import backind.backind.R;
-import backind.backind._sliders.SliderView;
+import backind.backind.Rest.RestApi;
+import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 
 public class ListTourismFragment extends Fragment {
+    public static final String ROOT_URL = "http://192.168.0.121:8000/";
 
     private LinearLayout mLinearLayout;
 
 
     private RecyclerView recyclerView;
     private TourismAdapter adapter;
-    private List<TourismModel> tourismList;
+    private List<HomestayDetails> bisnisList;
 
     public ListTourismFragment() {
     }
@@ -51,8 +51,8 @@ public class ListTourismFragment extends Fragment {
 
         recyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
 
-        tourismList = new ArrayList<>();
-        adapter = new TourismAdapter(getActivity(), tourismList);
+        bisnisList = new ArrayList<>();
+        adapter = new TourismAdapter(getActivity(), bisnisList);
 
         RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getActivity(), 2);
         recyclerView.setLayoutManager(mLayoutManager);
@@ -60,31 +60,48 @@ public class ListTourismFragment extends Fragment {
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(adapter);
 
-        dataTourism();
+        getData();
 
         return rootView;
     }
 
-    private void dataTourism() {
-        String[] covers = new String[]{
-                "https://demajesticbandung.com/wp-content/uploads/2017/03/1a-bandung-dari-masa-ke-masa.jpg",
-                "https://cdn-image.hipwee.com/wp-content/uploads/2017/11/hipwee-wisata-jogja-1080x630.jpg",
-                "https://cdns.klimg.com/resized/670x335/p/headline/5-destinasi-wisata-kekinian-wajib-kunju-fc3462.jpg",
-                "http://www.nationsonline.org/gallery/Indonesia/Jakarta-Panorama.jpg"};
+    private void getData() {
+        HttpLoggingInterceptor loggin = new HttpLoggingInterceptor(new HttpLoggingInterceptor.Logger() {
+            @Override
+            public void log(String message) {
+                Log.d("Backind", message);
+            }
+        });
+        loggin.setLevel(HttpLoggingInterceptor.Level.BODY);
+        OkHttpClient client = new OkHttpClient.Builder()
+                .addInterceptor(loggin)
+                .build();
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(ROOT_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .client(client)
+                .build();
 
-        TourismModel a = new TourismModel("Kampung Gajah", 20000, covers[0]);
-        tourismList.add(a);
+        RestApi service = retrofit.create(RestApi.class);
+        Call<List<Bisnis>> call = service.getDataHomestay();
+        call.enqueue(new Callback<List<Bisnis>>() {
+            @Override
+            public void onResponse(Call<List<Bisnis>> call, Response<List<Bisnis>> response) {
+                List<Bisnis> bisnis = response.body();
+                bisnisList.clear();
+                for(Bisnis homestay : bisnis){
+                    bisnisList.add(homestay.getBusinessDetails());
+                }
+                adapter.notifyDataSetChanged();
+            }
 
-        a = new TourismModel("Taman Kardus", 10000, covers[1]);
-        tourismList.add(a);
+            @Override
+            public void onFailure(Call<List<Bisnis>> call, Throwable t) {
+                System.out.println("Mencoba");
+            }
 
-        a = new TourismModel("Lorem Ipsum", 30000, covers[2]);
-        tourismList.add(a);
+        });
 
-        a = new TourismModel("Lorem Ipsum", 50000, covers[3]);
-        tourismList.add(a);
-
-        adapter.notifyDataSetChanged();
     }
 
     public class GridSpacingItemDecoration extends RecyclerView.ItemDecoration {
@@ -126,4 +143,7 @@ public class ListTourismFragment extends Fragment {
         Resources r = getResources();
         return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, r.getDisplayMetrics()));
     }
+
+
 }
+

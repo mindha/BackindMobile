@@ -15,13 +15,13 @@ import com.bumptech.glide.Glide;
 import java.util.List;
 
 import backind.backind.Activity.ListBisnisActivity;
-import backind.backind.Model.TourismModel;
+import backind.backind.Model.HomestayDetails;
 import backind.backind.R;
 
 public class TourismAdapter extends RecyclerView.Adapter<TourismAdapter.MyViewHolder> {
 
     private Context mContext;
-    private List<TourismModel> tourismList;
+    private List<HomestayDetails> tourismList;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView tourism, startFrom;
@@ -48,7 +48,7 @@ public class TourismAdapter extends RecyclerView.Adapter<TourismAdapter.MyViewHo
     }
 
 
-    public TourismAdapter(Context mContext, List<TourismModel> albumList) {
+    public TourismAdapter(Context mContext, List<HomestayDetails> albumList) {
         this.mContext = mContext;
         this.tourismList = albumList;
     }
@@ -63,12 +63,12 @@ public class TourismAdapter extends RecyclerView.Adapter<TourismAdapter.MyViewHo
 
     @Override
     public void onBindViewHolder(final TourismAdapter.MyViewHolder holder, int position) {
-        TourismModel album = tourismList.get(position);
-        holder.tourism.setText(album.getName());
-        holder.startFrom.setText("Mulai dari Rp " + album.getStartFrom() + ",-");
+        HomestayDetails album = tourismList.get(position);
+        holder.tourism.setText(album.getBusinessName());
+        holder.startFrom.setText("Mulai dari Rp " + album.getBusinessPrice() + ",-");
 
         // loading album cover using Glide library
-        Glide.with(mContext).load(album.getThumnail()).into(holder.thumbnail);
+        Glide.with(mContext).load(album.getBusinessProfilePict()).into(holder.thumbnail);
 
     }
 
