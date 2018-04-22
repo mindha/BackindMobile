@@ -18,8 +18,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import backind.backind.Adapter.TourismAdapter;
-import backind.backind.Model.BusinessDetails;
 import backind.backind.Model.Business;
+import backind.backind.Model.BusinessDetails;
 import backind.backind.R;
 import backind.backind.Rest.RestApi;
 import okhttp3.OkHttpClient;
@@ -31,7 +31,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 
-public class ListTourismFragment extends Fragment {
+public class ListHomestayFragment extends Fragment {
     public static final String ROOT_URL = "http://192.168.0.121:8000/";
 
     private LinearLayout mLinearLayout;
@@ -41,7 +41,7 @@ public class ListTourismFragment extends Fragment {
     private TourismAdapter adapter;
     private List<BusinessDetails> bisnisList;
 
-    public ListTourismFragment() {
+    public ListHomestayFragment() {
     }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -56,7 +56,7 @@ public class ListTourismFragment extends Fragment {
 
         RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getActivity(), 2);
         recyclerView.setLayoutManager(mLayoutManager);
-        recyclerView.addItemDecoration(new ListTourismFragment.GridSpacingItemDecoration(2, dpToPx(10), true));
+        recyclerView.addItemDecoration(new ListHomestayFragment.GridSpacingItemDecoration(2, dpToPx(10), true));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(adapter);
 
@@ -83,7 +83,7 @@ public class ListTourismFragment extends Fragment {
                 .build();
 
         RestApi service = retrofit.create(RestApi.class);
-        Call<List<Business>> call = service.getDataTourism();
+        Call<List<Business>> call = service.getDataHomestay();
         call.enqueue(new Callback<List<Business>>() {
             @Override
             public void onResponse(Call<List<Business>> call, Response<List<Business>> response) {

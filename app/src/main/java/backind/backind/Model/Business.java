@@ -4,7 +4,7 @@ package backind.backind.Model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Bisnis {
+public class Business {
 
     @SerializedName("id_business")
     @Expose
@@ -32,7 +32,7 @@ public class Bisnis {
     private String updatedAt;
     @SerializedName("business_details")
     @Expose
-    private HomestayDetails businessDetails;
+    private BusinessDetails businessDetails;
 
     public int getIdBusiness() {
         return idBusiness;
@@ -98,11 +98,11 @@ public class Bisnis {
         this.updatedAt = updatedAt;
     }
 
-    public HomestayDetails getBusinessDetails() {
+    public BusinessDetails getBusinessDetails() {
         return businessDetails;
     }
 
-    public void setBusinessDetails(HomestayDetails businessDetails) {
+    public void setBusinessDetails(BusinessDetails businessDetails) {
         this.businessDetails = businessDetails;
     }
 

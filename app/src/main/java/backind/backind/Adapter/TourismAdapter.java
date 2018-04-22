@@ -15,13 +15,13 @@ import com.bumptech.glide.Glide;
 import java.util.List;
 
 import backind.backind.Activity.ListBisnisActivity;
-import backind.backind.Model.HomestayDetails;
+import backind.backind.Model.BusinessDetails;
 import backind.backind.R;
 
 public class TourismAdapter extends RecyclerView.Adapter<TourismAdapter.MyViewHolder> {
 
     private Context mContext;
-    private List<HomestayDetails> tourismList;
+    private List<BusinessDetails> tourismList;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView tourism, startFrom;
@@ -48,7 +48,7 @@ public class TourismAdapter extends RecyclerView.Adapter<TourismAdapter.MyViewHo
     }
 
 
-    public TourismAdapter(Context mContext, List<HomestayDetails> albumList) {
+    public TourismAdapter(Context mContext, List<BusinessDetails> albumList) {
         this.mContext = mContext;
         this.tourismList = albumList;
     }
@@ -63,7 +63,7 @@ public class TourismAdapter extends RecyclerView.Adapter<TourismAdapter.MyViewHo
 
     @Override
     public void onBindViewHolder(final TourismAdapter.MyViewHolder holder, int position) {
-        HomestayDetails album = tourismList.get(position);
+        BusinessDetails album = tourismList.get(position);
         holder.tourism.setText(album.getBusinessName());
         holder.startFrom.setText("Mulai dari Rp " + album.getBusinessPrice() + ",-");
 

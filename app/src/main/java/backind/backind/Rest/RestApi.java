@@ -3,7 +3,7 @@ package backind.backind.Rest;
 
 import java.util.List;
 
-import backind.backind.Model.Bisnis;
+import backind.backind.Model.Business;
 import retrofit2.Call;
 import retrofit2.http.GET;
 
@@ -14,5 +14,7 @@ import retrofit2.http.GET;
 public interface RestApi {
 
     @GET("api/getHomestay")
-    Call<List<Bisnis>> getDataHomestay();
+    Call<List<Business>> getDataHomestay();
+    @GET("api/getTourism")
+    Call<List<Business>> getDataTourism();
 }
