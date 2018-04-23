@@ -110,7 +110,7 @@ public class ListBisnisActivity extends AppCompatActivity {
                     ListTourismFragment tab1 = new ListTourismFragment();
                     return tab1;
                 case 1:
-                    ListTourismFragment tab2 = new ListTourismFragment();
+                    ListHomestayFragment tab2 = new ListHomestayFragment();
                     return tab2;
                 default:
                     return null;
