@@ -3,7 +3,9 @@ package backind.backind.Response;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class LoginResponse extends BaseResponse{
+import backind.backind.Model.Data;
+
+public class LoginResponse<Data> extends BaseResponse{
     @SerializedName("email")
     @Expose
     String email;
@@ -12,9 +14,9 @@ public class LoginResponse extends BaseResponse{
     @Expose
     String password;
 
-    @SerializedName("token")
+    @SerializedName("data")
     @Expose
-    public String token;
+    public Data data;
 
     public String getEmail() {
         return email;

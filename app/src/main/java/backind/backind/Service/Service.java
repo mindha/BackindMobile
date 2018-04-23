@@ -1,5 +1,6 @@
 package backind.backind.Service;
 
+import backind.backind.Model.Data;
 import backind.backind.Response.LoginResponse;
 import backind.backind.Response.RegisterResponse;
 import retrofit2.Call;
@@ -14,5 +15,5 @@ public interface Service {
 
     @FormUrlEncoded
     @POST("login")
-    Call<LoginResponse> login(@Field("email") String email, @Field("password") String password);
+    Call<LoginResponse<Data>> login(@Field("email") String email, @Field("password") String password);
 }
