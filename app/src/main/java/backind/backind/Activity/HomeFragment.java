@@ -23,6 +23,7 @@ import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
@@ -32,6 +33,7 @@ import java.util.List;
 import backind.backind.Adapter.HomestayAdapter;
 import backind.backind.Adapter.KotaAdapter;
 import backind.backind.Model.Kota;
+import backind.backind.OnboardingActivity;
 import backind.backind.R;
 import backind.backind._sliders.FragmentSlider;
 import backind.backind._sliders.SliderIndicator;
@@ -43,10 +45,10 @@ public class HomeFragment extends Fragment {
 
     private SliderPagerAdapter mAdapter;
     private SliderIndicator mIndicator;
+    private TextView login;
 
     private SliderView sliderView;
     private LinearLayout mLinearLayout;
-
 
     private RecyclerView recyclerView;
     private KotaAdapter adapter;
@@ -71,6 +73,7 @@ public class HomeFragment extends Fragment {
 
         kotaList = new ArrayList<>();
         adapter = new KotaAdapter(getActivity(), kotaList);
+        login = (TextView)rootView.findViewById(R.id.login);
 
         RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getActivity(), 1);
         recyclerView.setLayoutManager(mLayoutManager);
@@ -117,7 +120,16 @@ public class HomeFragment extends Fragment {
             }
         });
 
+        login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getActivity(), LoginActivity.class));
+            }
+        });
+
         prepareKota();
+
+
 
 
         return rootView;

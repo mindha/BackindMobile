@@ -20,8 +20,6 @@ public class RegisterResponse {
     @Expose
     String password;
 
-
-
     public String getName() {
         return name;
     }

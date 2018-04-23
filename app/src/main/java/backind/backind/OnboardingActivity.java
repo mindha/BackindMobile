@@ -20,6 +20,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import backind.backind.Activity.LoginActivity;
+import backind.backind.Activity.MenuActivity;
 import backind.backind.R;
 
 /**
@@ -134,7 +135,7 @@ public class OnboardingActivity extends AppCompatActivity {
 
     private void launchHomeScreen() {
         prefManager.setFirstTimeLaunch(false);
-        startActivity(new Intent(OnboardingActivity.this, LoginActivity.class));
+        startActivity(new Intent(OnboardingActivity.this, MenuActivity.class));
         finish();
     }
 

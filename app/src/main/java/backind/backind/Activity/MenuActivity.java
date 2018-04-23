@@ -8,7 +8,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import com.orhanobut.hawk.Hawk;
+
 import backind.backind.R;
+import butterknife.ButterKnife;
 
 public class MenuActivity extends AppCompatActivity {
 
@@ -47,6 +50,9 @@ public class MenuActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
+
+        ButterKnife.bind(this);
+        Hawk.init(this).build();
 
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
