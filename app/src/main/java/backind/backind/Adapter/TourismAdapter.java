@@ -68,7 +68,7 @@ public class TourismAdapter extends RecyclerView.Adapter<TourismAdapter.MyViewHo
         holder.startFrom.setText("Mulai dari Rp " + album.getBusinessPrice() + ",-");
 
         // loading album cover using Glide library
-        Glide.with(mContext).load(album.getBusinessProfilePict()).into(holder.thumbnail);
+        Glide.with(mContext).load("http://backind.id/storage/"+album.getBusinessProfilePict()).into(holder.thumbnail);
 
     }
 
