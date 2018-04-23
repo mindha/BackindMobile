@@ -32,7 +32,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 
 public class ListTourismFragment extends Fragment {
-    public static final String ROOT_URL = "http://192.168.0.121:8000/";
+    public static final String ROOT_URL = "http://backind.id/";
 
     private LinearLayout mLinearLayout;
 
