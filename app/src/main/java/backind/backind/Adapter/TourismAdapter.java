@@ -15,6 +15,7 @@ import com.bumptech.glide.Glide;
 import java.util.List;
 
 import backind.backind.Activity.ListBisnisActivity;
+import backind.backind.Activity.NearbyActivity;
 import backind.backind.Model.BusinessDetails;
 import backind.backind.R;
 
@@ -39,7 +40,7 @@ public class TourismAdapter extends RecyclerView.Adapter<TourismAdapter.MyViewHo
                     int mPosition = getLayoutPosition();
                     String element = tourismList.get(mPosition).toString();
                     Toast.makeText(view.getContext(), tourism.getText(), Toast.LENGTH_SHORT).show();
-                    Intent i = new Intent(view.getContext(), ListBisnisActivity.class);
+                    Intent i = new Intent(view.getContext(), NearbyActivity.class);
 //                    i.putExtra("nama", tourism.getText());
                     view.getContext().startActivity(i);
                 }
