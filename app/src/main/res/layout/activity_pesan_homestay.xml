@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:paddingLeft="35dp"
+    android:background="@color/white"
+    android:paddingRight="35dp"
+    android:paddingBottom="35dp"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    tools:context=".Activity.PesanHomestayActivity">
+
+    <LinearLayout
+        android:gravity="center_horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:id="@+id/email_login_form"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/backindMontserratBold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/activity_horizontal_margin"
+                android:text="Pesan Homestay"
+                android:fontFamily="@font/montserrat_medium"
+                android:textColor="@color/colorHitam"
+                android:textSize="30dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/budget"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:textColor="@color/colorPink"/>
+                <TextView
+                    android:id="@+id/budget"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:text="Rp 20.000,-"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:textColor="@color/colorPink"/>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/namatiket"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/activity_horizontal_margin"
+                android:text="Vila Manis"
+                android:fontFamily="@font/montserrat_regular"
+                android:textColor="@color/colorHitam"
+                android:layout_marginTop="30dp"
+                android:textSize="20dp" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/checkin"
+                android:fontFamily="@font/montserrat_regular"
+                android:layout_marginTop="20dp"/>
+            <EditText
+                android:id="@+id/checkin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="date"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat_regular"
+                android:text="@string/checkout"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingTop="10dp">
+
+                <EditText
+                    android:id="@+id/checkout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="date"/>
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/belitiket"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/btn_style_orange"
+                android:textColor="@color/colorWhite"
+                android:text="@string/pesan"
+                android:textAllCaps="false"
+                android:textSize="20dp"
+                android:fontFamily="@font/montserrat_medium"
+                android:layout_marginTop="80dp"
+                />
+
+        </LinearLayout>
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>

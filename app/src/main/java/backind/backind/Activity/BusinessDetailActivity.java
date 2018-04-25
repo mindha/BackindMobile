@@ -6,24 +6,21 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.graphics.Palette;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Toast;
 
 import backind.backind.Adapter.BisnisAdapter;
+import backind.backind.Adapter.CommentAdapter;
 import backind.backind.R;
 
 
-public class NearbyActivity extends AppCompatActivity {
+public class BusinessDetailActivity extends AppCompatActivity {
 
 
     private Toolbar toolbar;
@@ -38,7 +35,7 @@ public class NearbyActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_nearby);
+        setContentView(R.layout.activity_business_detail);
         toolbar = findViewById(R.id.anim_toolbar);
         collapsingToolbar = findViewById(R.id.collapsing_toolbar);
         appBarLayout = findViewById(R.id.appbar);
@@ -53,7 +50,7 @@ public class NearbyActivity extends AppCompatActivity {
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         recList.setLayoutManager(llm);
 
-        BisnisAdapter adapter = new BisnisAdapter();
+        CommentAdapter adapter = new CommentAdapter();
         recList.setAdapter(adapter);
 
 
@@ -91,6 +88,43 @@ public class NearbyActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        if(collapseMenu != null && (!appBarExpanded || collapseMenu.size() != 1)){
+            //collapsed
+            collapseMenu.add("Maps")
+                    .setIcon(R.drawable.ic_near_me)
+                    .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
+        }else{
+
+        }
+        return super.onPrepareOptionsMenu(collapseMenu);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        this.collapseMenu = menu;
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case android.R.id.home:
+                finish();
+                break;
+            case R.id.action_settings:
+                Toast.makeText(this, "Setting menu clicked!", Toast.LENGTH_SHORT).show();
+                break;
+        }
+
+        if(item.getTitle() == "Maps"){
+            Toast.makeText(this, "Maps menu clicked!", Toast.LENGTH_SHORT).show();
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 }
