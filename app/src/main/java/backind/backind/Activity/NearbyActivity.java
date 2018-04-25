@@ -39,12 +39,12 @@ public class NearbyActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nearby);
-        toolbar = (Toolbar) findViewById(R.id.anim_toolbar);
-        collapsingToolbar = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
-        appBarLayout = (AppBarLayout) findViewById(R.id.appbar);
-        recList = (RecyclerView) findViewById(R.id.scrollableview);
+        toolbar = findViewById(R.id.anim_toolbar);
+        collapsingToolbar = findViewById(R.id.collapsing_toolbar);
+        appBarLayout = findViewById(R.id.appbar);
+        recList = findViewById(R.id.scrollableview);
 
-//        setSupportActionBar(toolbar);
+        setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         collapsingToolbar.setTitle("Kampung Gajah");
