@@ -57,6 +57,7 @@ public class RegisterActivity extends AppCompatActivity {
         btnDaftar = (Button)findViewById(R.id.daftar);
         txtLogin = (TextView)findViewById(R.id.login);
 
+
         btnDaftar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
