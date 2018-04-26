@@ -69,11 +69,14 @@
                 android:layout_marginTop="20dp"/>
             <EditText
                 android:id="@+id/checkin"
+                android:drawableTint="@color/abuLight"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/ic_date"
                 android:inputType="date"/>
             <TextView
                 android:layout_width="wrap_content"
+                android:drawableTint="@color/abuLight"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/montserrat_regular"
                 android:text="@string/checkout"/>
@@ -86,6 +89,8 @@
 
                 <EditText
                     android:id="@+id/checkout"
+                    android:drawableTint="@color/abuLight"
+                    android:drawableLeft="@drawable/ic_date"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="date"/>

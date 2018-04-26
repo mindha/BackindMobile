@@ -63,6 +63,8 @@
 
             <EditText
                 android:id="@+id/username"
+                android:drawableLeft="@drawable/ic_person_black_24dp"
+                android:drawableTint="@color/abuLight"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/montserrat_regular"
@@ -76,6 +78,7 @@
 
             <EditText
                 android:id="@+id/password"
+
                 android:inputType="textPassword"
                 android:fontFamily="@font/montserrat_regular"
                 android:layout_width="match_parent"
