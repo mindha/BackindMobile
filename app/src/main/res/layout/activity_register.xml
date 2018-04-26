@@ -37,6 +37,8 @@
 
             <EditText
                 android:id="@+id/nama_lengkap"
+                android:drawableLeft="@drawable/ic_person_black_24dp"
+                android:drawableTint="@color/abuLight"
                 android:inputType="text"
                 android:fontFamily="@font/montserrat_regular"
                 android:layout_width="match_parent"
@@ -50,6 +52,8 @@
 
             <EditText
                 android:id="@+id/email"
+                android:drawableLeft="@drawable/ic_mail"
+                android:drawableTint="@color/abuLight"
                 android:fontFamily="@font/montserrat_regular"
                 android:inputType="textEmailAddress"
                 android:layout_width="match_parent"
@@ -78,6 +82,8 @@
             <EditText
                 android:id="@+id/nohp"
                 android:inputType="number"
+                android:drawableLeft="@drawable/ic_call"
+                android:drawableTint="@color/abuLight"
                 android:fontFamily="@font/montserrat_regular"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
@@ -92,6 +98,8 @@
                 android:id="@+id/password"
                 android:fontFamily="@font/montserrat_regular"
                 android:inputType="textPassword"
+                android:drawableLeft="@drawable/ic_lock"
+                android:drawableTint="@color/abuLight"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
