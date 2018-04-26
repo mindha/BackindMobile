@@ -24,14 +24,17 @@ import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.orhanobut.hawk.Hawk;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import backind.backind.Adapter.HomestayAdapter;
 import backind.backind.Adapter.KotaAdapter;
+import backind.backind.Constant;
 import backind.backind.Model.Kota;
 import backind.backind.OnboardingActivity;
 import backind.backind.R;
@@ -123,7 +126,15 @@ public class HomeFragment extends Fragment {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getActivity(), LoginActivity.class));
+
+                if (!Hawk.get(Constant.TOKEN,"ERROR").equals("ERROR")){
+//                    Intent intent = new Intent(getActivity(), MenuActivity.class);
+//                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//                    startActivity(intent);
+                    Toast.makeText(getActivity(), "Already log in", Toast.LENGTH_LONG).show();
+                }else {
+                    startActivity(new Intent(getActivity(), LoginActivity.class));
+                }
             }
         });
 
