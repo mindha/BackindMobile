@@ -44,7 +44,7 @@ public class NearbyActivity extends AppCompatActivity {
         appBarLayout = findViewById(R.id.appbar);
         recList = findViewById(R.id.scrollableview);
 
-//        setSupportActionBar(toolbar);
+       setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         collapsingToolbar.setTitle("Kampung Gajah");

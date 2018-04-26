@@ -69,6 +69,7 @@ public class RegisterActivity extends AppCompatActivity {
         Edtnohp = findViewById(R.id.nohp);
         Edtpass = findViewById(R.id.password);
 
+
         btnDaftar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
