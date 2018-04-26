@@ -73,7 +73,7 @@ public class HomeFragment extends Fragment {
 
         kotaList = new ArrayList<>();
         adapter = new KotaAdapter(getActivity(), kotaList);
-        login = (TextView)rootView.findViewById(R.id.login);
+        login = rootView.findViewById(R.id.login);
 
         RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getActivity(), 1);
         recyclerView.setLayoutManager(mLayoutManager);

@@ -54,7 +54,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
-                    android:layout_marginRight="@dimen/padding10"
                     android:background="@drawable/btn_style_purple"
                     android:text="Detail"
                     android:fontFamily="@font/montserrat_medium"
