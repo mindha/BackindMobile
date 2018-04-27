@@ -23,7 +23,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
-                android:text="@string/belitiket"
+                android:text="Pemesanan"
                 android:fontFamily="@font/montserrat_medium"
                 android:textColor="@color/colorHitam"
                 android:textSize="25dp" />
@@ -167,7 +167,7 @@
                 android:fontFamily="@font/montserrat_medium"
                 android:textAllCaps="false"
                 android:textColor="@android:color/white"
-                android:textSize="20dp"/>
+                android:textSize="16sp"/>
             <Button
                 android:id="@+id/batal"
                 android:layout_width="match_parent"
@@ -178,7 +178,7 @@
                 android:textAllCaps="false"
                 android:layout_marginBottom="@dimen/padding5"
                 android:textColor="@android:color/white"
-                android:textSize="20dp"/>
+                android:textSize="16sp"/>
 
         </LinearLayout>
     </ScrollView>

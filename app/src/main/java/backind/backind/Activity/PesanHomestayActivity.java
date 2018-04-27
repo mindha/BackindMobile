@@ -1,6 +1,7 @@
 package backind.backind.Activity;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.ColorDrawable;
@@ -16,8 +17,10 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Locale;
 
 import backind.backind.R;
@@ -26,6 +29,7 @@ public class PesanHomestayActivity extends AppCompatActivity {
     private DatePickerDialog datePickerDialog;
     private SimpleDateFormat dateFormatter;
     private EditText dateCheckIn, dateCheckOut;
+    private Button orderHomestay;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,16 +57,31 @@ public class PesanHomestayActivity extends AppCompatActivity {
 
         dateCheckIn = findViewById(R.id.checkin);
         dateCheckOut =  findViewById(R.id.checkout);
+        orderHomestay = findViewById(R.id.pesanHomestay);
+
         dateCheckIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showDateDialog();
+                checkIn();
+            }
+        });
+        dateCheckOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                checkOut();
+            }
+        });
+
+        orderHomestay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(PesanHomestayActivity.this,DetailBayarHomestayActivity.class));
             }
         });
 
     }
 
-    private void showDateDialog(){
+    private void checkIn(){
 
         Calendar newCalendar = Calendar.getInstance();
 
@@ -73,7 +92,7 @@ public class PesanHomestayActivity extends AppCompatActivity {
 
                 Calendar newDate = Calendar.getInstance();
                 newDate.set(year, monthOfYear, dayOfMonth);
-
+                datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis() + (1000 * 60 * 60));
                 dateCheckIn.setText(dateFormatter.format(newDate.getTime()));
             }
 
@@ -81,4 +100,24 @@ public class PesanHomestayActivity extends AppCompatActivity {
 
         datePickerDialog.show();
     }
+    private void checkOut(){
+
+        final Calendar newCalendar = Calendar.getInstance();
+
+        datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+
+                Calendar newDate = Calendar.getInstance();
+                newDate.set(year, monthOfYear, dayOfMonth);
+                dateCheckOut.setText(dateFormatter.format(newDate.getTime()));
+            }
+
+        },newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
+
+        datePickerDialog.show();
+    }
+
 }
+

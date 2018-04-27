@@ -6,29 +6,27 @@ import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
+import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import backind.backind.R;
 
+public class DetailBayarHomestayActivity extends AppCompatActivity {
 
-public class DetailBayarTiketActivity extends AppCompatActivity {
-
-    private Button btnBayar, btnFindHomestay, btnNope, btnYes;
+    private Button btnBayar, btnCariTiket, btnNope, btnYes;
     private Dialog dialog;
     private ImageView close;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_detail_bayar_tiket);
+        setContentView(R.layout.activity_detail_bayar_homestay);
 
         //status bar
         Window window = this.getWindow();
@@ -47,47 +45,49 @@ public class DetailBayarTiketActivity extends AppCompatActivity {
 
 
         btnBayar = findViewById(R.id.bayar);
-        btnFindHomestay = findViewById(R.id.cari_homestay);
+        btnCariTiket =findViewById(R.id.cari_tiket);
 
         btnBayar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(DetailBayarTiketActivity.this, PembayaranActivity.class));
+                startActivity(new Intent(DetailBayarHomestayActivity.this, PembayaranActivity.class));
             }
         });
 
-        btnFindHomestay.setOnClickListener(new View.OnClickListener() {
+        btnCariTiket.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 messageDialog();
             }
         });
-    }
 
+    }
     private void messageDialog(){
         dialog = new Dialog(this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setContentView(R.layout.dialog_confirm_find_homestay);
-        btnNope = dialog.findViewById(R.id.btnNo);
-        btnYes = dialog.findViewById(R.id.btnYes);
+        dialog.setContentView(R.layout.dialog_confirm_find_ticket);
         Window window = dialog.getWindow();
         window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
+//        close = dialog.findViewById(R.id.close);
+        btnNope = dialog.findViewById(R.id.btnNo);
+        btnYes = dialog.findViewById(R.id.btnYes);
 
+//        if (close.callOnClick()&& btnNope.callOnClick()){
+//                dialog.dismiss();
+//        }
         btnNope.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 dialog.dismiss();
             }
         });
-
         btnYes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(DetailBayarTiketActivity.this, NearbyActivity.class));
+                startActivity(new Intent(DetailBayarHomestayActivity.this, NearbyActivity.class));
             }
         });
 
         dialog.show();
     }
-
 }

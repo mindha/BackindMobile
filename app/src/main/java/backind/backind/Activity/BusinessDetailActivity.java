@@ -1,6 +1,8 @@
 package backind.backind.Activity;
 
 
+import android.app.Dialog;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -13,6 +15,11 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import backind.backind.Adapter.BisnisAdapter;
@@ -28,6 +35,9 @@ public class BusinessDetailActivity extends AppCompatActivity {
     private AppBarLayout appBarLayout;
     private RecyclerView recList;
     private Menu collapseMenu;
+    private Button btnOrder;
+    private ImageView review;
+    private Dialog dialog;
 
     private boolean appBarExpanded = true;
 
@@ -40,8 +50,10 @@ public class BusinessDetailActivity extends AppCompatActivity {
         collapsingToolbar = findViewById(R.id.collapsing_toolbar);
         appBarLayout = findViewById(R.id.appbar);
         recList = findViewById(R.id.scrollableview);
+        review = findViewById(R.id.review);
 
-//        setSupportActionBar(toolbar);
+
+        setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         collapsingToolbar.setTitle("Kampung Gajah");
@@ -66,13 +78,12 @@ public class BusinessDetailActivity extends AppCompatActivity {
 
         Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.kampung_gajah);
         Palette.from(bitmap).generate(new Palette.PaletteAsyncListener() {
-
             @SuppressWarnings("ResourceType")
             @Override
             public void onGenerated(Palette palette) {
-                int vibrantColor = palette.getVibrantColor(R.color.colorPrimary);
+                int vibrantColor = palette.getVibrantColor(R.color.colorAccent);
                 collapsingToolbar.setContentScrimColor(vibrantColor);
-                collapsingToolbar.setStatusBarScrimColor(R.color.colorPrimary);
+                collapsingToolbar.setStatusBarScrimColor(R.color.colorAccent);
             }
         });
 
@@ -88,6 +99,31 @@ public class BusinessDetailActivity extends AppCompatActivity {
             }
         });
 
+        btnOrder = findViewById(R.id.btnOrder);
+        btnOrder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(BusinessDetailActivity.this, BeliTiketActivity.class));
+            }
+        });
+
+
+        review.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                messageDialog();
+            }
+        });
+
+    }
+
+    private void messageDialog(){
+        dialog = new Dialog(this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.dialog_review);
+        Window window = dialog.getWindow();
+        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
+        dialog.show();
     }
 
     @Override
@@ -126,5 +162,6 @@ public class BusinessDetailActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
 
 }

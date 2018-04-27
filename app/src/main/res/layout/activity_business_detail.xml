@@ -59,7 +59,7 @@
     <android.support.design.widget.FloatingActionButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
+        android:layout_margin="@dimen/fab_margin"
         android:clickable="true"
         android:src="@drawable/ic_near_me"
         app:backgroundTint="#4494f6"
@@ -74,13 +74,13 @@
         android:clipToPadding="false"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-
-
             <LinearLayout
                 android:background="@color/colorLightGrey"
                 android:layout_width="match_parent"
+                android:focusableInTouchMode="true"
                 android:orientation="vertical"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior">
                 <include layout="@layout/item_long_desc"/>
                 <include layout="@layout/list_comment"/>
             </LinearLayout>

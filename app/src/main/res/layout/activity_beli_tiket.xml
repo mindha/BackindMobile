@@ -66,7 +66,10 @@
             android:layout_marginTop="20dp"/>
         <EditText
             android:id="@+id/tanggal"
+            android:drawableLeft="@drawable/ic_date"
+            android:drawableTint="@color/abuLight"
             android:layout_width="match_parent"
+            android:drawablePadding="@dimen/padding10"
             android:layout_height="wrap_content"
             android:inputType="date"/>
         <TextView

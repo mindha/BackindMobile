@@ -1,5 +1,6 @@
 package backind.backind.Activity;
 
+import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -13,9 +14,15 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Locale;
 
 import backind.backind.R;
 
@@ -24,6 +31,9 @@ public class BeliTiketActivity extends AppCompatActivity {
     TextView txtJumlahTiket;
     ImageButton btnMinus, btnPlus;
     Button btnBeli;
+    EditText buyDate;
+    private DatePickerDialog datePickerDialog;
+    private SimpleDateFormat dateFormatter;
     int n;
 
     @Override
@@ -47,10 +57,20 @@ public class BeliTiketActivity extends AppCompatActivity {
         upArrow.setColorFilter(ContextCompat.getColor(this, R.color.colorHitam), PorterDuff.Mode.SRC_ATOP);
         getSupportActionBar().setHomeAsUpIndicator(upArrow);
 
+        dateFormatter = new SimpleDateFormat("dd-MM-yyyy", Locale.US);
         txtJumlahTiket = findViewById(R.id.jumlah);
         btnMinus = findViewById(R.id.btnMinus);
         btnPlus = findViewById(R.id.btnPlus);
         btnBeli = findViewById(R.id.belitiket);
+        buyDate = findViewById(R.id.tanggal);
+
+        buyDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showDialog();
+            }
+        });
+
 
         btnMinus.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,5 +107,23 @@ public class BeliTiketActivity extends AppCompatActivity {
                 startActivity(new Intent(BeliTiketActivity.this, DetailBayarTiketActivity.class));
             }
         });
+    }
+
+    public void showDialog(){
+        Calendar newCalendar = Calendar.getInstance();
+
+        datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                Calendar newDate = Calendar.getInstance();
+                newDate.set(year, monthOfYear, dayOfMonth);
+                datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis() + (1000 * 60 * 60));
+                buyDate.setText(dateFormatter.format(newDate.getTime()));
+            }
+
+        },newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
+
+        datePickerDialog.show();
     }
 }

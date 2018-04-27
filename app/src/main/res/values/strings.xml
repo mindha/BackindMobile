@@ -33,6 +33,10 @@
     <string name="error_invalid_password">This password is too short</string>
     <string name="error_incorrect_password">This password is incorrect</string>
     <string name="error_field_required">This field is required</string>
+    <string name="dialog_confirm_homestay">Pemesanan homestay dapat dilakukan apabila jumlah orang yang menginap
+        sama dengan jumlah tiket</string>
+    <string name="dialog_confirm_ticket">Pemesanan tiket wisata dapat dilakukan apabila jumlah tiket
+        sama dengan jumlah orang yang menginap</string>
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
