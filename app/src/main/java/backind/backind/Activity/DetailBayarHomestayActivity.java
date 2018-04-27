@@ -66,6 +66,8 @@ public class DetailBayarHomestayActivity extends AppCompatActivity {
         dialog = new Dialog(this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.dialog_confirm_find_ticket);
+        Window window = dialog.getWindow();
+        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
 //        close = dialog.findViewById(R.id.close);
         btnNope = dialog.findViewById(R.id.btnNo);
         btnYes = dialog.findViewById(R.id.btnYes);

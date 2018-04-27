@@ -1,6 +1,7 @@
 package backind.backind.Activity;
 
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -15,7 +16,10 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import backind.backind.Adapter.BisnisAdapter;
@@ -32,6 +36,8 @@ public class BusinessDetailActivity extends AppCompatActivity {
     private RecyclerView recList;
     private Menu collapseMenu;
     private Button btnOrder;
+    private ImageView review;
+    private Dialog dialog;
 
     private boolean appBarExpanded = true;
 
@@ -44,6 +50,8 @@ public class BusinessDetailActivity extends AppCompatActivity {
         collapsingToolbar = findViewById(R.id.collapsing_toolbar);
         appBarLayout = findViewById(R.id.appbar);
         recList = findViewById(R.id.scrollableview);
+        review = findViewById(R.id.review);
+
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -99,6 +107,23 @@ public class BusinessDetailActivity extends AppCompatActivity {
             }
         });
 
+
+        review.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                messageDialog();
+            }
+        });
+
+    }
+
+    private void messageDialog(){
+        dialog = new Dialog(this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.dialog_review);
+        Window window = dialog.getWindow();
+        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
+        dialog.show();
     }
 
     @Override

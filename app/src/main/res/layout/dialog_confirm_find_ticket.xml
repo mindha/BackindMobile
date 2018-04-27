@@ -8,7 +8,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:paddingBottom="10dp"
         >
 
         <TextView
@@ -22,6 +21,15 @@
             android:layout_gravity="center_vertical"
             android:text="Apakah Anda Yakin?"/>
 
+        <ImageView
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_marginTop="@dimen/padding10"
+            android:layout_marginBottom="@dimen/padding10"
+            android:layout_gravity="center_horizontal"
+            android:src="@drawable/caution"
+            />
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -33,20 +41,21 @@
             android:text="@string/dialog_confirm_ticket" />
 
         <LinearLayout
-            android:orientation="horizontal"
-            android:layout_marginBottom="@dimen/activity_horizontal_margin"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/dots_height"
+            android:orientation="horizontal">
+
             <Button
                 android:id="@+id/btnNo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/padding10"
                 android:background="@drawable/btn_style_grey"
-                android:text="Tidak"
-                android:layout_marginBottom="@dimen/padding5"
                 android:fontFamily="@font/montserrat_medium"
+                android:text="Tidak"
                 android:textAllCaps="false"
-                android:textColor="@android:color/white"/>
+                android:textColor="@android:color/white" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -54,10 +63,10 @@
 
                 <Button
                     android:id="@+id/btnYes"
-                    android:layout_marginBottom="@dimen/padding5"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
+                    android:layout_marginBottom="@dimen/padding10"
                     android:background="@drawable/btn_style_orange"
                     android:fontFamily="@font/montserrat_medium"
                     android:text="Ya"

@@ -14,11 +14,12 @@
         android:textSize="@dimen/margin20"
         android:fontFamily="@font/montserrat_medium"
         android:textColor="@color/colorHitam"
+            android:layout_marginBottom="@dimen/margin20"
         android:textAlignment="center"
         />
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:src="@drawable/ic_star"/>
         <EditText
             android:layout_width="match_parent"
@@ -29,12 +30,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin20"
-            android:background="@drawable/btn_style_blue"
-            android:text="@string/action_sign_in"
+            android:background="@drawable/btn_style_orange"
+            android:text="Review"
             android:fontFamily="@font/montserrat_medium"
             android:textAllCaps="false"
+            android:layout_marginBottom="@dimen/padding5"
             android:textColor="@android:color/white"
-            android:textSize="20dp" />
+            android:textSize="@dimen/fab_margin" />
     </LinearLayout>
 
 

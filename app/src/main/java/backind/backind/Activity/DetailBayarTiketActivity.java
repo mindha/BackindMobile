@@ -70,6 +70,8 @@ public class DetailBayarTiketActivity extends AppCompatActivity {
         dialog.setContentView(R.layout.dialog_confirm_find_homestay);
         btnNope = dialog.findViewById(R.id.btnNo);
         btnYes = dialog.findViewById(R.id.btnYes);
+        Window window = dialog.getWindow();
+        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
 
         btnNope.setOnClickListener(new View.OnClickListener() {
             @Override
