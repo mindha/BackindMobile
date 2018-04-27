@@ -22,7 +22,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/padding10"
-            android:text="@string/tempatwisata"
+            android:text="@string/homestay"
             android:fontFamily="@font/montserrat_medium"
             android:textColor="@color/colorHitam"
             android:textSize="16dp" />
@@ -32,33 +32,71 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/activity_horizontal_margin"
-            android:text="Kampung Gajah"
+            android:text="Villa Manis"
             android:fontFamily="@font/montserrat_regular"
             android:textColor="@color/colorHitam"
             android:layout_marginTop="@dimen/padding5"
             android:textSize="20dp" />
-        <TextView
+
+        <LinearLayout
+            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/tanggal"
-            android:fontFamily="@font/montserrat_regular"
-            android:layout_marginTop="20dp"/>
-        <TextView
-            android:id="@+id/tanggal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/montserrat_medium"
-            android:text="23 Januari 2020"
-            android:layout_marginTop="@dimen/padding5"
-            android:layout_marginBottom="@dimen/dots_height"
-            android:textColor="@color/colorHitam"/>
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/checkin"
+                    android:fontFamily="@font/montserrat_regular"
+                    android:layout_marginTop="20dp"/>
+                <TextView
+                    android:id="@+id/dateCheckIn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:text="23 Januari 2020"
+                    android:layout_marginTop="@dimen/padding5"
+                    android:layout_marginBottom="@dimen/dots_height"
+                    android:textColor="@color/colorHitam"/>
+
+            </LinearLayout>
+
+                <LinearLayout
+                    android:layout_marginLeft="50dp"
+                    android:orientation="vertical"
+                    android:layout_alignParentRight="true"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_marginTop="20dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat_regular"
+                        android:text="@string/checkout"/>
+                    <TextView
+                        android:id="@+id/dateCheckOut"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat_medium"
+                        android:text="23 Januari 2020"
+                        android:layout_marginTop="@dimen/padding5"
+                        android:layout_marginBottom="@dimen/dots_height"
+                        android:textColor="@color/colorHitam"/>
+                </LinearLayout>
+
+        </LinearLayout>
+
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/montserrat_regular"
-            android:text="@string/jumlahtiket"/>
+            android:text="Jumlah Orang"/>
         <TextView
-            android:id="@+id/tiket"
+            android:id="@+id/people"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/montserrat_medium"
@@ -78,7 +116,7 @@
             android:fontFamily="@font/montserrat_medium"
             android:text="Rp 100.000,-"
             android:layout_marginTop="@dimen/padding5"
-            android:layout_marginBottom="@dimen/dots_height"
+            android:layout_marginBottom="35dp"
             android:textColor="@color/colorHitam"/>
 
         <LinearLayout
@@ -105,18 +143,18 @@
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="70dp">
+            android:layout_marginTop="20dp">
             <Button
-                android:id="@+id/cari_homestay"
+                android:id="@+id/cari_tiket"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/btn_style_purple"
                 android:textColor="@color/colorWhite"
-                android:text="@string/cari"
+                android:text="Cari Tiket Wisata"
                 android:textAllCaps="false"
-                android:paddingLeft="@dimen/dots_height"
-                android:paddingRight="@dimen/dots_height"
-                android:textSize="@dimen/activity_vertical_margin"
+                android:paddingLeft="@dimen/fab_margin"
+                android:paddingRight="@dimen/fab_margin"
+                android:textSize="14sp"
                 android:layout_marginBottom="@dimen/padding10"
                 android:fontFamily="@font/montserrat_medium"
                 />
@@ -132,10 +170,10 @@
                     android:text="@string/bayar"
                     android:textAllCaps="false"
                     android:layout_alignParentRight="true"
-                    android:paddingLeft="@dimen/dots_height"
-                    android:paddingRight="@dimen/dots_height"
+                    android:paddingLeft="@dimen/fab_margin"
+                    android:paddingRight="@dimen/fab_margin"
                     android:layout_marginBottom="@dimen/padding10"
-                    android:textSize="@dimen/activity_vertical_margin"
+                    android:textSize="14sp"
                     android:fontFamily="@font/montserrat_medium"
                     />
             </RelativeLayout>

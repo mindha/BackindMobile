@@ -4,6 +4,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:paddingBottom="@dimen/margin20"
+    android:paddingLeft="@dimen/margin20"
     android:background="@android:color/white"
     >
 
@@ -11,10 +12,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/profil"
-        android:textSize="25dp"
+        android:textSize="@dimen/dots_height"
         android:textColor="@color/colorHitam"
         android:layout_marginTop="25dp"
-        android:layout_marginLeft="25dp"
+        android:layout_marginLeft="@dimen/margin20"
         android:layout_marginBottom="25dp"
         android:fontFamily="@font/montserrat_medium"/>
 
@@ -33,7 +34,7 @@
 
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="20dp"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
             android:orientation="vertical"
@@ -64,50 +65,30 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Setelan"
-        android:textSize="@dimen/activity_horizontal_margin"
+        android:textSize="@dimen/margin20"
         android:textColor="@color/colorHitam"
-        android:layout_marginTop="@dimen/margin20"
+        android:layout_marginTop="@dimen/dots_height"
         android:layout_marginLeft="@dimen/margin20"
-        android:layout_marginBottom="@dimen/margin20"
+        android:layout_marginBottom="@dimen/dots_height"
         android:fontFamily="@font/montserrat_medium"/>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/margin20"
-        android:orientation="horizontal">
-
-        <ImageView
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_gravity="center_vertical"
-            android:src="@drawable/ic_person_black_24dp"
-            />
 
             <TextView
                 android:id="@+id/ubah_profil"
                 android:layout_marginLeft="@dimen/margin20"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/ic_person_black_24dp"
+                android:drawableTint="@color/abuLight"
+                android:drawablePadding="@dimen/margin20"
+                android:layout_marginBottom="@dimen/fab_margin"
                 android:text="Ubah Profil"
                 android:layout_gravity="center_vertical"
                 android:fontFamily="@font/montserrat_regular"
                 android:textColor="@color/colorHitam"
                 android:textAppearance="?android:textAppearanceSmall" />
-    </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/margin20"
-        android:layout_marginTop="@dimen/margin20"
-        android:orientation="horizontal">
 
-        <ImageView
-            android:layout_width="20dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:src="@drawable/ic_person_black_24dp" />
 
         <TextView
             android:id="@+id/ubah_sandi"
@@ -115,25 +96,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Ubah Kata Sandi"
+            android:drawableLeft="@drawable/ic_lock"
+            android:drawableTint="@color/abuLight"
+            android:drawablePadding="@dimen/margin20"
+            android:layout_marginBottom="@dimen/fab_margin"
             android:layout_gravity="center_vertical"
             android:fontFamily="@font/montserrat_regular"
             android:textColor="@color/colorHitam"
             android:textAppearance="?android:textAppearanceSmall" />
-    </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin20"
-        android:layout_marginLeft="@dimen/margin20"
-        android:orientation="horizontal">
 
-        <ImageView
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_gravity="center_vertical"
-            android:src="@drawable/ic_person_black_24dp"
-            />
+
 
         <TextView
             android:id="@+id/logout"
@@ -141,11 +114,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Logout"
+            android:drawableLeft="@drawable/ic_logout"
+            android:drawableTint="@color/abuLight"
+            android:drawablePadding="@dimen/margin20"
             android:layout_gravity="center_vertical"
             android:fontFamily="@font/montserrat_regular"
             android:textColor="@color/colorHitam"
             android:textAppearance="?android:textAppearanceSmall" />
-    </LinearLayout>
+
 
 
     </LinearLayout>

@@ -48,48 +48,50 @@
         <activity
             android:name=".OnboardingActivity"
             android:theme="@style/AppTheme.NoActionBar" />
+
         <activity
             android:name=".SplashScreen"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".Activity.MenuActivity"
             android:label="@string/title_activity_menu"
             android:theme="@style/AppTheme.NoActionBar">
-
-            <!-- <intent-filter> -->
-            <!-- <action android:name="android.intent.action.MAIN" /> -->
-            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
-            <!-- </intent-filter> -->
         </activity>
+
         <activity
             android:name=".Activity.ListBisnisActivity"
             android:label="@string/title_activity_list_bisnis"
             android:theme="@style/AppTheme.NoActionBar">
-
-            <!-- <intent-filter> -->
-            <!-- <action android:name="android.intent.action.MAIN" /> -->
-            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
-            <!-- </intent-filter> -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="backind.backind.Activity.MenuActivity" />
         </activity>
+
         <activity android:name=".Activity.NearbyActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="backind.backind.Activity.ListBisnisActivity" />
+        </activity>
+
         <activity android:name=".Activity.BusinessDetailActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+
         <activity android:name=".Activity.PesanHomestayActivity"
             android:windowSoftInputMode="stateHidden">
-             <!--<intent-filter>-->
-             <!--<action android:name="android.intent.action.MAIN" />-->
-             <!--<category android:name="android.intent.category.LAUNCHER" />-->
-             <!--</intent-filter>-->
+        </activity>
+
+        <activity android:name=".Activity.DetailBayarHomestayActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="backind.backind.Activity.PesanHomestayActivity" />
+
         </activity>
     </application>
 
