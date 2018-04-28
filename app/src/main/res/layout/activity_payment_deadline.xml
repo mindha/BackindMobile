@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+<android.support.constraint.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="35dp"
+    android:background="@color/white"
+    android:paddingRight="35dp"
+    tools:context=".Activity.PaymentDeadlineActivity">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/bataswaktu"
+            android:textColor="@color/colorHitam"
+            android:layout_marginTop="@dimen/margin20"
+            android:fontFamily="@font/montserrat_medium"
+            android:textSize="@dimen/fab_margin"/>
+        <TextView
+            android:id="@+id/due_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin20"
+            android:fontFamily="@font/montserrat_medium"
+            android:text="Rabu, 26 Februari 2012, 23:45"
+            android:textColor="@color/colorPink"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin20"
+            android:fontFamily="@font/montserrat_regular"
+            android:textSize="12dp"
+            android:text="@string/jumlahtagihan"
+            android:textAllCaps="true"/>
+
+        <TextView
+            android:id="@+id/total_tagihan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/padding10"
+            android:fontFamily="@font/montserrat_regular"
+            android:textSize="@dimen/margin20"
+            android:text="Rp 2.150.126,-"
+            android:textColor="@color/colorHitam"
+            android:textAllCaps="true"
+            android:layout_marginBottom="@dimen/margin20"/>
+
+        <include layout="@layout/item_bank"/>
+    </LinearLayout>
+</android.support.constraint.ConstraintLayout>
+</ScrollView>
+
+

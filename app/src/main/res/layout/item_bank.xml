@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/transfertepat"
+            android:lineSpacingExtra="@dimen/padding5"
+            android:padding="@dimen/padding10"
+            android:textSize="11dp"
+            android:textColor="@color/colorHitam"
+            android:textAlignment="center"
+            android:fontFamily="@font/montserrat_regular"
+            android:background="@drawable/btn_style_white"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/transferrekening"
+            android:fontFamily="@font/montserrat_regular"
+            android:lineSpacingExtra="@dimen/padding5"
+            android:textColor="@color/colorHitam"
+            android:layout_marginTop="@dimen/margin20"/>
+        
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/margin20"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:src="@drawable/logo_mandiri"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_gravity="end"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/colorHitam"
+                        android:fontFamily="@font/montserrat_regular"
+                        android:textSize="@dimen/fab_margin"
+                        android:text="Backind"/>
+                    <TextView
+                        android:layout_gravity="end"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/colorHitam"
+                        android:text="132 093991 13791"/>
+
+                </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/margin20"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:src="@drawable/logo_bni"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_gravity="end"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorHitam"
+                    android:fontFamily="@font/montserrat_regular"
+                    android:textSize="@dimen/fab_margin"
+                    android:text="Backind"/>
+                <TextView
+                    android:layout_gravity="end"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorHitam"
+                    android:text="132 093991 13791"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/margin20"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:src="@drawable/logo_bca"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_gravity="end"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorHitam"
+                    android:fontFamily="@font/montserrat_regular"
+                    android:textSize="@dimen/fab_margin"
+                    android:text="Backind"/>
+                <TextView
+                    android:layout_gravity="end"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorHitam"
+                    android:text="132 093991 13791"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/nomortagihan"
+            android:fontFamily="@font/montserrat_regular"
+            android:lineSpacingExtra="@dimen/padding5"
+            android:textColor="@color/colorHitam"
+            android:layout_marginTop="@dimen/margin20"/>
+
+        <TextView
+            android:id="@+id/order_code"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="#BACKIND124"
+            android:fontFamily="@font/montserrat_medium"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/margin20"
+            android:layout_marginTop="@dimen/padding10"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/verifikasi"
+            android:fontFamily="@font/montserrat_regular"
+            android:lineSpacingExtra="@dimen/padding5"
+            android:textColor="@color/colorHitam"
+            android:layout_marginTop="@dimen/margin20"/>
+
+
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>

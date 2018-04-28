@@ -13,20 +13,20 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".Activity.LoginActivity"
-            android:windowSoftInputMode="stateHidden"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".Activity.RegisterActivity"
-            android:windowSoftInputMode="stateHidden"
-            android:parentActivityName=".Activity.LoginActivity">
+            android:parentActivityName=".Activity.LoginActivity"
+            android:windowSoftInputMode="stateHidden">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="backind.backind.Activity.LoginActivity" />
         </activity>
         <activity
             android:name=".Activity.BeliTiketActivity"
-            android:windowSoftInputMode="stateHidden"
-            android:parentActivityName=".Activity.RegisterActivity">
+            android:parentActivityName=".Activity.RegisterActivity"
+            android:windowSoftInputMode="stateHidden">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="backind.backind.Activity.RegisterActivity" />
@@ -48,22 +48,19 @@
         <activity
             android:name=".OnboardingActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-
         <activity
             android:name=".SplashScreen"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".Activity.MenuActivity"
             android:label="@string/title_activity_menu"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
-
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".Activity.ListBisnisActivity"
             android:label="@string/title_activity_list_bisnis"
@@ -72,27 +69,25 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="backind.backind.Activity.MenuActivity" />
         </activity>
-
-        <activity android:name=".Activity.NearbyActivity"
+        <activity
+            android:name=".Activity.NearbyActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="backind.backind.Activity.ListBisnisActivity" />
         </activity>
-
-        <activity android:name=".Activity.BusinessDetailActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
-
-        <activity android:name=".Activity.PesanHomestayActivity"
-            android:windowSoftInputMode="stateHidden">
-        </activity>
-
+        <activity
+            android:name=".Activity.BusinessDetailActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name=".Activity.PesanHomestayActivity"
+            android:windowSoftInputMode="stateHidden"></activity>
         <activity android:name=".Activity.DetailBayarHomestayActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="backind.backind.Activity.PesanHomestayActivity" />
-
         </activity>
+        <activity android:name=".Activity.PaymentDeadlineActivity"></activity>
     </application>
 
 </manifest>

@@ -1,5 +1,6 @@
 package backind.backind.Activity;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
@@ -16,6 +17,8 @@ import android.widget.Button;
 import backind.backind.R;
 
 public class PembayaranActivity extends AppCompatActivity {
+    private Button btnBayar, btnBatal, btnNope, btnYes;
+    private Dialog dialog;
 
 
     @Override
@@ -39,6 +42,48 @@ public class PembayaranActivity extends AppCompatActivity {
         upArrow.setColorFilter(ContextCompat.getColor(this, R.color.colorHitam), PorterDuff.Mode.SRC_ATOP);
         getSupportActionBar().setHomeAsUpIndicator(upArrow);
 
+        btnBatal = findViewById(R.id.batal);
+        btnBayar = findViewById(R.id.pay);
 
+        btnBayar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(PembayaranActivity.this,PaymentDeadlineActivity.class));
+            }
+        });
+
+        btnBatal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                messageDialog();
+            }
+        });
+
+    }
+
+    private void messageDialog(){
+        dialog = new Dialog(this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.dialog_cancel_order);
+        btnNope = dialog.findViewById(R.id.btnNo);
+        btnYes = dialog.findViewById(R.id.btnYes);
+        Window window = dialog.getWindow();
+        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
+
+        btnNope.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+
+        btnYes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(PembayaranActivity.this, MenuActivity.class));
+            }
+        });
+
+        dialog.show();
     }
 }
