@@ -18,6 +18,7 @@ public class PaymentDeadlineActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_payment_deadline);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         //status bar
         Window window = this.getWindow();

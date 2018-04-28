@@ -87,7 +87,11 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="backind.backind.Activity.PesanHomestayActivity" />
         </activity>
-        <activity android:name=".Activity.PaymentDeadlineActivity"></activity>
+        <activity android:name=".Activity.PaymentDeadlineActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="backind.backind.Activity.PembayaranActivity" />
+        </activity>
     </application>
 
 </manifest>
