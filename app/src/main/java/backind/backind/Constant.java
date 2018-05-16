@@ -8,5 +8,9 @@ public class Constant {
     public static final String TOKEN = "jwt_token";
     public static final String TAG_SUCCESS = "Success";
     public static final String TAG_NETWORK = "Please Check your Internet Connection";
-    public static final String BASE_URL_PHOTO = "http://backind.id/images/";
+    public static final String BASE_URL_PHOTO = "http://backind.id/storage/";
+
+    public static class DataLocal {
+        public static final String dataUser = "profiledata";
+    }
 }

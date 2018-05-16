@@ -1,6 +1,7 @@
 package backind.backind.Activity;
 
 import android.annotation.SuppressLint;
+import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -20,12 +21,14 @@ import android.view.ViewGroup;
 
 import android.widget.TextView;
 
+import com.miguelcatalan.materialsearchview.MaterialSearchView;
+
 import backind.backind.R;
 
 public class ListBisnisActivity extends AppCompatActivity {
 
     private SectionsPagerAdapter mSectionsPagerAdapter;
-
+    private MaterialSearchView materialSearchView;
     private ViewPager mViewPager;
 
     @Override
@@ -35,6 +38,20 @@ public class ListBisnisActivity extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        materialSearchView = findViewById(R.id.searchbudget);
+        materialSearchView.closeSearch();
+        materialSearchView.setOnQueryTextListener(new MaterialSearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
 
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
@@ -47,6 +64,7 @@ public class ListBisnisActivity extends AppCompatActivity {
 
     }
 
+
     @Override
     public void onBackPressed() {
         finish();
@@ -55,7 +73,11 @@ public class ListBisnisActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_list_bisnis, menu);
+        getMenuInflater().inflate(R.menu.search_menu, menu);
+
+        MenuItem item = menu.findItem(R.id.search);
+        materialSearchView.setMenuItem(item);
+
         return true;
     }
 

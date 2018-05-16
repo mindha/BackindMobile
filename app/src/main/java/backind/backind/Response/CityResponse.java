@@ -3,15 +3,16 @@ package backind.backind.Response;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-import backind.backind.Model.Data;
+import java.util.List;
 
-public class LoginResponse extends BaseResponse{
+public class CityResponse extends BaseResponse {
     @SerializedName("message")
     @Expose
     private String message;
     @SerializedName("data")
     @Expose
-    private Data data;
+    private List<City> data = null;
+
 
     public String getMessage() {
         return message;
@@ -21,11 +22,11 @@ public class LoginResponse extends BaseResponse{
         this.message = message;
     }
 
-    public Data getData() {
+    public List<City> getData() {
         return data;
     }
 
-    public void setData(Data data) {
+    public void setData(List<City> data) {
         this.data = data;
     }
 

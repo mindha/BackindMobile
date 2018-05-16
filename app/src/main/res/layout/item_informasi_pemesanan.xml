@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/informasipemesan"
+            android:fontFamily="@font/montserrat_medium"
+            android:textColor="@color/colorHitam"
+            android:textSize="@dimen/margin20"
+            android:layout_marginTop="@dimen/margin20"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="NAMA"
+            android:fontFamily="@font/montserrat_regular"
+            android:textColor="@color/abuDark"
+            android:layout_marginTop="@dimen/margin20"/>
+
+        <TextView
+            android:id="@+id/username"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Saka Gelantara"
+            android:fontFamily="@font/montserrat_regular"
+            android:textColor="@color/colorHitam"
+            android:textSize="16dp"
+            android:layout_marginTop="@dimen/padding10"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="EMAIL"
+            android:fontFamily="@font/montserrat_regular"
+            android:textColor="@color/abuDark"
+            android:layout_marginTop="@dimen/margin20"/>
+
+        <TextView
+            android:id="@+id/email_user"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="sakagelantara@gmail.com"
+            android:fontFamily="@font/montserrat_regular"
+            android:textColor="@color/colorHitam"
+            android:textSize="16dp"
+            android:layout_marginTop="@dimen/padding10"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="NO TELP"
+            android:fontFamily="@font/montserrat_regular"
+            android:textColor="@color/abuDark"
+            android:layout_marginTop="@dimen/margin20"/>
+
+        <TextView
+            android:id="@+id/no_telp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="082332443770"
+            android:fontFamily="@font/montserrat_regular"
+            android:textColor="@color/colorHitam"
+            android:textSize="16dp"
+            android:layout_marginTop="@dimen/padding10"/>
+
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>

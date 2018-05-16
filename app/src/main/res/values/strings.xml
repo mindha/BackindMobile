@@ -131,6 +131,7 @@
     <string name="nomortagihan">Pemesananmu dicatat dengan nomor tagihan pembayaran :</string>
     <string name="verifikasi">Backind akan melakukan verifikasi paling lama 30 menit setelah kamu melakukan pembayaran</string>
     <string name="informasipemesan">Informasi Pemesan</string>
+    <string name="detailtagihan">Detail Tagihan</string>
     <string name="notelp">No Telp</string>
     <string name="title_activity_menu">MenuActivity</string>
     <string name="title_activity_list_bisnis">ListBisnisActivity</string>

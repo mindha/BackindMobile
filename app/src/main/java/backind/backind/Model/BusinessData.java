@@ -1,29 +1,27 @@
-
 package backind.backind.Model;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Business {
-
+public class BusinessData {
     @SerializedName("id_business")
     @Expose
-    private int idBusiness;
+    private Integer idBusiness;
     @SerializedName("id_menu")
     @Expose
-    private int idMenu;
+    private String idMenu;
     @SerializedName("id_user")
     @Expose
-    private int idUser;
+    private String idUser;
     @SerializedName("id_city")
     @Expose
-    private int idCity;
+    private String idCity;
     @SerializedName("business_status")
     @Expose
-    private int businessStatus;
+    private String businessStatus;
     @SerializedName("id_business_details")
     @Expose
-    private int idBusinessDetails;
+    private String idBusinessDetails;
     @SerializedName("created_at")
     @Expose
     private String createdAt;
@@ -33,52 +31,55 @@ public class Business {
     @SerializedName("business_details")
     @Expose
     private BusinessDetails businessDetails;
+    @SerializedName("review")
+    @Expose
+    private Object review;
 
-    public int getIdBusiness() {
+    public Integer getIdBusiness() {
         return idBusiness;
     }
 
-    public void setIdBusiness(int idBusiness) {
+    public void setIdBusiness(Integer idBusiness) {
         this.idBusiness = idBusiness;
     }
 
-    public int getIdMenu() {
+    public String getIdMenu() {
         return idMenu;
     }
 
-    public void setIdMenu(int idMenu) {
+    public void setIdMenu(String idMenu) {
         this.idMenu = idMenu;
     }
 
-    public int getIdUser() {
+    public String getIdUser() {
         return idUser;
     }
 
-    public void setIdUser(int idUser) {
+    public void setIdUser(String idUser) {
         this.idUser = idUser;
     }
 
-    public int getIdCity() {
+    public String getIdCity() {
         return idCity;
     }
 
-    public void setIdCity(int idCity) {
+    public void setIdCity(String idCity) {
         this.idCity = idCity;
     }
 
-    public int getBusinessStatus() {
+    public String getBusinessStatus() {
         return businessStatus;
     }
 
-    public void setBusinessStatus(int businessStatus) {
+    public void setBusinessStatus(String businessStatus) {
         this.businessStatus = businessStatus;
     }
 
-    public int getIdBusinessDetails() {
+    public String getIdBusinessDetails() {
         return idBusinessDetails;
     }
 
-    public void setIdBusinessDetails(int idBusinessDetails) {
+    public void setIdBusinessDetails(String idBusinessDetails) {
         this.idBusinessDetails = idBusinessDetails;
     }
 
@@ -106,5 +107,11 @@ public class Business {
         this.businessDetails = businessDetails;
     }
 
-}
+    public Object getReview() {
+        return review;
+    }
 
+    public void setReview(Object review) {
+        this.review = review;
+    }
+}

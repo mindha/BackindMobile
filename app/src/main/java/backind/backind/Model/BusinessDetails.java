@@ -8,7 +8,7 @@ public class BusinessDetails {
 
     @SerializedName("id_business_details")
     @Expose
-    private int idBusinessDetails;
+    private Integer idBusinessDetails;
     @SerializedName("business_name")
     @Expose
     private String businessName;
@@ -35,7 +35,7 @@ public class BusinessDetails {
     private String businessCloseTime;
     @SerializedName("business_price")
     @Expose
-    private int businessPrice;
+    private String businessPrice;
     @SerializedName("business_desc")
     @Expose
     private String businessDesc;
@@ -51,12 +51,13 @@ public class BusinessDetails {
     @SerializedName("updated_at")
     @Expose
     private String updatedAt;
+    private final static long serialVersionUID = 8499450797562983145L;
 
-    public int getIdBusinessDetails() {
+    public Integer getIdBusinessDetails() {
         return idBusinessDetails;
     }
 
-    public void setIdBusinessDetails(int idBusinessDetails) {
+    public void setIdBusinessDetails(Integer idBusinessDetails) {
         this.idBusinessDetails = idBusinessDetails;
     }
 
@@ -124,11 +125,11 @@ public class BusinessDetails {
         this.businessCloseTime = businessCloseTime;
     }
 
-    public int getBusinessPrice() {
+    public String getBusinessPrice() {
         return businessPrice;
     }
 
-    public void setBusinessPrice(int businessPrice) {
+    public void setBusinessPrice(String businessPrice) {
         this.businessPrice = businessPrice;
     }
 
@@ -172,10 +173,5 @@ public class BusinessDetails {
         this.updatedAt = updatedAt;
     }
 
-    public BusinessDetails(String businessName, int businessPrice, String businessProfilePict) {
-        this.businessName = businessName;
-        this.businessPrice = businessPrice;
-        this.businessProfilePict = businessProfilePict;
-    }
 }
 

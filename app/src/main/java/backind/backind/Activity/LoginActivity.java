@@ -21,6 +21,7 @@ import backind.backind.Model.Data;
 import backind.backind.R;
 import backind.backind.Response.LoginResponse;
 import backind.backind.Service.Api;
+import backind.backind.Utils.Utils;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import retrofit2.Call;
@@ -34,6 +35,7 @@ public class LoginActivity extends AppCompatActivity {
     private Button btnLogin;
     private EditText edtUser;
     private EditText edtPass;
+    private Data data = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +45,17 @@ public class LoginActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         Hawk.init(this).build();
 
+        try {
+            data = Hawk.get(Constant.TOKEN);
+            if(data != null){
+                Intent intent = new Intent(LoginActivity.this, MenuActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                finish();
+                startActivity(intent);
+            }
+        }catch (Exception e){
+
+        }
         //status bar
         Window window = this.getWindow();
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
@@ -68,33 +81,32 @@ public class LoginActivity extends AppCompatActivity {
                 else if (edtPass.getText().toString().isEmpty())
                     edtPass.setError("Harus diisi ");
                 else
-                    Api.getService().login(edtUser.getText().toString(), edtPass.getText().toString()).enqueue(new Callback<LoginResponse<Data>>() {
+                    Api.getService().login(edtUser.getText().toString(), edtPass.getText().toString()).enqueue(new Callback<LoginResponse>() {
                         @Override
-                        public void onResponse(Call<LoginResponse<Data>> call, Response<LoginResponse<Data>> response) {
+                        public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
+                            Log.d("Backindbug","status = " + response.body().getError());
+                            Log.d("Backindbug","response = " + Utils.getJsonfromUrl(response.body()));
                             if (response.isSuccessful()){
                                 Toast.makeText(LoginActivity.this,"Log In", Toast.LENGTH_LONG).show();
-                                Log.d("ini tokennya", response.body().data.token);
-                                Hawk.put(Constant.TOKEN, "Bearer " + response.body().data.token);
+                                Log.d("ini tokennya", response.body().getData().getToken());
+                                Hawk.put(Constant.TOKEN, "Bearer " + response.body().getData().getToken());
 //                                Hawk.put(Constant.USER, response.body());
                                 Log.d("ini tokennya", Hawk.get(Constant.TOKEN, ""));
-                                Log.d("sama kan", response.body().data.token);
-                                if (!Hawk.get(Constant.TOKEN,"ERROR").equals("ERROR")){
-                                    Intent intent = new Intent(LoginActivity.this, MenuActivity.class);
-                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                                    finish();
-                                    startActivity(intent);
-                                }else{
-                                    Intent intent = new Intent(LoginActivity.this, LoginActivity.class);
-                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                                    finish();
-                                    startActivity(intent);
-                                }
+                                Log.d("sama kan", response.body().getData().getToken());
+                                Toast.makeText(LoginActivity.this, "Login Sukses", Toast.LENGTH_LONG).show();
+                                Intent intent = new Intent(LoginActivity.this, MenuActivity.class);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                Hawk.put(Constant.DataLocal.dataUser,response.body().getData().getUser());
+                                finish();
+                                startActivity(intent);
+                            }else{
+                                Toast.makeText(LoginActivity.this,"ERROR LOGIN",Toast.LENGTH_LONG).show();
                             }
                         }
 
                         @Override
-                        public void onFailure(Call<LoginResponse<Data>> call, Throwable t) {
-
+                        public void onFailure(Call<LoginResponse> call, Throwable t) {
+                            Log.d("Backindbug",t.getMessage());
                         }
                     });
             }

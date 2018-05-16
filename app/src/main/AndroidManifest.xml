@@ -60,7 +60,7 @@
         <activity
             android:name=".Activity.MenuActivity"
             android:label="@string/title_activity_menu"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Activity.ListBisnisActivity"
             android:label="@string/title_activity_list_bisnis"
@@ -81,7 +81,7 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
             android:name=".Activity.PesanHomestayActivity"
-            android:windowSoftInputMode="stateHidden"></activity>
+            android:windowSoftInputMode="stateHidden" />
         <activity android:name=".Activity.DetailBayarHomestayActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -91,6 +91,11 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="backind.backind.Activity.PembayaranActivity" />
+        </activity>
+        <activity android:name=".Activity.EditProfileActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="backind.backind.Activity.MenuActivity" />
         </activity>
     </application>
 

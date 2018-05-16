@@ -45,7 +45,7 @@ public class MenuActivity extends AppCompatActivity {
             return false;
         }
     };
-
+    public BottomNavigationView navigation;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,7 +54,7 @@ public class MenuActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         Hawk.init(this).build();
 
-        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
         setTitle("Home");

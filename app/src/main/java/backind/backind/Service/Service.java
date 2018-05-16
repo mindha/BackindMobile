@@ -2,8 +2,8 @@ package backind.backind.Service;
 
 import java.util.List;
 
-import backind.backind.Model.Business;
-import backind.backind.Model.Data;
+import backind.backind.Model.BusinessResponse;
+import backind.backind.Response.CityResponse;
 import backind.backind.Response.Login;
 import backind.backind.Response.LoginResponse;
 import backind.backind.Response.RegisterResponse;
@@ -20,12 +20,17 @@ public interface Service {
 
     @FormUrlEncoded
     @POST("login")
-    Call<LoginResponse<Data>> login(@Field("email") String email, @Field("password") String password);
+    Call<LoginResponse> login(@Field("email") String email, @Field("password") String password);
+
+    @GET("getMinCity")
+    Call<CityResponse> getListCity();
 
     @GET("getHomestay")
-    Call<List<Business>> getDataHomestay();
+    Call<BusinessResponse>getDataHomestay();
+//    Call<List<BusinessResponse>> getDataHomestay();
     @GET("getTourism")
-    Call<List<Business>> getDataTourism();
+    Call<BusinessResponse>getDataTourism();
+//    Call<List<BusinessResponse>> getDataTourism();
 
     @FormUrlEncoded
     @POST("login")

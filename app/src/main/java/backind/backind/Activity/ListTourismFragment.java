@@ -18,10 +18,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import backind.backind.Adapter.TourismAdapter;
+import backind.backind.Model.BusinessData;
 import backind.backind.Model.BusinessDetails;
-import backind.backind.Model.Business;
+import backind.backind.Model.BusinessResponse;
 import backind.backind.R;
 import backind.backind.Rest.RestApi;
+import backind.backind.Service.Api;
+import backind.backind.Utils.Utils;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
@@ -39,7 +42,7 @@ public class ListTourismFragment extends Fragment {
 
     private RecyclerView recyclerView;
     private TourismAdapter adapter;
-    private List<BusinessDetails> bisnisList;
+    private List<BusinessData> bisnisList;
 
     public ListTourismFragment() {
     }
@@ -52,7 +55,7 @@ public class ListTourismFragment extends Fragment {
         recyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
 
         bisnisList = new ArrayList<>();
-        adapter = new TourismAdapter(getActivity(), bisnisList);
+        adapter = new TourismAdapter(getActivity());
 
         RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getActivity(), 2);
         recyclerView.setLayoutManager(mLayoutManager);
@@ -60,48 +63,66 @@ public class ListTourismFragment extends Fragment {
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(adapter);
 
-        getData();
+        getListTourism();
 
         return rootView;
     }
 
-    private void getData() {
-        HttpLoggingInterceptor loggin = new HttpLoggingInterceptor(new HttpLoggingInterceptor.Logger() {
-            @Override
-            public void log(String message) {
-                Log.d("Backind", message);
-            }
-        });
-        loggin.setLevel(HttpLoggingInterceptor.Level.BODY);
-        OkHttpClient client = new OkHttpClient.Builder()
-                .addInterceptor(loggin)
-                .build();
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(ROOT_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .client(client)
-                .build();
+//    private void getData() {
+//        HttpLoggingInterceptor loggin = new HttpLoggingInterceptor(new HttpLoggingInterceptor.Logger() {
+//            @Override
+//            public void log(String message) {
+//                Log.d("Backind", message);
+//            }
+//        });
+//        loggin.setLevel(HttpLoggingInterceptor.Level.BODY);
+//        OkHttpClient client = new OkHttpClient.Builder()
+//                .addInterceptor(loggin)
+//                .build();
+//        Retrofit retrofit = new Retrofit.Builder()
+//                .baseUrl(ROOT_URL)
+//                .addConverterFactory(GsonConverterFactory.create())
+//                .client(client)
+//                .build();
+//
+//        RestApi service = retrofit.create(RestApi.class);
+//        Call<List<BusinessResponse>> call = service.getDataTourism();
+//        call.enqueue(new Callback<List<BusinessResponse>>() {
+//            @Override
+//            public void onResponse(Call<List<BusinessResponse>> call, Response<List<BusinessResponse>> response) {
+//                List<BusinessResponse> bisnis = response.body();
+//                bisnisList.clear();
+//                for(BusinessResponse homestay : bisnis){
+//                    bisnisList.add(homestay.getBusinessDetails());
+//                }
+//                adapter.notifyDataSetChanged();
+//            }
+//
+//            @Override
+//            public void onFailure(Call<List<BusinessResponse>> call, Throwable t) {
+//                System.out.println("Mencoba");
+//            }
+//
+//        });
+//
+//    }
 
-        RestApi service = retrofit.create(RestApi.class);
-        Call<List<Business>> call = service.getDataTourism();
-        call.enqueue(new Callback<List<Business>>() {
+    private void getListTourism(){
+        Api.getService().getDataTourism().enqueue(new Callback<BusinessResponse>() {
             @Override
-            public void onResponse(Call<List<Business>> call, Response<List<Business>> response) {
-                List<Business> bisnis = response.body();
-                bisnisList.clear();
-                for(Business homestay : bisnis){
-                    bisnisList.add(homestay.getBusinessDetails());
+            public void onResponse(Call<BusinessResponse> call, Response<BusinessResponse> response) {
+                if(response.isSuccessful()){
+                    Log.d("Backindbug","response = " + Utils.getJsonfromUrl(response.body()));
+                    bisnisList = response.body().getData();
+                    adapter.setItems(bisnisList);
                 }
-                adapter.notifyDataSetChanged();
             }
 
             @Override
-            public void onFailure(Call<List<Business>> call, Throwable t) {
-                System.out.println("Mencoba");
+            public void onFailure(Call<BusinessResponse> call, Throwable t) {
+
             }
-
         });
-
     }
 
     public class GridSpacingItemDecoration extends RecyclerView.ItemDecoration {

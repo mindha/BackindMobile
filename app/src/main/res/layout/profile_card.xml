@@ -26,7 +26,7 @@
         android:orientation="horizontal">
 
         <ImageView
-            android:id="@+id/user"
+            android:id="@+id/img_user"
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:layout_gravity="center_vertical"
@@ -50,7 +50,7 @@
                 android:textAppearance="?android:textAppearanceSmall" />
 
             <TextView
-                android:id="@+id/comment"
+                android:id="@+id/emailadd"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"

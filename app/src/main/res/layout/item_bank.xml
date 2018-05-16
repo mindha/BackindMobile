@@ -156,7 +156,244 @@
             android:textColor="@color/colorHitam"
             android:layout_marginTop="@dimen/margin20"/>
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/informasipemesan"
+            android:fontFamily="@font/montserrat_medium"
+            android:textColor="@color/colorHitam"
+            android:textSize="@dimen/margin20"
+            android:layout_marginTop="@dimen/margin20"/>
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="NAMA"
+            android:fontFamily="@font/montserrat_regular"
+            android:textColor="@color/abuDark"
+            android:layout_marginTop="@dimen/margin20"/>
+
+        <TextView
+            android:id="@+id/username"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Saka Gelantara"
+            android:fontFamily="@font/montserrat_regular"
+            android:textColor="@color/colorHitam"
+            android:textSize="16dp"
+            android:layout_marginTop="@dimen/padding10"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="EMAIL"
+            android:fontFamily="@font/montserrat_regular"
+            android:textColor="@color/abuDark"
+            android:layout_marginTop="@dimen/margin20"/>
+
+        <TextView
+            android:id="@+id/email_user"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="sakagelantara@gmail.com"
+            android:fontFamily="@font/montserrat_regular"
+            android:textColor="@color/colorHitam"
+            android:textSize="16dp"
+            android:layout_marginTop="@dimen/padding10"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="NO TELP"
+            android:fontFamily="@font/montserrat_regular"
+            android:textColor="@color/abuDark"
+            android:layout_marginTop="@dimen/margin20"/>
+
+        <TextView
+            android:id="@+id/no_telp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="082332443770"
+            android:fontFamily="@font/montserrat_regular"
+            android:textColor="@color/colorHitam"
+            android:textSize="16dp"
+            android:layout_marginTop="@dimen/padding10"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/detailtagihan"
+            android:fontFamily="@font/montserrat_medium"
+            android:textColor="@color/colorHitam"
+            android:textSize="@dimen/margin20"
+            android:layout_marginTop="@dimen/margin20"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/tourism_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Kampung Gajah"
+                android:fontFamily="@font/montserrat_regular"
+                android:textColor="@color/colorHitam"
+                android:textSize="16dp"
+                android:layout_marginTop="@dimen/margin20"/>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/tourism_price"
+                    android:layout_alignParentRight="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Rp 100.000,-"
+                    android:fontFamily="@font/montserrat_regular"
+                    android:textColor="@color/colorHitam"
+                    android:textSize="16dp"
+                    android:layout_marginTop="@dimen/margin20"/>
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/date_ticket"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Selasa, 23 Januari 2018"
+            android:fontFamily="@font/montserrat_regular"
+            android:layout_marginTop="@dimen/padding10"/>
+
+        <TextView
+            android:id="@+id/number_ticket"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="2 Tiket"
+            android:fontFamily="@font/montserrat_regular"
+            android:layout_marginTop="@dimen/padding10"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/homestay_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Kampung Gajah"
+                android:fontFamily="@font/montserrat_regular"
+                android:textColor="@color/colorHitam"
+                android:textSize="16dp"
+                android:layout_marginTop="@dimen/margin20"/>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/homestay_price"
+                    android:layout_alignParentRight="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Rp 100.000,-"
+                    android:fontFamily="@font/montserrat_regular"
+                    android:textColor="@color/colorHitam"
+                    android:textSize="16dp"
+                    android:layout_marginTop="@dimen/margin20"/>
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/date_booking"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="22 - 23 Januari 2018"
+            android:fontFamily="@font/montserrat_regular"
+            android:layout_marginTop="@dimen/padding10"/>
+
+        <TextView
+            android:id="@+id/number_people"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="2 Orang"
+            android:fontFamily="@font/montserrat_regular"
+            android:layout_marginTop="@dimen/padding10"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Kode Bayar"
+                android:fontFamily="@font/montserrat_regular"
+                android:textColor="@color/colorHitam"
+                android:textSize="16dp"
+                android:layout_marginTop="@dimen/margin20"/>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/pay_code"
+                    android:layout_alignParentRight="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Rp 156,-"
+                    android:fontFamily="@font/montserrat_regular"
+                    android:textColor="@color/colorHitam"
+                    android:textSize="16dp"
+                    android:layout_marginTop="@dimen/margin20"/>
+            </RelativeLayout>
+        </LinearLayout>
+        <ImageView
+            android:layout_marginTop="@dimen/margin20"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/colorHitam">
+        </ImageView>
+        <TextView
+            android:text="Total Harga"
+            android:layout_marginTop="@dimen/padding10"
+            android:layout_gravity="end"
+            android:fontFamily="@font/montserrat_regular"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/total_harga"
+            android:text="Rp 200.156,-"
+            android:layout_marginTop="@dimen/padding5"
+            android:layout_gravity="end"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat_medium"
+            android:textColor="@color/colorHitam"
+            android:textSize="20dp"
+            android:layout_alignParentRight="true"/>
+
+        <Button
+            android:id="@+id/pay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:layout_marginBottom="@dimen/padding10"
+            android:background="@drawable/btn_style_orange"
+            android:text="@string/bayar"
+            android:fontFamily="@font/montserrat_medium"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"/>
+        <Button
+            android:id="@+id/batal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/btn_style_grey"
+            android:text="@string/batalpesan"
+            android:fontFamily="@font/montserrat_medium"
+            android:textAllCaps="false"
+            android:layout_marginBottom="@dimen/margin20"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"/>
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

@@ -7,9 +7,11 @@ import android.content.res.Resources;
 import android.graphics.Rect;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
@@ -36,12 +38,19 @@ import backind.backind.Adapter.HomestayAdapter;
 import backind.backind.Adapter.KotaAdapter;
 import backind.backind.Constant;
 import backind.backind.Model.Kota;
+import backind.backind.Model.User;
 import backind.backind.OnboardingActivity;
 import backind.backind.R;
+import backind.backind.Response.City;
+import backind.backind.Response.CityResponse;
+import backind.backind.Service.Api;
 import backind.backind._sliders.FragmentSlider;
 import backind.backind._sliders.SliderIndicator;
 import backind.backind._sliders.SliderPagerAdapter;
 import backind.backind._sliders.SliderView;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class HomeFragment extends Fragment {
@@ -55,18 +64,35 @@ public class HomeFragment extends Fragment {
 
     private RecyclerView recyclerView;
     private KotaAdapter adapter;
-    private List<Kota> kotaList;
+    private List<City> kotaList;
 
+    private User user=null;
 
     public HomeFragment() {
         // Required empty public constructor
     }
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_home,container,false);
+
+        login = rootView.findViewById(R.id.login);
+        if (!Hawk.get(Constant.TOKEN,"ERROR").equals("ERROR")){
+            try {
+                user = Hawk.get(Constant.DataLocal.dataUser);
+                login.setText(user.getName().toString());
+            }catch (Exception ex){
+                ex.printStackTrace();
+            }
+            Toast.makeText(getActivity(), "Already log in", Toast.LENGTH_LONG).show();
+        }
 
         sliderView = (SliderView) rootView.findViewById(R.id.sliderView);
         mLinearLayout = (LinearLayout) rootView.findViewById(R.id.pagesContainer);
@@ -75,8 +101,8 @@ public class HomeFragment extends Fragment {
         recyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
 
         kotaList = new ArrayList<>();
-        adapter = new KotaAdapter(getActivity(), kotaList);
-        login = rootView.findViewById(R.id.login);
+        adapter = new KotaAdapter(getActivity());
+
 
         RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getActivity(), 1);
         recyclerView.setLayoutManager(mLayoutManager);
@@ -108,7 +134,7 @@ public class HomeFragment extends Fragment {
                     Window window = getActivity().getWindow();
                     window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
                     window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-                    window.setStatusBarColor(ContextCompat.getColor(getActivity(), R.color.colorPrimary));
+                    window.setStatusBarColor(ContextCompat.getColor(getActivity(), R.color.colorWhite));
                     collapsingToolbar.setTitle("Home");
                     isShow = true;
                 } else if (isShow) {
@@ -128,18 +154,21 @@ public class HomeFragment extends Fragment {
             public void onClick(View view) {
 
                 if (!Hawk.get(Constant.TOKEN,"ERROR").equals("ERROR")){
-//                    Intent intent = new Intent(getActivity(), MenuActivity.class);
-//                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//                    startActivity(intent);
-                    Toast.makeText(getActivity(), "Already log in", Toast.LENGTH_LONG).show();
+                    if(getActivity()instanceof MenuActivity){
+                        ((MenuActivity)getActivity()).navigation.setSelectedItemId(R.id.navigation_profile);
+                        ProfileFragment fragment3 = new ProfileFragment();
+                        FragmentTransaction fT3 = getActivity().getSupportFragmentManager().beginTransaction();
+                        fT3.replace(R.id.content, fragment3,"FragmentName");
+                        fT3.commit();
+                    }
                 }else {
                     startActivity(new Intent(getActivity(), LoginActivity.class));
                 }
             }
         });
 
-        prepareKota();
-
+        //prepareKota();
+        getListCity();
 
 
 
@@ -162,6 +191,22 @@ public class HomeFragment extends Fragment {
 
 
 
+    private void getListCity(){
+        Api.getService().getListCity().enqueue(new Callback<CityResponse>() {
+            @Override
+            public void onResponse(Call<CityResponse> call, Response<CityResponse> response) {
+                if(response.isSuccessful()){
+                    kotaList = response.body().getData();
+                    adapter.setItems(kotaList);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<CityResponse> call, Throwable t) {
+
+            }
+        });
+    }
     private void prepareKota() {
         String[] covers = new String[]{
                 "https://demajesticbandung.com/wp-content/uploads/2017/03/1a-bandung-dari-masa-ke-masa.jpg",
@@ -169,17 +214,17 @@ public class HomeFragment extends Fragment {
                 "https://cdns.klimg.com/resized/670x335/p/headline/5-destinasi-wisata-kekinian-wajib-kunju-fc3462.jpg",
                 "http://www.nationsonline.org/gallery/Indonesia/Jakarta-Panorama.jpg"};
 
-        Kota a = new Kota("Bandung", 20000, covers[0]);
-        kotaList.add(a);
-
-        a = new Kota("Jogjakarta", 10000, covers[1]);
-        kotaList.add(a);
-
-        a = new Kota("Malang", 30000, covers[2]);
-        kotaList.add(a);
-
-        a = new Kota("Jakarta", 50000, covers[3]);
-        kotaList.add(a);
+//        Kota a = new Kota("Bandung", 20000, covers[0]);
+//        kotaList.add(a);
+//
+//        a = new Kota("Jogjakarta", 10000, covers[1]);
+//        kotaList.add(a);
+//
+//        a = new Kota("Malang", 30000, covers[2]);
+//        kotaList.add(a);
+//
+//        a = new Kota("Jakarta", 50000, covers[3]);
+//        kotaList.add(a);
 
         adapter.notifyDataSetChanged();
     }

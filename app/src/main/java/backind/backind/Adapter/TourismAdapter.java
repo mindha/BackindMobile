@@ -12,17 +12,20 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import backind.backind.Activity.ListBisnisActivity;
 import backind.backind.Activity.NearbyActivity;
+import backind.backind.Model.BusinessData;
 import backind.backind.Model.BusinessDetails;
 import backind.backind.R;
+import backind.backind.Response.City;
 
 public class TourismAdapter extends RecyclerView.Adapter<TourismAdapter.MyViewHolder> {
 
     private Context mContext;
-    private List<BusinessDetails> tourismList;
+    private List<BusinessData> tourismList = new ArrayList<>();
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView tourism, startFrom;
@@ -49,9 +52,14 @@ public class TourismAdapter extends RecyclerView.Adapter<TourismAdapter.MyViewHo
     }
 
 
-    public TourismAdapter(Context mContext, List<BusinessDetails> albumList) {
+    public TourismAdapter(Context mContext) {
         this.mContext = mContext;
-        this.tourismList = albumList;
+    }
+
+    public void setItems(List<BusinessData> business){
+        this.tourismList.addAll(business);
+        notifyDataSetChanged();
+
     }
 
     @Override
@@ -64,7 +72,7 @@ public class TourismAdapter extends RecyclerView.Adapter<TourismAdapter.MyViewHo
 
     @Override
     public void onBindViewHolder(final TourismAdapter.MyViewHolder holder, int position) {
-        BusinessDetails album = tourismList.get(position);
+        BusinessDetails album = tourismList.get(position).getBusinessDetails();
         holder.tourism.setText(album.getBusinessName());
         holder.startFrom.setText("Mulai dari Rp " + album.getBusinessPrice() + ",-");
 

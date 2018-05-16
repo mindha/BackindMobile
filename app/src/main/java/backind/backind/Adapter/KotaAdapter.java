@@ -16,16 +16,18 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import backind.backind.Activity.ListBisnisActivity;
 import backind.backind.Model.Kota;
 import backind.backind.R;
+import backind.backind.Response.City;
 
 public class KotaAdapter extends RecyclerView.Adapter<KotaAdapter.MyViewHolder> {
 
     private Context mContext;
-    private List<Kota> kotaList;
+    private List<City> kotaList = new ArrayList<>();
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView kota, startFrom;
@@ -53,9 +55,8 @@ public class KotaAdapter extends RecyclerView.Adapter<KotaAdapter.MyViewHolder> 
 
 
 
-    public KotaAdapter(Context mContext, List<Kota> albumList) {
+    public KotaAdapter(Context mContext) {
         this.mContext = mContext;
-        this.kotaList = albumList;
     }
 
     @Override
@@ -66,14 +67,21 @@ public class KotaAdapter extends RecyclerView.Adapter<KotaAdapter.MyViewHolder> 
         return new MyViewHolder(itemView);
     }
 
+    public void setItems(List<City> city){
+        this.kotaList.addAll(city);
+        notifyDataSetChanged();
+
+    }
     @Override
     public void onBindViewHolder(final MyViewHolder holder, int position) {
-        Kota album = kotaList.get(position);
-        holder.kota.setText(album.getName());
-        holder.startFrom.setText("Mulai dari Rp " +album.getStartFrom() +",-");
+        City album = kotaList.get(position);
+        holder.kota.setText(album.getCity().toString());
+        holder.startFrom.setText("Mulai dari Rp "+ album.getMinCBusinessPrice().toString()+",-");
+//        holder.kota.setText(album.getName());
+//        holder.startFrom.setText("Mulai dari Rp " +album.getStartFrom() +",-");
 
         // loading album cover using Glide library
-        Glide.with(mContext).load(album.getThumnail()).into(holder.thumbnail);
+//        Glide.with(mContext).load(album.getThumnail()).into(holder.thumbnail);
 
     }
 
