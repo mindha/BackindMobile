@@ -62,6 +62,12 @@ public class TourismAdapter extends RecyclerView.Adapter<TourismAdapter.MyViewHo
 
     }
 
+    public void setFilter(List<BusinessData> business){
+        this.tourismList = new ArrayList<BusinessData>();
+        this.tourismList.addAll(business);
+        super.notifyDataSetChanged();
+
+    }
     @Override
     public TourismAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())

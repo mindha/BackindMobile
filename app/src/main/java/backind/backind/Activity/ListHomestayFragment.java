@@ -7,11 +7,16 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 
 import java.util.ArrayList;
@@ -34,7 +39,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 
-public class ListHomestayFragment extends Fragment {
+public class ListHomestayFragment extends Fragment implements SearchView.OnQueryTextListener{
     public static final String ROOT_URL = "http://backind.id/";
 
     private LinearLayout mLinearLayout;
@@ -65,11 +70,26 @@ public class ListHomestayFragment extends Fragment {
 
 //        getData();
         getListHomestay();
-
+        Log.d("Backindbug","Cobain = " + Utils.getJsonfromUrl(bisnisList));
         return rootView;
     }
 
-//    private void getData() {
+    @Override
+    public void onPrepareOptionsMenu(Menu menu) {
+        super.onPrepareOptionsMenu(menu);
+
+        MenuInflater inflater = getActivity().getMenuInflater();
+        inflater.inflate(R.menu.search_menu,menu);
+
+        final MenuItem item = menu.findItem(R.id.search);
+        final SearchView searchView = (SearchView) item.getActionView();
+        EditText searchEditText = searchView.findViewById(android.support.v7.appcompat.R.id.search_src_text);
+        searchEditText.setTextColor(getResources().getColor(R.color.abuDark));
+        searchEditText.setHintTextColor(getResources().getColor(R.color.abuLight));
+        searchView.setOnQueryTextListener(this);
+    }
+
+    //    private void getData() {
 //        HttpLoggingInterceptor loggin = new HttpLoggingInterceptor(new HttpLoggingInterceptor.Logger() {
 //            @Override
 //            public void log(String message) {
@@ -124,6 +144,16 @@ public class ListHomestayFragment extends Fragment {
 
             }
         });
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        return false;
     }
 
     public class GridSpacingItemDecoration extends RecyclerView.ItemDecoration {
