@@ -129,7 +129,7 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/btn_style_orange"
                     android:textColor="@color/colorWhite"
-                    android:text="@string/bayar"
+                    android:text="@string/pesan"
                     android:textAllCaps="false"
                     android:layout_alignParentRight="true"
                     android:paddingLeft="@dimen/dots_height"

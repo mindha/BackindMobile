@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingLeft="35dp"
+        android:background="@color/white"
+        android:paddingRight="35dp"
+        tools:context=".Activity.BuktiTransferActivity">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="KONFIRMASI PEMBAYARAN"
+                android:textColor="@color/colorHitam"
+                android:fontFamily="@font/montserrat_medium"
+                android:textSize="@dimen/fab_margin"/>
+            <TextView
+                android:id="@+id/order_code"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="#BACKIND124"
+                android:fontFamily="@font/montserrat_medium"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/margin20"
+                android:layout_marginTop="@dimen/padding10" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/padding10"
+                android:fontFamily="@font/montserrat_regular"
+                android:textSize="12dp"
+                android:text="@string/jumlahtagihan"
+                android:textAllCaps="true"/>
+
+            <TextView
+                android:id="@+id/total_tagihan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/padding10"
+                android:fontFamily="@font/montserrat_regular"
+                android:textSize="@dimen/margin20"
+                android:text="Rp 2.150.126,-"
+                android:textColor="@color/colorHitam"
+                android:textAllCaps="true"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/bataswaktu"
+                android:layout_marginTop="@dimen/padding10"
+                android:fontFamily="@font/montserrat_regular"
+                android:textSize="12dp"/>
+
+            <TextView
+                android:id="@+id/due_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/padding10"
+                android:fontFamily="@font/montserrat_medium"
+                android:text="Rabu, 26 Februari 2012, 23:45"
+                android:textColor="@color/colorPink"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="STATUS PEMBAYARAN"
+                android:layout_marginTop="@dimen/padding10"
+                android:fontFamily="@font/montserrat_regular"
+                android:textSize="12dp"/>
+
+            <TextView
+                android:id="@+id/status"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/padding10"
+                android:fontFamily="@font/montserrat_medium"
+                android:text="WAITING"
+                android:textColor="@color/colorPink"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/padding10"
+                android:text="UNGGAH BUKTI TRANSFER"
+                android:layout_marginTop="@dimen/padding10"
+                android:fontFamily="@font/montserrat_regular"
+                android:textSize="12dp"/>
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_marginBottom="10dp"
+                android:background="@color/abuLight"/>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_marginBottom="@dimen/padding10"
+                android:layout_height="wrap_content">
+                <Button
+                    android:id="@+id/pilihfoto"
+                    android:text="Pilih Foto"
+                    android:paddingLeft="@dimen/margin20"
+                    android:paddingRight="@dimen/margin20"
+                    android:layout_width="wrap_content"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:background="@drawable/btn_style_purple"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/padding5"/>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    >
+                    <Button
+                        android:id="@+id/bayar"
+                        android:paddingLeft="@dimen/margin20"
+                        android:paddingRight="@dimen/margin20"
+                        android:layout_width="wrap_content"
+                        android:textColor="@color/white"
+                        android:layout_alignParentRight="true"
+                        android:text="UNGGAH"
+                        android:layout_marginBottom="@dimen/padding5"
+                        android:fontFamily="@font/montserrat_medium"
+                        android:background="@drawable/btn_style_orange"
+                        android:layout_height="wrap_content"
+                        />
+                </RelativeLayout>
+            </LinearLayout>
+
+            <include layout="@layout/content_upload_bukti_transfer"/>
+        </LinearLayout>
+    </android.support.constraint.ConstraintLayout>
+</ScrollView>
+
+

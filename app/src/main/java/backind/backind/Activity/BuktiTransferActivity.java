@@ -15,15 +15,14 @@ import android.widget.Button;
 
 import backind.backind.R;
 
-public class PaymentDeadlineActivity extends AppCompatActivity {
+public class BuktiTransferActivity extends AppCompatActivity {
 
-    private Button bayar, batal;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_payment_deadline);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        setContentView(R.layout.activity_bukti_transfer);
 
         //status bar
         Window window = this.getWindow();
@@ -40,15 +39,7 @@ public class PaymentDeadlineActivity extends AppCompatActivity {
         upArrow.setColorFilter(ContextCompat.getColor(this, R.color.colorHitam), PorterDuff.Mode.SRC_ATOP);
         getSupportActionBar().setHomeAsUpIndicator(upArrow);
 
-        bayar = findViewById(R.id.pay);
-        batal = findViewById(R.id.batal);
 
-        bayar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(PaymentDeadlineActivity.this, BuktiTransferActivity.class));
-            }
-        });
 
     }
 }

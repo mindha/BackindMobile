@@ -55,7 +55,7 @@
             android:textAllCaps="true"
             android:layout_marginBottom="@dimen/margin20"/>
 
-        <include layout="@layout/item_bank"/>
+        <include layout="@layout/content_payment_deadline"/>
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>
 </ScrollView>
