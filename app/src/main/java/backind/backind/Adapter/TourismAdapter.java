@@ -80,7 +80,7 @@ public class TourismAdapter extends RecyclerView.Adapter<TourismAdapter.MyViewHo
     public void onBindViewHolder(final TourismAdapter.MyViewHolder holder, int position) {
         BusinessDetails album = tourismList.get(position).getBusinessDetails();
         holder.tourism.setText(album.getBusinessName());
-        holder.startFrom.setText("Mulai dari Rp " + album.getBusinessPrice() + ",-");
+        holder.startFrom.setText("Rp " + album.getBusinessPrice() + ",-");
 
         // loading album cover using Glide library
         Glide.with(mContext).load("http://backind.id/storage/"+album.getBusinessProfilePict()).into(holder.thumbnail);

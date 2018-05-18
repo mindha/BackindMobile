@@ -27,7 +27,6 @@ import backind.backind.Model.BusinessData;
 import backind.backind.Model.BusinessResponse;
 import backind.backind.Model.BusinessDetails;
 import backind.backind.R;
-import backind.backind.Rest.RestApi;
 import backind.backind.Service.Api;
 import backind.backind.Utils.Utils;
 import okhttp3.OkHttpClient;
