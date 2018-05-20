@@ -1,5 +1,4 @@
 package backind.backind.Adapter;
 
-public class HomestayAdapter {
-
+public class BusinessAdapter {
 }
