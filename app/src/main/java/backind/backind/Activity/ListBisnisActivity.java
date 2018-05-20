@@ -1,10 +1,7 @@
 package backind.backind.Activity;
 
-import android.annotation.SuppressLint;
-import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
@@ -14,6 +11,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
+import android.text.InputType;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -25,21 +23,14 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.miguelcatalan.materialsearchview.MaterialSearchView;
-
 import java.util.ArrayList;
 import java.util.List;
 
 import backind.backind.Model.BusinessData;
-import backind.backind.Model.BusinessResponse;
 import backind.backind.R;
-import backind.backind.Service.Api;
 import backind.backind.Utils.Utils;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
-public class ListBisnisActivity extends AppCompatActivity implements SearchView.OnQueryTextListener{
+public class ListBisnisActivity extends AppCompatActivity implements SearchView.OnQueryTextListener {
 
     private SectionsPagerAdapter mSectionsPagerAdapter;
     //private MaterialSearchView materialSearchView;
@@ -48,6 +39,11 @@ public class ListBisnisActivity extends AppCompatActivity implements SearchView.
 
     private List<BusinessData> listTourism;
     private List<BusinessData> listHomestay = new ArrayList<>();
+
+    ListTourismFragment tab1 = null;
+    ListHomestayFragment tab2 = null;
+    int id_city;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,6 +51,12 @@ public class ListBisnisActivity extends AppCompatActivity implements SearchView.
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        try{
+            id_city = getIntent().getIntExtra("id_kota",0);
+        }catch (Exception e){
+
+        }
 
         /*materialSearchView = findViewById(R.id.searchbudget);
         materialSearchView.closeSearch();
@@ -81,32 +83,9 @@ public class ListBisnisActivity extends AppCompatActivity implements SearchView.
 
     }
 
-    private void setupViewPager(ViewPager viewPager){
+    private void setupViewPager(ViewPager viewPager) {
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
         mViewPager.setAdapter(mSectionsPagerAdapter);
-    }
-    private void getListBisnisTorism(){
-        listTourism = new ArrayList<>();
-        Api.getService().getDataTourism().enqueue(new Callback<BusinessResponse>() {
-            @Override
-            public void onResponse(Call<BusinessResponse> call, Response<BusinessResponse> response) {
-                if(response.isSuccessful()){
-                    listTourism = response.body().getData();
-                    Log.d("Backindbug","response dari activity = " + Utils.getJsonfromUrl(listTourism));
-
-                    setupViewPager(mViewPager);
-                    tabLayout.setupWithViewPager(mViewPager);
-                    //ListTourismFragment.newListTourism(listTourism);
-//                    bisnisList = response.body().getData();
-//                    adapter.setItems(bisnisList);
-                }
-            }
-
-            @Override
-            public void onFailure(Call<BusinessResponse> call, Throwable t) {
-
-            }
-        });
     }
 
 
@@ -115,9 +94,9 @@ public class ListBisnisActivity extends AppCompatActivity implements SearchView.
         finish();
     }
 
-    public void resultSearch(){
-        Log.d("Backindbug","cek length = " + tab1.bisnisList.size());
-        Log.d("Backindbug","cek result = " + Utils.getJsonfromUrl(tab1.bisnisList));
+    public void resultSearch() {
+        Log.d("Backindbug", "cek length = " + tab1.bisnisList.size());
+        Log.d("Backindbug", "cek result = " + Utils.getJsonfromUrl(tab1.bisnisList));
         /*if (mViewPager.getCurrentItem()==0){
             tab1 = ListTourismFragment.newListTourism();
             //List<BusinessData> listTourism1 = filter(listTourism, newText);
@@ -127,15 +106,15 @@ public class ListBisnisActivity extends AppCompatActivity implements SearchView.
         }*/
     }
 
-    private List<BusinessData> filter(List<BusinessData> models, String query){
+    private List<BusinessData> filter(List<BusinessData> models, String query) {
         query = query.toLowerCase();
         int q = Integer.valueOf(query);
-        final List <BusinessData> filtermodel = new ArrayList<BusinessData>();
+        final List<BusinessData> filtermodel = new ArrayList<BusinessData>();
         String harga;
-        for(BusinessData model : models){
+        for (BusinessData model : models) {
             harga = model.getBusinessDetails().getBusinessPrice().toLowerCase();
             int n = Integer.valueOf(harga);
-            if(harga.contains(query)) {
+            if (harga.contains(query)) {
                 filtermodel.add(model);
             }
         }
@@ -145,13 +124,26 @@ public class ListBisnisActivity extends AppCompatActivity implements SearchView.
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.search_menu,menu);
+        inflater.inflate(R.menu.search_menu, menu);
         final MenuItem item = menu.findItem(R.id.search);
         final SearchView searchView = (SearchView) item.getActionView();
         EditText searchEditText = searchView.findViewById(android.support.v7.appcompat.R.id.search_src_text);
-        searchEditText.setTextColor(getResources().getColor(R.color.abuDark));
-        searchEditText.setHintTextColor(getResources().getColor(R.color.abuLight));
+        searchEditText.setTextColor(getResources().getColor(R.color.white));
+        searchEditText.setText("Masukkan Budget Anda");
+        searchEditText.setHintTextColor(getResources().getColor(R.color.white));
+        searchView.setInputType(InputType.TYPE_CLASS_NUMBER);
         searchView.setOnQueryTextListener(this);
+        MenuItemCompat.setOnActionExpandListener(item, new MenuItemCompat.OnActionExpandListener() {
+            @Override
+            public boolean onMenuItemActionExpand(MenuItem item) {
+                return true;
+            }
+
+            @Override
+            public boolean onMenuItemActionCollapse(MenuItem item) {
+                return true;
+            }
+        });
         return true;
     }
 
@@ -167,17 +159,20 @@ public class ListBisnisActivity extends AppCompatActivity implements SearchView.
         return super.onOptionsItemSelected(item);
     }
 
+
+
     @Override
     public boolean onQueryTextSubmit(String query) {
-        Log.d("Backindbug","Disearch = " + query);
+        Log.d("Backindbug", "Disearch = " + query);
         //resultSearch();
         return true;
     }
 
     @Override
     public boolean onQueryTextChange(String newText) {
-        Log.d("Backindbug","Disearch coba = " + newText);
-
+        Log.d("Backindbug", "Disearch coba = " + newText);
+        tab1.searchView(newText);
+        tab2.searchView(newText);
         return true;
     }
 
@@ -204,7 +199,7 @@ public class ListBisnisActivity extends AppCompatActivity implements SearchView.
             return rootView;
         }
     }
-    ListTourismFragment tab1=null;
+
 
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
@@ -216,11 +211,11 @@ public class ListBisnisActivity extends AppCompatActivity implements SearchView.
         public Fragment getItem(int position) {
             switch (position) {
                 case 0:
-                    //tab1 = ListTourismFragment.newListTourism(listTourism);
-                    tab1 = new ListTourismFragment();
+                    tab1 = ListTourismFragment.newListTourism(id_city);
+                    //tab1 = new ListTourismFragment();
                     return tab1;
                 case 1:
-                    ListHomestayFragment tab2 = new ListHomestayFragment();
+                    tab2 = ListHomestayFragment.newListHomestay(id_city);
                     return tab2;
                 default:
                     return null;

@@ -13,6 +13,7 @@ import android.support.v7.graphics.Palette;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -20,11 +21,22 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import backind.backind.Adapter.BisnisAdapter;
-import backind.backind.Adapter.CommentAdapter;
+import com.bumptech.glide.Glide;
+
+import java.util.List;
+
+import backind.backind.Adapter.ReviewAdapter;
+import backind.backind.Model.Review;
 import backind.backind.R;
+import backind.backind.Response.BusinessDetailsResponse;
+import backind.backind.Service.Api;
+import backind.backind.Utils.Utils;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class BusinessDetailActivity extends AppCompatActivity {
@@ -36,8 +48,13 @@ public class BusinessDetailActivity extends AppCompatActivity {
     private RecyclerView recList;
     private Menu collapseMenu;
     private Button btnOrder;
-    private ImageView review;
+    private ImageView review, header;
     private Dialog dialog;
+    private TextView price,bukatutup, desc, address, number_reviews;
+    private List<Review> reviewData = null;
+    public ReviewAdapter adapter = null;
+
+    int id_detail_bisnis, hargaSearch;
 
     private boolean appBarExpanded = true;
 
@@ -46,35 +63,41 @@ public class BusinessDetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_business_detail);
+
+        try{
+            id_detail_bisnis = getIntent().getIntExtra("id_detail_bisnis",0);
+            hargaSearch = getIntent().getIntExtra("hargaSearch",0);
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
         toolbar = findViewById(R.id.anim_toolbar);
         collapsingToolbar = findViewById(R.id.collapsing_toolbar);
         appBarLayout = findViewById(R.id.appbar);
         recList = findViewById(R.id.scrollableview);
         review = findViewById(R.id.review);
 
+        header = findViewById(R.id.header);
+        price = findViewById(R.id.price);
+        bukatutup = findViewById(R.id.bukatutup);
+        address = findViewById(R.id.address);
+        desc = findViewById(R.id.desc);
+        number_reviews = findViewById(R.id.number_reviews);
+        btnOrder = findViewById(R.id.btnOrder);
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        collapsingToolbar.setTitle("Kampung Gajah");
+        getBusinessDetail();
 
         LinearLayoutManager llm = new LinearLayoutManager(this);
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         recList.setLayoutManager(llm);
 
-        CommentAdapter adapter = new CommentAdapter();
+        adapter = new ReviewAdapter(BusinessDetailActivity.this);
         recList.setAdapter(adapter);
 
-
-//        try {
-//            URL url = new URL("http://developer.android.com/assets/images/dac_logo.png");
-//            Bitmap bitmap = BitmapFactory.decodeStream(url.openStream());
-//            wallpaperManager.setBitmap(bitmap);
-//        } catch (MalformedURLException e) {
-//            e.printStackTrace();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
 
         Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.kampung_gajah);
         Palette.from(bitmap).generate(new Palette.PaletteAsyncListener() {
@@ -126,6 +149,55 @@ public class BusinessDetailActivity extends AppCompatActivity {
         dialog.show();
     }
 
+    private  void getBusinessDetail(){
+        Api.getService().getDetailPerBusiness("getDetailPerBisnis/"+id_detail_bisnis).enqueue(new Callback<BusinessDetailsResponse>() {
+            @Override
+            public void onResponse(Call<BusinessDetailsResponse> call, final Response<BusinessDetailsResponse> response) {
+                if(response.isSuccessful()){
+                    Log.d("Backindbug","HMMM = " + Utils.getJsonfromUrl(response.body()));
+                    String title = response.body().getData().getBusinessDetails().get(0).getBusinessDetails().getBusinessName();
+                    String description = response.body().getData().getBusinessDetails().get(0).getBusinessDetails().getBusinessDesc();
+                    String harga = response.body().getData().getBusinessDetails().get(0).getBusinessDetails().getBusinessPrice();
+                    String openclose = "Buka Jam "+ response.body().getData().getBusinessDetails().get(0).getBusinessDetails().getBusinessOpenTime()+" - Tutup Jam "+response.body().getData().getBusinessDetails().get(0).getBusinessDetails().getBusinessCloseTime();
+                    String alamat = response.body().getData().getBusinessDetails().get(0).getBusinessDetails().getBusinessAddress();
+                    String n_review = String.valueOf(response.body().getData().getBusinessDetails().get(0).getReviews().size());
+                    collapsingToolbar.setTitle(title);
+                    Glide.with(BusinessDetailActivity.this).load("http://backind.id/storage/"+response.body().getData().getBusinessDetails().get(0).getBusinessDetails().getBusinessProfilePict()).into(header);
+                    price.setText(harga);
+                    desc.setText(description);
+                    bukatutup.setText(openclose);
+                    address.setText(alamat);
+                    number_reviews.setText(n_review);
+                    reviewData = response.body().getData().getBusinessDetails().get(0).getReviews();
+                    final int idDetailBisnis = response.body().getData().getBusinessDetails().get(0).getBusinessDetails().getIdBusinessDetails();
+                    final int idmenu = Integer.valueOf(response.body().getData().getBusinessDetails().get(0).getIdMenu());
+                    btnOrder.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            if(idmenu == 1){
+                                startActivity(new Intent(BusinessDetailActivity.this, BeliTiketActivity.class));
+                            }else {
+                                startActivity(new Intent(BusinessDetailActivity.this, PesanHomestayActivity.class));
+                            }
+                            Intent intent = new Intent();
+                            Intent i = new Intent(view.getContext(), BusinessDetailActivity.class);
+                            i.putExtra("id_bisnis_detail", (idDetailBisnis));
+                            i.putExtra("harga_search", hargaSearch);
+                            view.getContext().startActivity(i);
+                        }
+                    });
+                    adapter.setItems(reviewData);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<BusinessDetailsResponse> call, Throwable t) {
+
+            }
+        });
+    }
+
+
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         if(collapseMenu != null && (!appBarExpanded || collapseMenu.size() != 1)){
@@ -164,4 +236,14 @@ public class BusinessDetailActivity extends AppCompatActivity {
     }
 
 
+
+//        try {
+//            URL url = new URL("http://developer.android.com/assets/images/dac_logo.png");
+//            Bitmap bitmap = BitmapFactory.decodeStream(url.openStream());
+//            wallpaperManager.setBitmap(bitmap);
+//        } catch (MalformedURLException e) {
+//            e.printStackTrace();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
 }

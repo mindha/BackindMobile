@@ -3,7 +3,9 @@ package backind.backind.Activity;
 import android.content.res.Resources;
 import android.graphics.Rect;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -24,36 +26,50 @@ import java.util.List;
 
 import backind.backind.Adapter.TourismAdapter;
 import backind.backind.Model.BusinessData;
-import backind.backind.Model.BusinessResponse;
-import backind.backind.Model.BusinessDetails;
+import backind.backind.Response.BusinessResponse;
 import backind.backind.R;
 import backind.backind.Service.Api;
 import backind.backind.Utils.Utils;
-import okhttp3.OkHttpClient;
-import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 
-public class ListHomestayFragment extends Fragment implements SearchView.OnQueryTextListener{
+public class ListHomestayFragment extends Fragment implements SearchView.OnQueryTextListener {
     public static final String ROOT_URL = "http://backind.id/";
+    private static final String getIdCity = "id_city";
 
     private LinearLayout mLinearLayout;
 
 
     private RecyclerView recyclerView;
-    private TourismAdapter adapter;
+    public TourismAdapter adapter;
     private List<BusinessData> bisnisList;
+    public int id_city;
 
-    public ListHomestayFragment() {
+    public static ListHomestayFragment newListHomestay (int id_city){
+        ListHomestayFragment ListHomestayFragment = new ListHomestayFragment();
+        Bundle args = new Bundle();
+        args.putInt(getIdCity,id_city);
+        ListHomestayFragment.setArguments(args);
+
+        return ListHomestayFragment;
     }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if(getArguments()!= null){
+            this.id_city = getArguments().getInt(getIdCity);
+            Log.d("Backindbug","id citynya = " + id_city);
+        }
+
+    }
+
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_list_tourism,container,false);
+        View rootView = inflater.inflate(R.layout.fragment_list_tourism, container, false);
 
 
         recyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
@@ -69,70 +85,41 @@ public class ListHomestayFragment extends Fragment implements SearchView.OnQuery
 
 //        getData();
         getListHomestay();
-        Log.d("Backindbug","Cobain = " + Utils.getJsonfromUrl(bisnisList));
+        Log.d("Backindbug", "Cobain = " + Utils.getJsonfromUrl(bisnisList));
         return rootView;
     }
 
+    // 123
     @Override
-    public void onPrepareOptionsMenu(Menu menu) {
-        super.onPrepareOptionsMenu(menu);
-
-        MenuInflater inflater = getActivity().getMenuInflater();
-        inflater.inflate(R.menu.search_menu,menu);
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.search_menu, menu);
 
         final MenuItem item = menu.findItem(R.id.search);
-        final SearchView searchView = (SearchView) item.getActionView();
-        EditText searchEditText = searchView.findViewById(android.support.v7.appcompat.R.id.search_src_text);
+        final SearchView searchView = (SearchView) MenuItemCompat.getActionView(item);
+        EditText searchEditText = (EditText) searchView.findViewById(android.support.v7.appcompat.R.id.search_src_text);
         searchEditText.setTextColor(getResources().getColor(R.color.abuDark));
         searchEditText.setHintTextColor(getResources().getColor(R.color.abuLight));
         searchView.setOnQueryTextListener(this);
+
+        MenuItemCompat.setOnActionExpandListener(item, new MenuItemCompat.OnActionExpandListener() {
+            @Override
+            public boolean onMenuItemActionExpand(MenuItem item) {
+                return true;
+            }
+
+            @Override
+            public boolean onMenuItemActionCollapse(MenuItem item) {
+                return true;
+            }
+        });
+
     }
 
-    //    private void getData() {
-//        HttpLoggingInterceptor loggin = new HttpLoggingInterceptor(new HttpLoggingInterceptor.Logger() {
-//            @Override
-//            public void log(String message) {
-//                Log.d("Backind", message);
-//            }
-//        });
-//        loggin.setLevel(HttpLoggingInterceptor.Level.BODY);
-//        OkHttpClient client = new OkHttpClient.Builder()
-//                .addInterceptor(loggin)
-//                .build();
-//        Retrofit retrofit = new Retrofit.Builder()
-//                .baseUrl(ROOT_URL)
-//                .addConverterFactory(GsonConverterFactory.create())
-//                .client(client)
-//                .build();
-//
-//        RestApi service = retrofit.create(RestApi.class);
-//        Call<List<BusinessResponse>> call = service.getDataHomestay();
-//        call.enqueue(new Callback<List<BusinessResponse>>() {
-//            @Override
-//            public void onResponse(Call<List<BusinessResponse>> call, Response<List<BusinessResponse>> response) {
-//                List<BusinessResponse> bisnis = response.body();
-//                bisnisList.clear();
-//                for(BusinessResponse homestay : bisnis){
-//                    bisnisList.add(homestay.getBusinessDetails());
-//                }
-//                adapter.notifyDataSetChanged();
-//            }
-//
-//            @Override
-//            public void onFailure(Call<List<BusinessResponse>> call, Throwable t) {
-//                System.out.println("Mencoba");
-//            }
-//
-//        });
-//
-//    }
-
-    private void getListHomestay(){
-        Api.getService().getDataHomestay().enqueue(new Callback<BusinessResponse>() {
+    private void getListHomestay() {
+        Api.getService().getDataHomestay("getHomestayInThatCities/"+id_city).enqueue(new Callback<BusinessResponse>() {
             @Override
             public void onResponse(Call<BusinessResponse> call, Response<BusinessResponse> response) {
                 if(response.isSuccessful()){
-                    Log.d("Backindbug","response = " + Utils.getJsonfromUrl(response.body()));
                     bisnisList = response.body().getData();
                     adapter.setItems(bisnisList);
                 }
@@ -144,15 +131,61 @@ public class ListHomestayFragment extends Fragment implements SearchView.OnQuery
             }
         });
     }
+    // 123
+    public void searchView(String newText) {
+        Log.d("Backindbug","ini harganya = "+newText);
+        if(newText == null || newText.equals("")){
+            newText="5000000";
+        }
 
-    @Override
-    public boolean onQueryTextSubmit(String query) {
-        return false;
+        List<BusinessData> listTourism1 = filter(bisnisList, newText);
+        adapter.setFilter(Integer.parseInt(newText),listTourism1);
+        adapter.notifyDataSetChanged();
+        /*if (mViewPager.getCurrentItem()==0){
+
+            //List<BusinessData> listTourism1 = filter(listTourism, newText);
+            //tab1.adapter.setFilter(listTourism1);
+        }else if(mViewPager.getCurrentItem()==1){
+
+        }*/
+    }
+    // 123
+    private List<BusinessData> filter(List<BusinessData> models, String query) {
+        query = query.toLowerCase();
+        List<BusinessData> filtermodel = new ArrayList<BusinessData>();
+
+        try {
+            if (query.isEmpty()) {
+                filtermodel = models;
+            } else {
+                long q = Long.valueOf(query);
+                long harga;
+                for (BusinessData model : models) {
+                    harga = Long.valueOf(model.getBusinessDetails().getBusinessPrice());
+                    long n = Long.valueOf(harga);
+                    if (harga <= q) {
+                        filtermodel.add(model);
+                    }
+                }
+            }
+        } catch (NumberFormatException e) {
+
+        }
+
+        return filtermodel;
     }
 
+    // 123
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        searchView(query);
+        return true;
+    }
+    // 123
     @Override
     public boolean onQueryTextChange(String newText) {
-        return false;
+        searchView(newText);
+        return true;
     }
 
     public class GridSpacingItemDecoration extends RecyclerView.ItemDecoration {

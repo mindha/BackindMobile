@@ -1,11 +1,12 @@
 
-package backind.backind.Model;
+package backind.backind.Response;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
+import backind.backind.Model.BusinessData;
 import backind.backind.Response.BaseResponse;
 
 public class BusinessResponse extends BaseResponse{

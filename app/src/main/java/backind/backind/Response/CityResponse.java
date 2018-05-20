@@ -5,6 +5,8 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
+import backind.backind.Model.City;
+
 public class CityResponse extends BaseResponse {
     @SerializedName("message")
     @Expose

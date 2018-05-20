@@ -1,7 +1,11 @@
-package backind.backind.Model;
+package backind.backind.Response;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+
+import backind.backind.Model.BusinessDetails;
+import backind.backind.Model.Data;
+import backind.backind.Model.ListNear;
 
 public class NearbyResponse {
     @SerializedName("error")
@@ -12,7 +16,7 @@ public class NearbyResponse {
     private String message;
     @SerializedName("data")
     @Expose
-    private Data data;
+    private ListNear data;
 
 
     public Boolean getError() {
@@ -31,11 +35,11 @@ public class NearbyResponse {
         this.message = message;
     }
 
-    public Data getData() {
+    public ListNear getData() {
         return data;
     }
 
-    public void setData(Data data) {
+    public void setData(ListNear data) {
         this.data = data;
     }
 }

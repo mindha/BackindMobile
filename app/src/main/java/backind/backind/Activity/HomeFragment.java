@@ -1,11 +1,8 @@
 package backind.backind.Activity;
 
-import android.app.ActionBar;
-import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Rect;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.AppBarLayout;
@@ -22,26 +19,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.AdapterView;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
 import com.orhanobut.hawk.Hawk;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import backind.backind.Adapter.HomestayAdapter;
 import backind.backind.Adapter.KotaAdapter;
 import backind.backind.Constant;
-import backind.backind.Model.Kota;
 import backind.backind.Model.User;
-import backind.backind.OnboardingActivity;
 import backind.backind.R;
-import backind.backind.Response.City;
+import backind.backind.Model.City;
 import backind.backind.Response.CityResponse;
 import backind.backind.Service.Api;
 import backind.backind._sliders.FragmentSlider;

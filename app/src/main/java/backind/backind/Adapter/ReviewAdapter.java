@@ -2,7 +2,6 @@ package backind.backind.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,23 +17,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 import backind.backind.Activity.BusinessDetailActivity;
-import backind.backind.Activity.NearbyActivity;
-import backind.backind.Model.BisnisModel;
-import backind.backind.Model.BusinessData;
-import backind.backind.Model.BusinessDetails;
 import backind.backind.Model.Near;
+import backind.backind.Model.Review;
+import backind.backind.Model.User;
 import backind.backind.R;
-
-import static com.thefinestartist.utils.service.ClipboardManagerUtil.getText;
 
 /**
  * Created by root on 28/05/17.
  */
 
-public class BusinessAdapter extends RecyclerView.Adapter<BusinessAdapter.MyViewHolder> {
+public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.MyViewHolder> {
 
     private Context mContext;
-    private List<Near> bisnisList = new ArrayList<>();
+    private List<Review> reviewList = new ArrayList<>();
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView labelName, labelDesc;
@@ -43,71 +38,59 @@ public class BusinessAdapter extends RecyclerView.Adapter<BusinessAdapter.MyView
 
         public MyViewHolder(View view) {
             super(view);
-            labelPic = view.findViewById(R.id.pic);
+            labelPic = view.findViewById(R.id.pic_user);
             labelName   =  view.findViewById(R.id.name);
-            labelDesc   = view.findViewById(R.id.harga);
+            labelDesc   = view.findViewById(R.id.comment);
             listItem = view.findViewById(R.id.item);
-
-            listItem.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    int mPosition = getLayoutPosition();
-                    Toast.makeText(view.getContext(), labelName.getText(), Toast.LENGTH_SHORT).show();
-                    Intent i = new Intent(view.getContext(), BusinessDetailActivity.class);
-                    i.putExtra("id_detail_bisnis", Integer.parseInt(bisnisList.get(mPosition).getIdBusinessDetails().toString()));
-//                    i.putExtra("harga_search", hargaSearch);
-                    view.getContext().startActivity(i);
-                }
-            });
 
         }
     }
 
-    public BusinessAdapter(Context mContext) {
+    public ReviewAdapter(Context mContext) {
         this.mContext = mContext;
     }
 
-    public void setItems(List<Near> business){
-        this.bisnisList.addAll(business);
+    public void setItems(List<Review> review){
+        this.reviewList.addAll(review);
         notifyDataSetChanged();
 
     }
 
-    public void setFilter(List<Near> business){
-        this.bisnisList = new ArrayList<Near>();
-        this.bisnisList.addAll(business);
+    public void setFilter(List<Review> review){
+        this.reviewList = new ArrayList<Review>();
+        this.reviewList.addAll(review);
         super.notifyDataSetChanged();
 
     }
 
     @Override
-    public BusinessAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ReviewAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_business, parent, false);
+                .inflate(R.layout.item_review, parent, false);
 
-        return new BusinessAdapter.MyViewHolder(itemView);
+        return new ReviewAdapter.MyViewHolder(itemView);
     }
 
 
     int n;
     @Override
-    public void onBindViewHolder(final BusinessAdapter.MyViewHolder holder, int position) {
-        Near album = bisnisList.get(position);
-        n = Integer.valueOf(album.getIdBusinessDetails());
-        holder.labelName.setText(album.getBusinessName());
-        holder.labelDesc.setText("Rp " + album.getBusinessPrice() + ",-");
+    public void onBindViewHolder(final ReviewAdapter.MyViewHolder holder, int position) {
+        Review album = reviewList.get(position);
+        User dataUser = album.getUser();
+        holder.labelName.setText(dataUser.getName().toString());
+        holder.labelDesc.setText(album.getReview());
 
 //        i.putExtra("id_bisnis", Integer.parseInt(kotaList.get(mPosition).getIdCity().toString()));
 
         // loading album cover using Glide library
-//        Glide.with(mContext).load("http://backind.id/storage/"+album.getfoto()).into(holder.labelPic);
+//        Glide.with(mContext).load("http://backind.id/storage/"+album.get).into(holder.labelPic);
 
     }
 
 
     @Override
     public int getItemCount() {
-        return bisnisList.size();
+        return reviewList.size();
     }
 
 

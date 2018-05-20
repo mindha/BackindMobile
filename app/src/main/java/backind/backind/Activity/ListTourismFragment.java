@@ -3,9 +3,9 @@ package backind.backind.Activity;
 import android.content.res.Resources;
 import android.graphics.Rect;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -26,35 +26,31 @@ import java.util.List;
 
 import backind.backind.Adapter.TourismAdapter;
 import backind.backind.Model.BusinessData;
-import backind.backind.Model.BusinessDetails;
-import backind.backind.Model.BusinessResponse;
+import backind.backind.Response.BusinessResponse;
 import backind.backind.R;
 import backind.backind.Service.Api;
-import backind.backind.Utils.Utils;
-import okhttp3.OkHttpClient;
-import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 
-public class ListTourismFragment extends Fragment{
+public class ListTourismFragment extends Fragment implements SearchView.OnQueryTextListener {
     public static final String ROOT_URL = "http://backind.id/";
     private static final String LIST_Tourism = "List_Tourism";
+    private static final String getIdCity = "id_city";
 
     private LinearLayout mLinearLayout;
 
 
     private RecyclerView recyclerView;
-    public TourismAdapter adapter;
-    public List<BusinessData> bisnisList;
+    public  TourismAdapter adapter;
+    public  List<BusinessData> bisnisList;
+    public int id_city;
 
-    public static ListTourismFragment newListTourism (List<BusinessData> bisnis){
+    public static ListTourismFragment newListTourism (int id_city){
         ListTourismFragment listTourismFragment = new ListTourismFragment();
         Bundle args = new Bundle();
-        args.putParcelableArrayList(LIST_Tourism, (ArrayList<? extends Parcelable>) bisnis);
+        args.putInt(getIdCity,id_city);
         listTourismFragment.setArguments(args);
 
         return listTourismFragment;
@@ -64,18 +60,30 @@ public class ListTourismFragment extends Fragment{
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if(getArguments()!= null){
-            this.bisnisList = getArguments().getParcelableArrayList(LIST_Tourism);
-            Log.d("Backindbug","Ga null = " + Utils.getJsonfromUrl(bisnisList));
+            this.id_city = getArguments().getInt(getIdCity);
+            Log.d("Backindbug","id citynya = " + id_city);
         }
 
     }
 
-    public void searchView(String newText){
-        List<BusinessData> listTourism1 = filter(bisnisList, newText);
-        adapter.setFilter(listTourism1);
-        adapter.notifyDataSetChanged();
-        /*if (mViewPager.getCurrentItem()==0){
+    // 123
+//    @Override
+//    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+//        super.onViewCreated(view, savedInstanceState);
+//        setHasOptionsMenu(true);
+//    }
 
+    // 123
+    public  void searchView(String newText){
+
+        if(newText == null || newText.equals("")){
+            newText="5000000";
+        }
+        List<BusinessData> listTourism1 = filter(bisnisList, newText);
+        adapter.setFilter(Integer.parseInt(newText),listTourism1);
+        adapter.notifyDataSetChanged();
+
+        /*if (mViewPager.getCurrentItem()==0){
             //List<BusinessData> listTourism1 = filter(listTourism, newText);
             //tab1.adapter.setFilter(listTourism1);
         }else if(mViewPager.getCurrentItem()==1){
@@ -83,23 +91,34 @@ public class ListTourismFragment extends Fragment{
         }*/
     }
 
-    private List<BusinessData> filter(List<BusinessData> models, String query){
+    // 123
+    private  List<BusinessData> filter(List<BusinessData> models, String query) {
         query = query.toLowerCase();
-        int q = Integer.valueOf(query);
-        final List <BusinessData> filtermodel = new ArrayList<BusinessData>();
-        String harga;
-        for(BusinessData model : models){
-            harga = model.getBusinessDetails().getBusinessPrice().toLowerCase();
-            int n = Integer.valueOf(harga);
-            if(harga.contains(query)) {
-                filtermodel.add(model);
+        List<BusinessData> filtermodel = new ArrayList<BusinessData>();
+
+        try {
+            if (query.isEmpty()) {
+                filtermodel = models;
+            } else {
+                long q = Long.valueOf(query);
+                long harga;
+                for (BusinessData model : models) {
+                    harga = Long.valueOf(model.getBusinessDetails().getBusinessPrice());
+                    long n = Long.valueOf(harga);
+                    if (harga <= q) {
+                        filtermodel.add(model);
+                    }
+                }
             }
+        } catch (NumberFormatException e){
+
         }
+
         return filtermodel;
     }
 
     private void getListTourism(){
-        Api.getService().getDataTourism().enqueue(new Callback<BusinessResponse>() {
+        Api.getService().getDataTourism("getTourismInThatCities/"+id_city).enqueue(new Callback<BusinessResponse>() {
             @Override
             public void onResponse(Call<BusinessResponse> call, Response<BusinessResponse> response) {
                 if(response.isSuccessful()){
@@ -134,36 +153,78 @@ public class ListTourismFragment extends Fragment{
         return rootView;
     }
 
-    @Override
-    public void onPrepareOptionsMenu(Menu menu) {
-        super.onPrepareOptionsMenu(menu);
+//    @Override
+//    public void onPrepareOptionsMenu(Menu menu) {
+//        super.onPrepareOptionsMenu(menu);
+//
+//        MenuInflater inflater = getActivity().getMenuInflater();
+//        inflater.inflate(R.menu.search_menu,menu);
+//
+//        final MenuItem item = menu.findItem(R.id.search);
+//        final SearchView searchView = (SearchView) item.getActionView();
+//        EditText searchEditText = searchView.findViewById(android.support.v7.appcompat.R.id.search_src_text);
+//        searchEditText.setTextColor(getResources().getColor(R.color.abuDark));
+//        searchEditText.setHintTextColor(getResources().getColor(R.color.abuLight));
+////        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+////            @Override
+////            public boolean onQueryTextSubmit(String query) {
+////                Log.d("Backindbug","TesAA1 = " + query);
+////                return true;
+////            }
+////
+////            @Override
+////            public boolean onQueryTextChange(String newText) {
+////                Log.d("Backindbug","TesAA1 = " + newText);
+////                return true;
+////            }
+////        });
+//        searchView.setOnSearchClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Log.d("Backindbug","diklik searchnya");
+//            }
+//        });
+//    }
 
-        MenuInflater inflater = getActivity().getMenuInflater();
-        inflater.inflate(R.menu.search_menu,menu);
+    // 123
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.search_menu, menu);
 
         final MenuItem item = menu.findItem(R.id.search);
-        final SearchView searchView = (SearchView) item.getActionView();
-        EditText searchEditText = searchView.findViewById(android.support.v7.appcompat.R.id.search_src_text);
+        final SearchView searchView = (SearchView) MenuItemCompat.getActionView(item);
+        EditText searchEditText = (EditText) searchView.findViewById(android.support.v7.appcompat.R.id.search_src_text);
         searchEditText.setTextColor(getResources().getColor(R.color.abuDark));
         searchEditText.setHintTextColor(getResources().getColor(R.color.abuLight));
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+        searchView.setOnQueryTextListener(this);
+
+        MenuItemCompat.setOnActionExpandListener(item, new MenuItemCompat.OnActionExpandListener() {
             @Override
-            public boolean onQueryTextSubmit(String query) {
-                Log.d("Backindbug","Tes = " + query);
+            public boolean onMenuItemActionExpand(MenuItem item) {
                 return true;
             }
 
             @Override
-            public boolean onQueryTextChange(String newText) {
+            public boolean onMenuItemActionCollapse(MenuItem item) {
                 return true;
             }
         });
-        searchView.setOnSearchClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Log.d("Backindbug","diklik searchnya");
-            }
-        });
+
+    }
+    // 123
+
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+//        Toast.makeText(getActivity(), query, Toast.LENGTH_SHORT).show();
+        searchView(query);
+        return true;
+    }
+    // 123
+    @Override
+    public boolean onQueryTextChange(String newText) {
+//        Toast.makeText(getActivity(), newText, Toast.LENGTH_SHORT).show();
+        searchView(newText);
+        return true;
     }
 
     /*@Override

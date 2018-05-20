@@ -6,6 +6,8 @@ import android.os.Parcelable;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.List;
+
 public class BusinessData implements Parcelable{
     @SerializedName("id_business")
     @Expose
@@ -34,9 +36,20 @@ public class BusinessData implements Parcelable{
     @SerializedName("business_details")
     @Expose
     private BusinessDetails businessDetails;
+    @SerializedName("city")
+    @Expose
+    private City city;
     @SerializedName("review")
     @Expose
-    private Object review;
+    private List<Review> reviews = null;
+
+    public List<Review> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(List<Review> reviews) {
+        this.reviews = reviews;
+    }
 
     protected BusinessData(Parcel in) {
         if (in.readByte() == 0) {
@@ -64,6 +77,14 @@ public class BusinessData implements Parcelable{
             return new BusinessData[size];
         }
     };
+
+    public City getCity() {
+        return city;
+    }
+
+    public void setCity(City city) {
+        this.city = city;
+    }
 
     public Integer getIdBusiness() {
         return idBusiness;
@@ -135,14 +156,6 @@ public class BusinessData implements Parcelable{
 
     public void setBusinessDetails(BusinessDetails businessDetails) {
         this.businessDetails = businessDetails;
-    }
-
-    public Object getReview() {
-        return review;
-    }
-
-    public void setReview(Object review) {
-        this.review = review;
     }
 
     @Override

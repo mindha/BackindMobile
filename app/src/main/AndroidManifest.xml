@@ -63,7 +63,7 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Activity.ListBisnisActivity"
-            android:label="@string/title_activity_list_bisnis"
+            android:label="Backind"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
