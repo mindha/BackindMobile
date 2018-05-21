@@ -10,6 +10,7 @@ import android.graphics.drawable.Drawable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -25,21 +26,39 @@ import java.util.Calendar;
 import java.util.Locale;
 
 import backind.backind.R;
+import backind.backind.Response.TransaksiResponse;
+import backind.backind.Service.Api;
+import backind.backind.Utils.Utils;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class BeliTiketActivity extends AppCompatActivity {
 
-    TextView txtJumlahTiket;
+    TextView txtJumlahTiket,tourismname;
     ImageButton btnMinus, btnPlus;
     Button btnBeli;
     EditText buyDate;
     private DatePickerDialog datePickerDialog;
     private SimpleDateFormat dateFormatter;
     int n;
+    int id_tourism;
+    String name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_beli_tiket);
+
+
+        try{
+            id_tourism = getIntent().getIntExtra("id_tourism",0);
+            name = getIntent().getStringExtra("name");
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         //status bar
@@ -57,12 +76,15 @@ public class BeliTiketActivity extends AppCompatActivity {
         upArrow.setColorFilter(ContextCompat.getColor(this, R.color.colorHitam), PorterDuff.Mode.SRC_ATOP);
         getSupportActionBar().setHomeAsUpIndicator(upArrow);
 
-        dateFormatter = new SimpleDateFormat("dd-MM-yyyy", Locale.US);
+        dateFormatter = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
         txtJumlahTiket = findViewById(R.id.jumlah);
         btnMinus = findViewById(R.id.btnMinus);
         btnPlus = findViewById(R.id.btnPlus);
         btnBeli = findViewById(R.id.belitiket);
         buyDate = findViewById(R.id.tanggal);
+        tourismname = findViewById(R.id.ticketname);
+
+        tourismname.setText(name);
 
         buyDate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -104,7 +126,7 @@ public class BeliTiketActivity extends AppCompatActivity {
         btnBeli.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(BeliTiketActivity.this, DetailBayarTiketActivity.class));
+                bookingTourism();
             }
         });
     }
@@ -125,5 +147,43 @@ public class BeliTiketActivity extends AppCompatActivity {
         },newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
 
         datePickerDialog.show();
+    }
+
+    public void bookingTourism(){
+        int id_homestay = 0;
+        final String dateTicket = buyDate.getText().toString();
+        final int jumlah = Integer.parseInt(txtJumlahTiket.getText().toString());
+        Log.d("Backindbug","Tes Parameter = " + "id_tourism = " + id_tourism+",\n " +
+                "dateticket = "+ dateTicket+", \n " +
+                "jumlah = " + jumlah+", \n" +
+                "id_homestay = " + id_homestay);
+        Api.getService().booking(id_tourism,id_homestay,"", "",dateTicket,jumlah).
+                enqueue(new Callback<TransaksiResponse>() {
+                    @Override
+                    public void onResponse(Call<TransaksiResponse> call, Response<TransaksiResponse> response) {
+                        if (response.isSuccessful()) {
+                            Log.d("Backindbug","BERHASIL");
+                            Toast.makeText(BeliTiketActivity.this, "Data anda berhasil disimpan", Toast.LENGTH_LONG).show();
+                            Intent i = new Intent(BeliTiketActivity.this,DetailBayarTiketActivity.class);
+                            i.putExtra("name_tourism",name);
+                            i.putExtra("date",dateTicket);
+                            i.putExtra("jumlah",jumlah);
+                            int harga = response.body().getData().getTotalCost();
+                            int id_booking = response.body().getData().getIdBooking();
+                            i.putExtra("harga",harga);
+                            i.putExtra("id_booking",id_booking);
+                            startActivity(i);
+                        }else{
+                            Log.d("Backindbug","GA BERHASIL = " + Utils.getJsonfromUrl(response.errorBody()));
+                            Log.d("Backindbug","GA BERHASIL = " + response.code());
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<TransaksiResponse> call, Throwable t) {
+                        Log.d("Backindbug","GAGAL = " + t.getMessage());
+
+                    }
+                });
     }
 }

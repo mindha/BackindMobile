@@ -12,7 +12,6 @@
     tools:context=".Activity.DetailBayarTiketActivity">
 
     <LinearLayout
-        android:id="@+id/email_login_form"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
@@ -129,7 +128,7 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/btn_style_orange"
                     android:textColor="@color/colorWhite"
-                    android:text="@string/pesan"
+                    android:text="@string/bayar"
                     android:textAllCaps="false"
                     android:layout_alignParentRight="true"
                     android:paddingLeft="@dimen/dots_height"

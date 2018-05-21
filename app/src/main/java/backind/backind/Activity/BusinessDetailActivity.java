@@ -13,6 +13,7 @@ import android.support.v7.graphics.Palette;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.method.TimeKeyListener;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -41,7 +42,6 @@ import retrofit2.Response;
 
 public class BusinessDetailActivity extends AppCompatActivity {
 
-
     private Toolbar toolbar;
     private CollapsingToolbarLayout collapsingToolbar;
     private AppBarLayout appBarLayout;
@@ -55,7 +55,6 @@ public class BusinessDetailActivity extends AppCompatActivity {
     public ReviewAdapter adapter = null;
 
     int id_detail_bisnis, hargaSearch;
-
     private boolean appBarExpanded = true;
 
 
@@ -123,13 +122,6 @@ public class BusinessDetailActivity extends AppCompatActivity {
         });
 
         btnOrder = findViewById(R.id.btnOrder);
-        btnOrder.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(BusinessDetailActivity.this, BeliTiketActivity.class));
-            }
-        });
-
 
         review.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -155,9 +147,9 @@ public class BusinessDetailActivity extends AppCompatActivity {
             public void onResponse(Call<BusinessDetailsResponse> call, final Response<BusinessDetailsResponse> response) {
                 if(response.isSuccessful()){
                     Log.d("Backindbug","HMMM = " + Utils.getJsonfromUrl(response.body()));
-                    String title = response.body().getData().getBusinessDetails().get(0).getBusinessDetails().getBusinessName();
+                    final String title = response.body().getData().getBusinessDetails().get(0).getBusinessDetails().getBusinessName();
                     String description = response.body().getData().getBusinessDetails().get(0).getBusinessDetails().getBusinessDesc();
-                    String harga = response.body().getData().getBusinessDetails().get(0).getBusinessDetails().getBusinessPrice();
+                    String harga = "Rp "+response.body().getData().getBusinessDetails().get(0).getBusinessDetails().getBusinessPrice();
                     String openclose = "Buka Jam "+ response.body().getData().getBusinessDetails().get(0).getBusinessDetails().getBusinessOpenTime()+" - Tutup Jam "+response.body().getData().getBusinessDetails().get(0).getBusinessDetails().getBusinessCloseTime();
                     String alamat = response.body().getData().getBusinessDetails().get(0).getBusinessDetails().getBusinessAddress();
                     String n_review = String.valueOf(response.body().getData().getBusinessDetails().get(0).getReviews().size());
@@ -175,15 +167,17 @@ public class BusinessDetailActivity extends AppCompatActivity {
                         @Override
                         public void onClick(View view) {
                             if(idmenu == 1){
-                                startActivity(new Intent(BusinessDetailActivity.this, BeliTiketActivity.class));
+                                Intent i = new Intent(BusinessDetailActivity.this, BeliTiketActivity.class);
+                                i.putExtra("id_tourism",idDetailBisnis);
+                                i.putExtra("name", title);
+                                startActivity(i);
                             }else {
-                                startActivity(new Intent(BusinessDetailActivity.this, PesanHomestayActivity.class));
+                                Intent i = new Intent(BusinessDetailActivity.this, PesanHomestayActivity.class);
+                                i.putExtra("id_homestay",idDetailBisnis);
+                                i.putExtra("name", title);
+                                startActivity(i);
                             }
-                            Intent intent = new Intent();
-                            Intent i = new Intent(view.getContext(), BusinessDetailActivity.class);
-                            i.putExtra("id_bisnis_detail", (idDetailBisnis));
-                            i.putExtra("harga_search", hargaSearch);
-                            view.getContext().startActivity(i);
+                            BusinessDetailActivity.this.finish();
                         }
                     });
                     adapter.setItems(reviewData);

@@ -19,31 +19,23 @@
             android:name=".Activity.RegisterActivity"
             android:parentActivityName=".Activity.LoginActivity"
             android:windowSoftInputMode="stateHidden">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="backind.backind.Activity.LoginActivity" />
+
         </activity>
         <activity
             android:name=".Activity.BeliTiketActivity"
             android:parentActivityName=".Activity.RegisterActivity"
             android:windowSoftInputMode="stateHidden">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="backind.backind.Activity.RegisterActivity" />
+
         </activity>
         <activity
             android:name=".Activity.DetailBayarTiketActivity"
             android:parentActivityName=".Activity.BeliTiketActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="backind.backind.Activity.BeliTiketActivity" />
+
         </activity>
         <activity
             android:name=".Activity.PembayaranActivity"
             android:parentActivityName=".Activity.DetailBayarTiketActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="backind.backind.Activity.DetailBayarTiketActivity" />
+
         </activity>
         <activity
             android:name=".OnboardingActivity"
@@ -65,16 +57,12 @@
             android:name=".Activity.ListBisnisActivity"
             android:label="Backind"
             android:theme="@style/AppTheme.NoActionBar">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="backind.backind.Activity.MenuActivity" />
+
         </activity>
         <activity
             android:name=".Activity.NearbyActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="backind.backind.Activity.ListBisnisActivity" />
+
         </activity>
         <activity
             android:name=".Activity.BusinessDetailActivity"
@@ -83,24 +71,16 @@
             android:name=".Activity.PesanHomestayActivity"
             android:windowSoftInputMode="stateHidden" />
         <activity android:name=".Activity.DetailBayarHomestayActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="backind.backind.Activity.PesanHomestayActivity" />
+
         </activity>
         <activity android:name=".Activity.PaymentDeadlineActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="backind.backind.Activity.PembayaranActivity" />
+
         </activity>
         <activity android:name=".Activity.EditProfileActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="backind.backind.Activity.MenuActivity" />
+
         </activity>
         <activity android:name=".Activity.BuktiTransferActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="backind.backind.Activity.PaymentDeadlineActivity" />
+            
         </activity>
     </application>
 

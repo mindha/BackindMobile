@@ -11,6 +11,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -91,7 +93,7 @@ public class BusinessAdapter extends RecyclerView.Adapter<BusinessAdapter.MyView
 //        i.putExtra("id_bisnis", Integer.parseInt(kotaList.get(mPosition).getIdCity().toString()));
 
         // loading album cover using Glide library
-//        Glide.with(mContext).load("http://backind.id/storage/"+album.getfoto()).into(holder.labelPic);
+        Glide.with(mContext).load("http://backind.id/storage/"+album.getBusinessProfilePict()).into(holder.labelPic);
 
     }
 

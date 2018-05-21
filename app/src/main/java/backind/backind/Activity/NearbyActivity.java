@@ -41,12 +41,12 @@ public class NearbyActivity extends AppCompatActivity {
     private CollapsingToolbarLayout collapsingToolbar;
     private AppBarLayout appBarLayout;
     private RecyclerView recList;
-    private TextView price;
+    private TextView price,status;
     private Button detail;
     private ImageView header;
     private Menu collapseMenu;
     private List<Near> nearList = null;
-    int id_bisnis, hargaSearch;
+    int id_bisnis, hargaSearch, id_menu;
     public BusinessAdapter adapter = null;
 
     private boolean appBarExpanded = true;
@@ -59,6 +59,7 @@ public class NearbyActivity extends AppCompatActivity {
 
 
         try{
+            id_menu = getIntent().getIntExtra("id_menu",0);
             id_bisnis = getIntent().getIntExtra("id_bisnis",0);
             hargaSearch = getIntent().getIntExtra("harga_search",0);
         }catch (Exception e){
@@ -75,6 +76,7 @@ public class NearbyActivity extends AppCompatActivity {
         collapsingToolbar = findViewById(R.id.collapsing_toolbar);
         appBarLayout = findViewById(R.id.appbar);
         recList = findViewById(R.id.scrollableview);
+        status = findViewById(R.id.status);
 
         header = findViewById(R.id.header);
         price = findViewById(R.id.harga);
@@ -130,10 +132,16 @@ public class NearbyActivity extends AppCompatActivity {
                     price.setText(response.body().getData().getLoc().getBusinessPrice());
                     nearList = response.body().getData().getNear();
                     final int idDetailBisnis = response.body().getData().getLoc().getIdBusinessDetails();
-
+                    if (id_menu == 1){
+                        status.setText("Homestay Terdekat");
+                    }else{
+                        status.setText("Tempat Wisata Terdekat");
+                    }
                     Log.d("Backindbug","idDetilBisnis="+idDetailBisnis);
                     Log.d("Backindbug","TESTES="+ Utils.getJsonfromUrl(response.body().getData().getLoc()));
                     adapter.setItems(nearList);
+
+
 
                     detail.setOnClickListener(new View.OnClickListener() {
                         @Override

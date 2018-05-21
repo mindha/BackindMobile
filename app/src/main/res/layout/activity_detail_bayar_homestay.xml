@@ -28,7 +28,7 @@
             android:textSize="16dp" />
 
         <TextView
-            android:id="@+id/namatiket"
+            android:id="@+id/namahomestay"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/activity_horizontal_margin"

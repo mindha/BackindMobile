@@ -19,7 +19,17 @@ public class Near {
     @SerializedName("id_menu")
     @Expose
     private String idMenu;
+    @SerializedName("business_profile_pict")
+    @Expose
+    private String businessProfilePict;
 
+    public String getBusinessProfilePict() {
+        return businessProfilePict;
+    }
+
+    public void setBusinessProfilePict(String businessProfilePict) {
+        this.businessProfilePict = businessProfilePict;
+    }
 
     public String getDistance() {
         return distance;

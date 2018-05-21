@@ -11,6 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.thefinestartist.finestwebview.enums.Position;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,6 +46,8 @@ public class TourismAdapter extends RecyclerView.Adapter<TourismAdapter.MyViewHo
                     String element = tourismList.get(mPosition).toString();
                     Toast.makeText(view.getContext(), tourism.getText(), Toast.LENGTH_SHORT).show();
                     Intent i = new Intent(view.getContext(), NearbyActivity.class);
+                    int idmenu = Integer.parseInt(tourismList.get(mPosition).getIdMenu());
+                    i.putExtra("id_menu",idmenu);
                     i.putExtra("id_bisnis", Integer.parseInt(tourismList.get(mPosition).getIdBusinessDetails().toString()));
                     i.putExtra("harga_search", hargaSearch);
                     view.getContext().startActivity(i);

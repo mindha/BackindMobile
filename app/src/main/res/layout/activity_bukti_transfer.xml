@@ -107,32 +107,21 @@
                 android:layout_width="match_parent"
                 android:layout_marginBottom="@dimen/padding10"
                 android:layout_height="wrap_content">
-                <Button
-                    android:id="@+id/pilihfoto"
-                    android:text="Pilih Foto"
-                    android:paddingLeft="@dimen/margin20"
-                    android:paddingRight="@dimen/margin20"
-                    android:layout_width="wrap_content"
-                    android:textColor="@color/white"
-                    android:fontFamily="@font/montserrat_medium"
-                    android:background="@drawable/btn_style_purple"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/padding5"/>
+
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    >
+                    android:layout_height="match_parent">
                     <Button
-                        android:id="@+id/bayar"
+                        android:id="@+id/choose"
                         android:paddingLeft="@dimen/margin20"
                         android:paddingRight="@dimen/margin20"
                         android:layout_width="wrap_content"
                         android:textColor="@color/white"
                         android:layout_alignParentRight="true"
-                        android:text="UNGGAH"
+                        android:text="PILIH FOTO"
                         android:layout_marginBottom="@dimen/padding5"
                         android:fontFamily="@font/montserrat_medium"
-                        android:background="@drawable/btn_style_orange"
+                        android:background="@drawable/btn_style_purple"
                         android:layout_height="wrap_content"
                         />
                 </RelativeLayout>
