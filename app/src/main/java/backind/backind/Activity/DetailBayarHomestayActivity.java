@@ -48,6 +48,7 @@ public class DetailBayarHomestayActivity extends AppCompatActivity {
 
         try{
             id_bisnis = getIntent().getIntExtra("id_bisnis",0);
+            Log.d("Backindbug", "Ini id bisnis yg jadi id tourism"+id_bisnis);
             id_menu = getIntent().getIntExtra("id_menu",2);
             hargaSearch = getIntent().getIntExtra("harga_search",5000000);
         }catch (Exception e){
@@ -173,9 +174,10 @@ public class DetailBayarHomestayActivity extends AppCompatActivity {
             }else {
 
             }
+
             final int finalTotal_harga_semua = total_harga_semua;
             Log.d("Backindbug","DAPET DARI HOMESTAY = " + Utils.getJsonfromUrl(pesanan));
-        Api.getService().booking(id_tourism,id_bisnis,checkin, checkout,checkinTourism,jumlah).
+        Api.getService().booking(id_tourism,id_bisnis,checkin,checkout,checkinTourism,jumlah).
                 enqueue(new Callback<TransaksiResponse>() {
                     @Override
                     public void onResponse(Call<TransaksiResponse> call, Response<TransaksiResponse> response) {

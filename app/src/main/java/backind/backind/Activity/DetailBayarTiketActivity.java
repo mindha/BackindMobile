@@ -37,9 +37,9 @@ public class DetailBayarTiketActivity extends AppCompatActivity {
     private Button btnBayar, btnFindHomestay, btnNope, btnYes;
     private Dialog dialog;
     private ImageView close;
-    TextView nama, tanggal, jumlah, harga;
+    TextView nama, tanggal, jumlah, price;
     String name, date;
-    int value, price, id_booking, id_menu, id_bisnis, hargaSearch;
+    int value, harga, id_booking, id_menu, id_bisnis, hargaSearch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,13 +58,14 @@ public class DetailBayarTiketActivity extends AppCompatActivity {
             name = getIntent().getStringExtra("name_tourism");
             date = getIntent().getStringExtra("date");
             value = getIntent().getIntExtra("jumlah",0);
-            price = getIntent().getIntExtra("harga",0);
+            harga = getIntent().getIntExtra("harga",0);
             id_booking = getIntent().getIntExtra("id_booking",0);
 
         }catch (Exception e){
             Log.d("Backindbug","ERRR = " + e.getMessage());
             e.printStackTrace();
         }
+            Log.d("Backindbug", "DetailBayarTicket ====== id tourism"+id_bisnis);
 
         //status bar
         Window window = this.getWindow();
@@ -87,7 +88,7 @@ public class DetailBayarTiketActivity extends AppCompatActivity {
         nama = findViewById(R.id.namatiket);
         tanggal = findViewById(R.id.tanggal);
         jumlah = findViewById(R.id.tiket);
-        harga = findViewById(R.id.harga);
+        price = findViewById(R.id.harga);
 
         try{
             if(Hawk.get("PesananHomestay") != null){
@@ -103,7 +104,7 @@ public class DetailBayarTiketActivity extends AppCompatActivity {
             nama.setText(name);
             tanggal.setText(date);
             jumlah.setText(""+value);
-            harga.setText("Rp "+price+",-");
+            price.setText("Rp "+harga+",-");
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -164,22 +165,22 @@ public class DetailBayarTiketActivity extends AppCompatActivity {
             int id_homestay = 0;
             String checkin = "";
             String checkout = "";
-            int jumlah = 0;
-            int total_harga_semua = price;
+            int total_harga_semua = harga;
             if(Hawk.get("PesananHomestay") != null){
                 pesanan = Hawk.get("PesananHomestay");
                 id_homestay = Integer.parseInt(pesanan.getIdHomestay());
+                Log.d("Backindbug","id homestay harus null tapi ??"+id_homestay);
                 checkin = pesanan.getCheckin();
                 checkout = pesanan.getCheckout();
-                jumlah = Integer.parseInt(pesanan.getTotalTicket());
-                total_harga_semua = price + (Integer.parseInt(pesanan.getHomestay().getBusinessPrice()) * jumlah);
+                value = Integer.parseInt(pesanan.getTotalTicket());
+                total_harga_semua = harga + (Integer.parseInt(pesanan.getHomestay().getBusinessPrice()) * value);
 
             }else {
-
             }
+
             final int finalTotal_harga_semua = total_harga_semua;
             Log.d("Backindbug","DAPET DARI TOURISM = " + Utils.getJsonfromUrl(pesanan));
-            Api.getService().booking(id_bisnis,id_homestay,checkin, checkout,date,jumlah).
+            Api.getService().booking(id_bisnis,id_homestay,checkin, checkout,date,value).
                 enqueue(new Callback<TransaksiResponse>() {
                     @Override
                     public void onResponse(Call<TransaksiResponse> call, Response<TransaksiResponse> response) {
@@ -198,15 +199,15 @@ public class DetailBayarTiketActivity extends AppCompatActivity {
         }
     }
 
-    public void updateCost(final int id_booking, final int price){
-        Api.getService().getUpdateCost("postUpdateCost/"+id_booking,price).enqueue(new Callback<UpdateCostResponse>() {
+    public void updateCost(final int id_booking, final int harga){
+        Api.getService().getUpdateCost("postUpdateCost/"+id_booking,harga).enqueue(new Callback<UpdateCostResponse>() {
             @Override
             public void onResponse(Call<UpdateCostResponse> call, Response<UpdateCostResponse> response) {
                 if(response.isSuccessful()){
                     Hawk.put("PesananTourism",null);
                     Hawk.put("PesananHomestay",null);
                     Log.d("Backindbug","id booking="+id_booking);
-                    Log.d("Backindbug","harga="+price);
+                    Log.d("Backindbug","harga="+harga);
                     Intent i = new Intent(DetailBayarTiketActivity.this,PaymentDeadlineActivity.class);
                     i.putExtra("id_booking",id_booking);
                     startActivity(i);

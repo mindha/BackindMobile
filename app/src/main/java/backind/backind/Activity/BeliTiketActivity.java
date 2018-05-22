@@ -46,7 +46,7 @@ public class BeliTiketActivity extends AppCompatActivity {
     private DatePickerDialog datePickerDialog;
     private SimpleDateFormat dateFormatter;
     int n;
-    int id_tourism, id_bisnis, id_menu, hargaSearch, harga_tourism;
+    int id_tourism, id_menu, hargaSearch, harga_tourism;
     String name;
 
     @Override
@@ -165,10 +165,10 @@ public class BeliTiketActivity extends AppCompatActivity {
         int id_homestay = 0;
         final String dateTicket = buyDate.getText().toString();
         final int jumlah = Integer.parseInt(txtJumlahTiket.getText().toString());
-        Log.d("Backindbug","Tes Parameter = " + "id_tourism = " + id_tourism+",\n " +
+        Log.d("Backindbug","Tes Parameter = " + "id_homestay = " + id_homestay+",\n " +
                 "dateticket = "+ dateTicket+", \n " +
                 "jumlah = " + jumlah+", \n" +
-                "id_homestay = " + id_homestay);
+                "id_tourism = " + id_tourism);
 
         BusinessDetails tourism = new BusinessDetails();
         Transaksi pesanTourism = new Transaksi();
