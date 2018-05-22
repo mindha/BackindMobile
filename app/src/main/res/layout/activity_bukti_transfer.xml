@@ -97,11 +97,11 @@
                 android:fontFamily="@font/montserrat_regular"
                 android:textSize="12dp"/>
             <ImageView
+                android:id="@+id/img_prev"
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
                 android:layout_marginBottom="10dp"
                 android:background="@color/abuLight"/>
-
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"

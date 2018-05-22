@@ -18,25 +18,17 @@
         <activity
             android:name=".Activity.RegisterActivity"
             android:parentActivityName=".Activity.LoginActivity"
-            android:windowSoftInputMode="stateHidden">
-
-        </activity>
+            android:windowSoftInputMode="stateHidden"></activity>
         <activity
             android:name=".Activity.BeliTiketActivity"
             android:parentActivityName=".Activity.RegisterActivity"
-            android:windowSoftInputMode="stateHidden">
-
-        </activity>
+            android:windowSoftInputMode="stateHidden"></activity>
         <activity
             android:name=".Activity.DetailBayarTiketActivity"
-            android:parentActivityName=".Activity.BeliTiketActivity">
-
-        </activity>
+            android:parentActivityName=".Activity.BeliTiketActivity"></activity>
         <activity
             android:name=".Activity.PembayaranActivity"
-            android:parentActivityName=".Activity.DetailBayarTiketActivity">
-
-        </activity>
+            android:parentActivityName=".Activity.DetailBayarTiketActivity"></activity>
         <activity
             android:name=".OnboardingActivity"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -56,32 +48,21 @@
         <activity
             android:name=".Activity.ListBisnisActivity"
             android:label="Backind"
-            android:theme="@style/AppTheme.NoActionBar">
-
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".Activity.NearbyActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-
-        </activity>
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
         <activity
             android:name=".Activity.BusinessDetailActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
             android:name=".Activity.PesanHomestayActivity"
             android:windowSoftInputMode="stateHidden" />
-        <activity android:name=".Activity.DetailBayarHomestayActivity">
-
-        </activity>
-        <activity android:name=".Activity.PaymentDeadlineActivity">
-
-        </activity>
-        <activity android:name=".Activity.EditProfileActivity">
-
-        </activity>
-        <activity android:name=".Activity.BuktiTransferActivity">
-            
-        </activity>
+        <activity android:name=".Activity.DetailBayarHomestayActivity"></activity>
+        <activity android:name=".Activity.PaymentDeadlineActivity"></activity>
+        <activity android:name=".Activity.EditProfileActivity"></activity>
+        <activity android:name=".Activity.BuktiTransferActivity"></activity>
+        <activity android:name=".Activity.ChangePasswordActivity"></activity>
     </application>
 
 </manifest>

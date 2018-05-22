@@ -218,6 +218,7 @@ public class PaymentDeadlineActivity extends AppCompatActivity {
                         @Override
                         public void onClick(View view) {
                             Intent i = new Intent(PaymentDeadlineActivity.this, BuktiTransferActivity.class);
+                            i.putExtra("id_transaksi",id_booking);
                             i.putExtra("eticket",code_order);
                             i.putExtra("jumlah_tagihan",total_code);
                             i.putExtra("duedate",batas_tanggal);

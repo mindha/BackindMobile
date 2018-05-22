@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,13 +36,15 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.MyViewHold
         public TextView labelName, labelDesc;
         public ImageView labelPic;
         public LinearLayout listItem;
+        public RatingBar rate;
 
         public MyViewHolder(View view) {
             super(view);
             labelPic = view.findViewById(R.id.pic_user);
-            labelName   =  view.findViewById(R.id.name);
-            labelDesc   = view.findViewById(R.id.comment);
+            labelName = view.findViewById(R.id.name);
+            labelDesc = view.findViewById(R.id.comment);
             listItem = view.findViewById(R.id.item);
+            rate = view.findViewById(R.id.star);
 
         }
     }
@@ -50,13 +53,14 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.MyViewHold
         this.mContext = mContext;
     }
 
-    public void setItems(List<Review> review){
+    public void setItems(List<Review> review) {
+        this.reviewList.clear();
         this.reviewList.addAll(review);
         notifyDataSetChanged();
 
     }
 
-    public void setFilter(List<Review> review){
+    public void setFilter(List<Review> review) {
         this.reviewList = new ArrayList<Review>();
         this.reviewList.addAll(review);
         super.notifyDataSetChanged();
@@ -72,18 +76,18 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.MyViewHold
     }
 
 
-    int n;
     @Override
     public void onBindViewHolder(final ReviewAdapter.MyViewHolder holder, int position) {
         Review album = reviewList.get(position);
         User dataUser = album.getUser();
         holder.labelName.setText(dataUser.getName().toString());
         holder.labelDesc.setText(album.getReview());
+        holder.rate.setRating(Float.parseFloat(album.getRating()));
 
 //        i.putExtra("id_bisnis", Integer.parseInt(kotaList.get(mPosition).getIdCity().toString()));
 
-        // loading album cover using Glide library
-//        Glide.with(mContext).load("http://backind.id/storage/"+album.get).into(holder.labelPic);
+        //loading album cover using Glide library
+        Glide.with(mContext).load("http://backind.id/storage/"+album.getUser().getAvatar()).into(holder.labelPic);
 
     }
 
@@ -92,7 +96,6 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.MyViewHold
     public int getItemCount() {
         return reviewList.size();
     }
-
 
 
 }

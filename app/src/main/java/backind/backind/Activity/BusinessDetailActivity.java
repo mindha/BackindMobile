@@ -21,18 +21,25 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.orhanobut.hawk.Hawk;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import backind.backind.Adapter.ReviewAdapter;
+import backind.backind.Constant;
 import backind.backind.Model.Review;
+import backind.backind.Model.User;
 import backind.backind.R;
 import backind.backind.Response.BusinessDetailsResponse;
+import backind.backind.Response.ReviewResponse;
 import backind.backind.Service.Api;
 import backind.backind.Utils.Utils;
 import retrofit2.Call;
@@ -50,11 +57,13 @@ public class BusinessDetailActivity extends AppCompatActivity {
     private Button btnOrder;
     private ImageView review, header;
     private Dialog dialog;
-    private TextView price,bukatutup, desc, address, number_reviews;
+    private TextView price, bukatutup, desc, address, number_reviews;
+    private RatingBar totalStar;
     private List<Review> reviewData = null;
     public ReviewAdapter adapter = null;
+    private User user = null;
 
-    int id_detail_bisnis, hargaSearch;
+    int id_detail_bisnis, hargaSearch, id_user;
     private boolean appBarExpanded = true;
 
 
@@ -63,11 +72,15 @@ public class BusinessDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_business_detail);
 
-        try{
-            id_detail_bisnis = getIntent().getIntExtra("id_detail_bisnis",0);
-            hargaSearch = getIntent().getIntExtra("hargaSearch",0);
+        try {
+            if (Hawk.contains(Constant.DataLocal.dataUser)){
+                user = Hawk.get(Constant.DataLocal.dataUser);
+                id_user = user.getIdUser();
+            }
+            id_detail_bisnis = getIntent().getIntExtra("id_detail_bisnis", 8);
+            hargaSearch = getIntent().getIntExtra("hargaSearch", 0);
 
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -84,6 +97,7 @@ public class BusinessDetailActivity extends AppCompatActivity {
         desc = findViewById(R.id.desc);
         number_reviews = findViewById(R.id.number_reviews);
         btnOrder = findViewById(R.id.btnOrder);
+        totalStar = findViewById(R.id.total_star);
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -112,9 +126,9 @@ public class BusinessDetailActivity extends AppCompatActivity {
         appBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
             @Override
             public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
-                if(Math.abs(verticalOffset) > 200){
+                if (Math.abs(verticalOffset) > 200) {
                     appBarExpanded = false;
-                }else{
+                } else {
                     appBarExpanded = true;
                 }
                 invalidateOptionsMenu();
@@ -126,68 +140,124 @@ public class BusinessDetailActivity extends AppCompatActivity {
         review.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                messageDialog();
+                boolean statusLogin = Hawk.get("statusLogin", false);
+                if (statusLogin) {
+                    messageDialog();
+                } else {
+                    Toast.makeText(BusinessDetailActivity.this, "Silahkan login terlebih dahulu", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(BusinessDetailActivity.this, LoginActivity.class));
+                    finish();
+                }
             }
         });
 
     }
 
-    private void messageDialog(){
+    private void messageDialog() {
+
         dialog = new Dialog(this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.dialog_review);
+        final RatingBar valueRating = dialog.findViewById(R.id.value_ratting);
+        final EditText valueReview = dialog.findViewById(R.id.value_review);
+        Button btnReview = dialog.findViewById(R.id.btn_review);
+
+        btnReview.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int intValueRating = (int) valueRating.getRating();
+                String review = valueReview.getText().toString();
+                addReview(intValueRating, review);
+
+            }
+        });
+
         Window window = dialog.getWindow();
         window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
         dialog.show();
     }
 
-    private  void getBusinessDetail(){
-        Api.getService().getDetailPerBusiness("getDetailPerBisnis/"+id_detail_bisnis).enqueue(new Callback<BusinessDetailsResponse>() {
+    private void addReview(int ratting, String review) {
+        Api.getService().postReview("postReview", id_detail_bisnis, review, " ", ratting, id_user).enqueue(new Callback<ReviewResponse>() {
+            @Override
+            public void onResponse(Call<ReviewResponse> call, Response<ReviewResponse> response) {
+                if (response.isSuccessful()) {
+                    dialog.dismiss();
+                    Toast.makeText(BusinessDetailActivity.this, "Berhasil add review", Toast.LENGTH_SHORT).show();
+                    getBusinessDetail();
+                } else {
+                    dialog.dismiss();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ReviewResponse> call, Throwable t) {
+                dialog.dismiss();
+                Toast.makeText(BusinessDetailActivity.this, "Terjadi Kesalahan", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void getBusinessDetail() {
+        Api.getService().getDetailPerBusiness("getDetailPerBisnis/" + id_detail_bisnis).enqueue(new Callback<BusinessDetailsResponse>() {
             @Override
             public void onResponse(Call<BusinessDetailsResponse> call, final Response<BusinessDetailsResponse> response) {
-                if(response.isSuccessful()){
-                    Log.d("Backindbug","HMMM = " + Utils.getJsonfromUrl(response.body()));
+                if (response.isSuccessful()) {
+                    Log.d("Backindbug", "HMMM = " + Utils.getJsonfromUrl(response.body()));
                     final String title = response.body().getData().getBusinessDetails().get(0).getBusinessDetails().getBusinessName();
                     String description = response.body().getData().getBusinessDetails().get(0).getBusinessDetails().getBusinessDesc();
-                    String harga = "Rp "+response.body().getData().getBusinessDetails().get(0).getBusinessDetails().getBusinessPrice();
-                    String openclose = "Buka Jam "+ response.body().getData().getBusinessDetails().get(0).getBusinessDetails().getBusinessOpenTime()+" - Tutup Jam "+response.body().getData().getBusinessDetails().get(0).getBusinessDetails().getBusinessCloseTime();
+                    String harga = "Rp " + response.body().getData().getBusinessDetails().get(0).getBusinessDetails().getBusinessPrice();
+                    String openclose = "Buka Jam " + response.body().getData().getBusinessDetails().get(0).getBusinessDetails().getBusinessOpenTime() + " - Tutup Jam " + response.body().getData().getBusinessDetails().get(0).getBusinessDetails().getBusinessCloseTime();
                     String alamat = response.body().getData().getBusinessDetails().get(0).getBusinessDetails().getBusinessAddress();
                     String n_review = String.valueOf(response.body().getData().getBusinessDetails().get(0).getReviews().size());
                     collapsingToolbar.setTitle(title);
-                    Glide.with(BusinessDetailActivity.this).load("http://backind.id/storage/"+response.body().getData().getBusinessDetails().get(0).getBusinessDetails().getBusinessProfilePict()).into(header);
+                    Glide.with(BusinessDetailActivity.this).load("http://backind.id/storage/" + response.body().getData().getBusinessDetails().get(0).getBusinessDetails().getBusinessProfilePict()).into(header);
                     price.setText(harga);
                     desc.setText(description);
                     bukatutup.setText(openclose);
                     address.setText(alamat);
                     number_reviews.setText(n_review);
+                    reviewData = new ArrayList<Review>();
                     reviewData = response.body().getData().getBusinessDetails().get(0).getReviews();
                     final int idDetailBisnis = response.body().getData().getBusinessDetails().get(0).getBusinessDetails().getIdBusinessDetails();
                     final int idmenu = Integer.valueOf(response.body().getData().getBusinessDetails().get(0).getIdMenu());
                     btnOrder.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            if(idmenu == 1){
-                                Intent i = new Intent(BusinessDetailActivity.this, BeliTiketActivity.class);
-                                i.putExtra("id_menu",idmenu);
-                                i.putExtra("id_tourism",idDetailBisnis);
-                                i.putExtra("harga_search",hargaSearch);
-                                i.putExtra("harga_tourism",response.body().getData().getBusinessDetails().get(0).getBusinessDetails().getBusinessPrice());
-                                i.putExtra("name", title);
-                                startActivity(i);
-                            }else {
-                                Intent i = new Intent(BusinessDetailActivity.this, PesanHomestayActivity.class);
-                                i.putExtra("id_menu",idmenu);
-                                i.putExtra("id_homestay",idDetailBisnis);
-                                i.putExtra("harga_search",hargaSearch);
-                                i.putExtra("harga_homestay",response.body().getData().getBusinessDetails().get(0).getBusinessDetails().getBusinessPrice());
-                                i.putExtra("name", title);
-                                Log.d("Backindbug","COBACOBA = "+ response.body().getData().getBusinessDetails().get(0).getBusinessDetails().getBusinessPrice());
-                                startActivity(i);
+                            boolean statusLogin = Hawk.get("statusLogin", false);
+                            if (statusLogin) {
+                                if (idmenu == 1) {
+                                    Intent i = new Intent(BusinessDetailActivity.this, BeliTiketActivity.class);
+                                    i.putExtra("id_tourism", idDetailBisnis);
+                                    i.putExtra("name", title);
+                                    startActivity(i);
+                                } else {
+                                    Intent i = new Intent(BusinessDetailActivity.this, PesanHomestayActivity.class);
+                                    i.putExtra("id_homestay", idDetailBisnis);
+                                    i.putExtra("name", title);
+                                    startActivity(i);
+                                }
+                            } else {
+                                Toast.makeText(BusinessDetailActivity.this, "Silahkan login terlebih dahulu", Toast.LENGTH_SHORT).show();
+                                startActivity(new Intent(BusinessDetailActivity.this, LoginActivity.class));
+                                finish();
                             }
                             BusinessDetailActivity.this.finish();
                         }
                     });
+                    number_reviews.setText(reviewData.size() + " reviews");
                     adapter.setItems(reviewData);
+
+                    float sumRate = 0;
+                    for (Review review : reviewData) {
+                        sumRate += Integer.valueOf(review.getRating());
+                        Log.d("aziz", review.getRating());
+                    }
+                    float avgRate = sumRate / reviewData.size();
+                    Log.d("aziz", avgRate + "");
+                    Toast.makeText(BusinessDetailActivity.this, avgRate + "", Toast.LENGTH_SHORT).show();
+                    totalStar.setRating(avgRate);
+
                 }
             }
 
@@ -201,12 +271,12 @@ public class BusinessDetailActivity extends AppCompatActivity {
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
-        if(collapseMenu != null && (!appBarExpanded || collapseMenu.size() != 1)){
+        if (collapseMenu != null && (!appBarExpanded || collapseMenu.size() != 1)) {
             //collapsed
             collapseMenu.add("Maps")
                     .setIcon(R.drawable.ic_near_me)
                     .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
-        }else{
+        } else {
 
         }
         return super.onPrepareOptionsMenu(collapseMenu);
@@ -221,7 +291,7 @@ public class BusinessDetailActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case android.R.id.home:
                 finish();
                 break;
@@ -230,7 +300,7 @@ public class BusinessDetailActivity extends AppCompatActivity {
                 break;
         }
 
-        if(item.getTitle() == "Maps"){
+        if (item.getTitle() == "Maps") {
             Toast.makeText(this, "Maps menu clicked!", Toast.LENGTH_SHORT).show();
         }
         return super.onOptionsItemSelected(item);

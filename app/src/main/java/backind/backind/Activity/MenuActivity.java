@@ -1,5 +1,6 @@
 package backind.backind.Activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -16,6 +17,7 @@ import butterknife.ButterKnife;
 public class MenuActivity extends AppCompatActivity {
 
     private TextView mTextMessage;
+    private Intent intent;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -57,11 +59,22 @@ public class MenuActivity extends AppCompatActivity {
         navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
-        setTitle("Home");
-        HomeFragment fragment1 = new HomeFragment();
-        FragmentTransaction fT1 = getSupportFragmentManager().beginTransaction();
-        fT1.replace(R.id.content, fragment1,"FragmentName");
-        fT1.commit();
+        intent = getIntent();
+        if (intent.hasExtra("action")){
+            if (intent.getStringExtra("action").equalsIgnoreCase("history")){
+                HistoryFragment fragment2 = new HistoryFragment();
+                FragmentTransaction fT2 = getSupportFragmentManager().beginTransaction();
+                fT2.replace(R.id.content, fragment2,"FragmentName");
+                fT2.commit();
+            }
+
+        } else {
+            setTitle("Home");
+            HomeFragment fragment1 = new HomeFragment();
+            FragmentTransaction fT1 = getSupportFragmentManager().beginTransaction();
+            fT1.replace(R.id.content, fragment1,"FragmentName");
+            fT1.commit();
+        }
 
     }
 

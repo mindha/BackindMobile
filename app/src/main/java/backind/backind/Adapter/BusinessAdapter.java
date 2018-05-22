@@ -45,8 +45,9 @@ public class BusinessAdapter extends RecyclerView.Adapter<BusinessAdapter.MyView
                 @Override
                 public void onClick(View view) {
                     int mPosition = getLayoutPosition();
-                    Toast.makeText(view.getContext(), labelName.getText(), Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(view.getContext(), labelName.getText(), Toast.LENGTH_SHORT).show();
                     Intent i = new Intent(view.getContext(), BusinessDetailActivity.class);
+//                    Toast.makeText(view.getContext(), bisnisList.get(mPosition).getIdBusinessDetails().toString(), Toast.LENGTH_SHORT).show();
                     i.putExtra("id_detail_bisnis", Integer.parseInt(bisnisList.get(mPosition).getIdBusinessDetails().toString()));
 //                    i.putExtra("harga_search", hargaSearch);
                     view.getContext().startActivity(i);

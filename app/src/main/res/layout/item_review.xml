@@ -40,12 +40,15 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
-                    <ImageView
+                    <RatingBar
                         android:id="@+id/star"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:isIndicator="true"
                         android:layout_alignParentRight="true"
-                        android:src="@drawable/ic_star" />
+                        android:numStars="5"
+                        android:stepSize="1"
+                        style="?android:attr/ratingBarStyleSmall"/>
                 </RelativeLayout>
             </LinearLayout>
 

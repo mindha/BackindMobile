@@ -60,6 +60,7 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Hawk.deleteAll();
+                Hawk.put("statusLogin", false);
                 startActivity(new Intent(getActivity(),MenuActivity.class));
             }
         });
@@ -68,6 +69,13 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getActivity(),EditProfileActivity.class));
+            }
+        });
+
+        changePass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getActivity(),ChangePasswordActivity.class));
             }
         });
 

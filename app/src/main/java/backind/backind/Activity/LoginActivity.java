@@ -97,6 +97,7 @@ public class LoginActivity extends AppCompatActivity {
                                 Intent intent = new Intent(LoginActivity.this, MenuActivity.class);
                                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                 Hawk.put(Constant.DataLocal.dataUser,response.body().getData().getUser());
+                                Hawk.put("statusLogin", true);
                                 finish();
                                 startActivity(intent);
                             }else{
