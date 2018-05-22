@@ -59,7 +59,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/montserrat_regular"
-                android:text="@string/username"/>
+                android:text="@string/email"/>
 
             <EditText
                 android:id="@+id/username"
@@ -88,20 +88,13 @@
                 android:layout_height="wrap_content" />
 
 
-            <TextView
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:gravity="right"
-                android:fontFamily="@font/montserrat_medium"
-                android:layout_marginTop="40dp"
-                android:layout_marginBottom="10dp"
-                android:text="@string/lupasandi"
-                android:textColor="@color/colorPrimary"/>
+
 
             <Button
                 android:id="@+id/login"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin20"
                 android:layout_marginBottom="@dimen/margin20"
                 android:background="@drawable/btn_style_blue"
                 android:text="@string/action_sign_in"

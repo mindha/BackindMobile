@@ -64,11 +64,7 @@ public class EditProfileActivity extends AppCompatActivity {
         upArrow.setColorFilter(ContextCompat.getColor(this, R.color.colorHitam), PorterDuff.Mode.SRC_ATOP);
         getSupportActionBar().setHomeAsUpIndicator(upArrow);
 
-        Spinner spinner = findViewById(R.id.jenis_kelamin);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.jenis_kelamin_array, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
+
 
         name = findViewById(R.id.name);
         email = findViewById(R.id.emailadd);
