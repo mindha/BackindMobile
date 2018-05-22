@@ -9,7 +9,7 @@ public class Transaksi {
     private String idTourism;
     @SerializedName("id_homestay")
     @Expose
-    private Object idHomestay;
+    private String idHomestay;
     @SerializedName("id_user")
     @Expose
     private Integer idUser;
@@ -83,11 +83,11 @@ public class Transaksi {
         this.idTourism = idTourism;
     }
 
-    public Object getIdHomestay() {
+    public String getIdHomestay() {
         return idHomestay;
     }
 
-    public void setIdHomestay(Object idHomestay) {
+    public void setIdHomestay(String idHomestay) {
         this.idHomestay = idHomestay;
     }
 

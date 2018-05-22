@@ -21,10 +21,14 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.orhanobut.hawk.Hawk;
+
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
+import backind.backind.Model.BusinessDetails;
+import backind.backind.Model.Transaksi;
 import backind.backind.R;
 import backind.backind.Response.TransaksiResponse;
 import backind.backind.Service.Api;
@@ -42,7 +46,7 @@ public class BeliTiketActivity extends AppCompatActivity {
     private DatePickerDialog datePickerDialog;
     private SimpleDateFormat dateFormatter;
     int n;
-    int id_tourism;
+    int id_tourism, id_bisnis, id_menu, hargaSearch, harga_tourism;
     String name;
 
     @Override
@@ -50,6 +54,14 @@ public class BeliTiketActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_beli_tiket);
 
+        try{
+            id_menu = getIntent().getIntExtra("id_menu",1);
+            hargaSearch = getIntent().getIntExtra("harga_search",5000000);
+            String harga = getIntent().getStringExtra("harga_tourism");
+            harga_tourism = Integer.parseInt(harga);
+        }catch (Exception e){
+
+        }
 
         try{
             id_tourism = getIntent().getIntExtra("id_tourism",0);
@@ -157,7 +169,30 @@ public class BeliTiketActivity extends AppCompatActivity {
                 "dateticket = "+ dateTicket+", \n " +
                 "jumlah = " + jumlah+", \n" +
                 "id_homestay = " + id_homestay);
-        Api.getService().booking(id_tourism,id_homestay,"", "",dateTicket,jumlah).
+
+        BusinessDetails tourism = new BusinessDetails();
+        Transaksi pesanTourism = new Transaksi();
+        pesanTourism.setIdTourism(""+id_tourism);
+        pesanTourism.setCheckinTourism(dateTicket);
+        pesanTourism.setTotalTicket(""+jumlah);
+        tourism.setBusinessPrice(""+harga_tourism);
+        pesanTourism.setTourism(tourism);
+
+        Hawk.put("PesananTourism",pesanTourism);
+        Intent i = new Intent(BeliTiketActivity.this,DetailBayarTiketActivity.class);
+        i.putExtra("name_tourism",name);
+        i.putExtra("date",dateTicket);
+        i.putExtra("jumlah",jumlah);
+        i.putExtra("id_bisnis",id_tourism);
+        i.putExtra("id_menu",id_menu);
+        i.putExtra("harga_search",hargaSearch);
+        int harga = harga_tourism * jumlah;
+        int id_booking = 0;
+        i.putExtra("harga",harga);
+        i.putExtra("id_booking",id_booking);
+        Log.d("Backindbug","TESSSS TOURISM = " + Utils.getJsonfromUrl(pesanTourism));
+        startActivity(i);
+        /*Api.getService().booking(id_tourism,id_homestay,"", "",dateTicket,jumlah).
                 enqueue(new Callback<TransaksiResponse>() {
                     @Override
                     public void onResponse(Call<TransaksiResponse> call, Response<TransaksiResponse> response) {
@@ -168,6 +203,9 @@ public class BeliTiketActivity extends AppCompatActivity {
                             i.putExtra("name_tourism",name);
                             i.putExtra("date",dateTicket);
                             i.putExtra("jumlah",jumlah);
+                            i.putExtra("id_bisnis",id_tourism);
+                            i.putExtra("id_menu",id_menu);
+                            i.putExtra("harga_search",hargaSearch);
                             int harga = response.body().getData().getTotalCost();
                             int id_booking = response.body().getData().getIdBooking();
                             i.putExtra("harga",harga);
@@ -184,6 +222,6 @@ public class BeliTiketActivity extends AppCompatActivity {
                         Log.d("Backindbug","GAGAL = " + t.getMessage());
 
                     }
-                });
+                });*/
     }
 }

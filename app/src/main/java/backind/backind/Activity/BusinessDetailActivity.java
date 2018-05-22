@@ -168,13 +168,20 @@ public class BusinessDetailActivity extends AppCompatActivity {
                         public void onClick(View view) {
                             if(idmenu == 1){
                                 Intent i = new Intent(BusinessDetailActivity.this, BeliTiketActivity.class);
+                                i.putExtra("id_menu",idmenu);
                                 i.putExtra("id_tourism",idDetailBisnis);
+                                i.putExtra("harga_search",hargaSearch);
+                                i.putExtra("harga_tourism",response.body().getData().getBusinessDetails().get(0).getBusinessDetails().getBusinessPrice());
                                 i.putExtra("name", title);
                                 startActivity(i);
                             }else {
                                 Intent i = new Intent(BusinessDetailActivity.this, PesanHomestayActivity.class);
+                                i.putExtra("id_menu",idmenu);
                                 i.putExtra("id_homestay",idDetailBisnis);
+                                i.putExtra("harga_search",hargaSearch);
+                                i.putExtra("harga_homestay",response.body().getData().getBusinessDetails().get(0).getBusinessDetails().getBusinessPrice());
                                 i.putExtra("name", title);
+                                Log.d("Backindbug","COBACOBA = "+ response.body().getData().getBusinessDetails().get(0).getBusinessDetails().getBusinessPrice());
                                 startActivity(i);
                             }
                             BusinessDetailActivity.this.finish();

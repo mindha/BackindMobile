@@ -9,7 +9,6 @@
     <string name="title_activity_onboarding">OnboardingActivity</string>
     <string name="section_format">Hello World from</string>
 
-
     <string name="desc_login">Backind membantu anda menemukan tempat wisata impian dan homestay terdekat!</string>
     <string name="facebook">FACEBOOK</string>
     <string name="google">GOOGLE</string>
@@ -138,5 +137,7 @@
     <string name="tab_text_1">Tab 1</string>
     <string name="tab_text_2">Tab 2</string>
     <string name="tab_text_3">Tab 3</string>
+
+    <string name="notif_login">Segera login di Backind agar kamu bisa melakukan pemesanan.</string>
 
 </resources>

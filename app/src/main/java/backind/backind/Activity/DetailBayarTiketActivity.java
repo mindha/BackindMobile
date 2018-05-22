@@ -18,9 +18,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.orhanobut.hawk.Hawk;
+
+import backind.backind.Constant;
+import backind.backind.Model.Transaksi;
 import backind.backind.R;
+import backind.backind.Response.TransaksiResponse;
 import backind.backind.Response.UpdateCostResponse;
 import backind.backind.Service.Api;
+import backind.backind.Utils.Utils;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -33,12 +39,20 @@ public class DetailBayarTiketActivity extends AppCompatActivity {
     private ImageView close;
     TextView nama, tanggal, jumlah, harga;
     String name, date;
-    int value, price, id_booking;
+    int value, price, id_booking, id_menu, id_bisnis, hargaSearch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_bayar_tiket);
+
+        try{
+            id_menu = getIntent().getIntExtra("id_menu",1);
+            id_bisnis = getIntent().getIntExtra("id_bisnis",0);
+            hargaSearch = getIntent().getIntExtra("harga_search",5000000);
+        }catch (Exception e){
+
+        }
 
         try{
             name = getIntent().getStringExtra("name_tourism");
@@ -76,6 +90,16 @@ public class DetailBayarTiketActivity extends AppCompatActivity {
         harga = findViewById(R.id.harga);
 
         try{
+            if(Hawk.get("PesananHomestay") != null){
+                btnFindHomestay.setVisibility(View.GONE);
+            }else{
+                btnFindHomestay.setVisibility(View.VISIBLE);
+            }
+        }catch (Exception e){
+
+        }
+
+        try{
             nama.setText(name);
             tanggal.setText(date);
             jumlah.setText(""+value);
@@ -87,10 +111,9 @@ public class DetailBayarTiketActivity extends AppCompatActivity {
         btnBayar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                updateCost();
-                Intent i = new Intent(DetailBayarTiketActivity.this,PaymentDeadlineActivity.class);
-                i.putExtra("id_booking",id_booking);
-                startActivity(i);
+                //updateCost();
+                order();
+
 //                startActivity(new Intent(DetailBayarTiketActivity.this, PaymentDeadlineActivity.class));
             }
         });
@@ -122,20 +145,71 @@ public class DetailBayarTiketActivity extends AppCompatActivity {
         btnYes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(DetailBayarTiketActivity.this, NearbyActivity.class));
+                Intent i = new Intent(DetailBayarTiketActivity.this, NearbyActivity.class);
+                i.putExtra("id_menu",id_menu);
+                i.putExtra("id_bisnis",id_bisnis);
+                i.putExtra("harga_search",hargaSearch);
+                startActivity(i);
+                //startActivity(new Intent(DetailBayarTiketActivity.this, NearbyActivity.class));
             }
         });
 
         dialog.show();
     }
 
-    public void updateCost(){
+    public void order(){
+        try{
+            Log.d("Backindbug","Mau bayar di Tourism");
+            Transaksi pesanan = null;
+            int id_homestay = 0;
+            String checkin = "";
+            String checkout = "";
+            int jumlah = 0;
+            int total_harga_semua = price;
+            if(Hawk.get("PesananHomestay") != null){
+                pesanan = Hawk.get("PesananHomestay");
+                id_homestay = Integer.parseInt(pesanan.getIdHomestay());
+                checkin = pesanan.getCheckin();
+                checkout = pesanan.getCheckout();
+                jumlah = Integer.parseInt(pesanan.getTotalTicket());
+                total_harga_semua = price + (Integer.parseInt(pesanan.getHomestay().getBusinessPrice()) * jumlah);
+
+            }else {
+
+            }
+            final int finalTotal_harga_semua = total_harga_semua;
+            Log.d("Backindbug","DAPET DARI TOURISM = " + Utils.getJsonfromUrl(pesanan));
+            Api.getService().booking(id_bisnis,id_homestay,checkin, checkout,date,jumlah).
+                enqueue(new Callback<TransaksiResponse>() {
+                    @Override
+                    public void onResponse(Call<TransaksiResponse> call, Response<TransaksiResponse> response) {
+                        if(response.isSuccessful()){
+                            updateCost(response.body().getData().getIdBooking(), finalTotal_harga_semua);
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<TransaksiResponse> call, Throwable t) {
+
+                    }
+                });
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public void updateCost(final int id_booking, final int price){
         Api.getService().getUpdateCost("postUpdateCost/"+id_booking,price).enqueue(new Callback<UpdateCostResponse>() {
             @Override
             public void onResponse(Call<UpdateCostResponse> call, Response<UpdateCostResponse> response) {
                 if(response.isSuccessful()){
+                    Hawk.put("PesananTourism",null);
+                    Hawk.put("PesananHomestay",null);
                     Log.d("Backindbug","id booking="+id_booking);
                     Log.d("Backindbug","harga="+price);
+                    Intent i = new Intent(DetailBayarTiketActivity.this,PaymentDeadlineActivity.class);
+                    i.putExtra("id_booking",id_booking);
+                    startActivity(i);
                 }else{
                     Log.d("Backindbug","TIDAK SUKSES");
                 }

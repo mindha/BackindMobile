@@ -21,12 +21,16 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.orhanobut.hawk.Hawk;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
+import backind.backind.Model.BusinessDetails;
+import backind.backind.Model.Transaksi;
 import backind.backind.R;
 import backind.backind.Response.TransaksiResponse;
 import backind.backind.Service.Api;
@@ -43,13 +47,22 @@ public class PesanHomestayActivity extends AppCompatActivity {
     ImageButton btnMinus, btnPlus;
     TextView txtJumlahTiket, homestayname;
     int n;
-    int id_homestay;
+    int id_homestay, hargaSearch, id_menu, harga_homestay;
     String name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pesan_homestay);
+
+        try {
+            hargaSearch = getIntent().getIntExtra("harga_search",5000000);
+            id_menu = getIntent().getIntExtra("id_menu",2);
+            String harga = getIntent().getStringExtra("harga_homestay");
+            harga_homestay = Integer.parseInt(harga);
+        }catch (Exception e){
+
+        }
 
         try{
             id_homestay = getIntent().getIntExtra("id_homestay",0);
@@ -186,7 +199,34 @@ public class PesanHomestayActivity extends AppCompatActivity {
                 "checkout = " + checkOut+", \n " +
                 "jumlah = " + jumlah+", \n" +
                 "id_homestay = " + id_homestay);
-        Api.getService().booking(id_tourism,id_homestay,checkIn, checkOut,"",jumlah).
+        BusinessDetails homestay = new BusinessDetails();
+        Transaksi pesanHomestay = new Transaksi();
+        pesanHomestay.setIdHomestay(""+id_homestay);
+        pesanHomestay.setCheckin(checkIn);
+        pesanHomestay.setCheckout(checkOut);
+        pesanHomestay.setTotalTicket(""+jumlah);
+        homestay.setBusinessPrice(""+harga_homestay);
+        pesanHomestay.setHomestay(homestay);
+
+
+        Hawk.put("PesananHomestay",pesanHomestay);
+
+        Intent i = new Intent(PesanHomestayActivity.this,DetailBayarHomestayActivity.class);
+        i.putExtra("nama_homestay",name);
+        i.putExtra("checkin",checkIn);
+        i.putExtra("checkout",checkOut);
+        i.putExtra("jumlah",jumlah);
+        i.putExtra("id_menu",id_menu);
+        i.putExtra("id_bisnis",id_homestay);
+        i.putExtra("harga_search",hargaSearch);
+        int harga = harga_homestay * jumlah;
+        int id_booking = 0;
+        i.putExtra("harga",harga);
+        i.putExtra("id_booking",id_booking);
+
+        Log.d("Backindbug","TESSSS HOMESTAY = " + Utils.getJsonfromUrl(pesanHomestay));
+        startActivity(i);
+        /*Api.getService().booking(id_tourism,id_homestay,checkIn, checkOut,"",jumlah).
                 enqueue(new Callback<TransaksiResponse>() {
                     @Override
                     public void onResponse(Call<TransaksiResponse> call, Response<TransaksiResponse> response) {
@@ -198,6 +238,9 @@ public class PesanHomestayActivity extends AppCompatActivity {
                             i.putExtra("checkin",checkIn);
                             i.putExtra("checkout",checkOut);
                             i.putExtra("jumlah",jumlah);
+                            i.putExtra("id_menu",id_menu);
+                            i.putExtra("id_bisnis",id_homestay);
+                            i.putExtra("harga_search",hargaSearch);
                             int harga = response.body().getData().getTotalCost();
                             int id_booking = response.body().getData().getIdBooking();
                             i.putExtra("harga",harga);
@@ -214,7 +257,7 @@ public class PesanHomestayActivity extends AppCompatActivity {
                             Log.d("Backindbug","GAGAL = " + t.getMessage());
 
                     }
-                });
+                });*/
     }
 }
 
