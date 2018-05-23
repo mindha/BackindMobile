@@ -27,6 +27,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
+import backind.backind.Model.BusinessData;
 import backind.backind.Model.BusinessDetails;
 import backind.backind.Model.Transaksi;
 import backind.backind.R;
@@ -170,12 +171,15 @@ public class BeliTiketActivity extends AppCompatActivity {
                 "jumlah = " + jumlah+", \n" +
                 "id_tourism = " + id_tourism);
 
-        BusinessDetails tourism = new BusinessDetails();
+        BusinessData tourism = new BusinessData();
+
+        BusinessDetails tourism_detail = new BusinessDetails();
         Transaksi pesanTourism = new Transaksi();
         pesanTourism.setIdTourism(""+id_tourism);
         pesanTourism.setCheckinTourism(dateTicket);
         pesanTourism.setTotalTicket(""+jumlah);
-        tourism.setBusinessPrice(""+harga_tourism);
+        tourism_detail.setBusinessPrice(""+harga_tourism);
+        tourism.setBusinessDetails(tourism_detail);
         pesanTourism.setTourism(tourism);
 
         Hawk.put("PesananTourism",pesanTourism);

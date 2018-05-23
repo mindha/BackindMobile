@@ -122,14 +122,15 @@ public class PaymentDeadlineActivity extends AppCompatActivity {
 
                     try{
                         Log.d("Backindbug","try Tourism");
-                        tourism = response.body().getData().get(0).getTourism().getBusinessName();
-                        price_tourism = response.body().getData().get(0).getTourism().getBusinessPrice();
+                        tourism = response.body().getData().get(0).getTourism().getBusinessDetails().getBusinessName();
+                        price_tourism = response.body().getData().get(0).getTourism().getBusinessDetails().getBusinessPrice();
                         harga_tourism = Integer.valueOf(price_tourism);
                         total_tourism = harga_tourism*jumlah;
                         total_all_tourism = String.valueOf(total_tourism);
                         date_tourism = String.valueOf(response.body().getData().get(0).getCheckinTourism());
                     }catch (Exception e){
-                        Log.d("Backindbug","catch Tourism");
+                        e.printStackTrace();
+                        Log.d("Backindbug","catch Tourism = " + e.getMessage());
                     }
 
                     //homestay
@@ -137,9 +138,9 @@ public class PaymentDeadlineActivity extends AppCompatActivity {
                     int harga_homestay=0, total_homestay=0;
                     try{
                         Log.d("Backindbug","try Homestay");
-                        name_homestay = response.body().getData().get(0).getHomestay().getBusinessName();
+                        name_homestay = response.body().getData().get(0).getHomestay().getBusinessDetails().getBusinessName();
                         Log.d("Backindbug","ini nama homestay"+name_homestay);
-                        price_homestay = String.valueOf(response.body().getData().get(0).getHomestay().getBusinessPrice());
+                        price_homestay = String.valueOf(response.body().getData().get(0).getHomestay().getBusinessDetails().getBusinessPrice());
                         harga_homestay = Integer.valueOf(price_homestay);
                         Log.d("Backindbug","ini harga homestay"+harga_homestay);
                         total_homestay = jumlah *harga_homestay;
@@ -149,8 +150,8 @@ public class PaymentDeadlineActivity extends AppCompatActivity {
                         checkout = String.valueOf(response.body().getData().get(0).getCheckout());
 
                     }catch (Exception e){
-                        Log.d("Backindbug","catch Homestay");
-
+                        Log.d("Backindbug","catch Homestay = " + e.getMessage());
+                        e.printStackTrace();
                     }
 
                     String day_homestay = checkin+ " sampai " + checkout;
@@ -239,7 +240,7 @@ public class PaymentDeadlineActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<InvoiceResponse> call, Throwable t) {
-                    Log.d("Backindbug","TIDAK TAMPIL = " + t.getMessage());
+                Log.d("Backindbug","TIDAK TAMPIL = " + t.getMessage());
 
             }
         });

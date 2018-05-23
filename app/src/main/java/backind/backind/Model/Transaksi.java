@@ -43,27 +43,27 @@ public class Transaksi {
 
     @SerializedName("tourism")
     @Expose
-    private BusinessDetails tourism;
+    private BusinessData tourism;
     @SerializedName("homestay")
     @Expose
-    private BusinessDetails homestay;
+    private BusinessData homestay;
     @SerializedName("user")
     @Expose
     private User user;
 
-    public BusinessDetails getTourism() {
+    public BusinessData getTourism() {
         return tourism;
     }
 
-    public void setTourism(BusinessDetails tourism) {
+    public void setTourism(BusinessData tourism) {
         this.tourism = tourism;
     }
 
-    public BusinessDetails getHomestay() {
+    public BusinessData getHomestay() {
         return homestay;
     }
 
-    public void setHomestay(BusinessDetails homestay) {
+    public void setHomestay(BusinessData homestay) {
         this.homestay = homestay;
     }
 

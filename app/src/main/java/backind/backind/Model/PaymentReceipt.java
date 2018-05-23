@@ -25,6 +25,17 @@ public class PaymentReceipt {
     @SerializedName("updated_at")
     @Expose
     private String updatedAt;
+    @SerializedName("booking_detail")
+    @Expose
+    private Transaksi transaksi;
+
+    public Transaksi getTransaksi() {
+        return transaksi;
+    }
+
+    public void setTransaksi(Transaksi transaksi) {
+        this.transaksi = transaksi;
+    }
 
     public Integer getIdTransaksi() {
         return idTransaksi;

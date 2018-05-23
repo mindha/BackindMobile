@@ -29,6 +29,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
+import backind.backind.Model.BusinessData;
 import backind.backind.Model.BusinessDetails;
 import backind.backind.Model.Transaksi;
 import backind.backind.R;
@@ -199,13 +200,17 @@ public class PesanHomestayActivity extends AppCompatActivity {
                 "checkout = " + checkOut+", \n " +
                 "jumlah = " + jumlah+", \n" +
                 "id_homestay = " + id_homestay);
-        BusinessDetails homestay = new BusinessDetails();
+
+        BusinessData homestay = new BusinessData();
+
+        BusinessDetails homestay_detail = new BusinessDetails();
         Transaksi pesanHomestay = new Transaksi();
         pesanHomestay.setIdHomestay(""+id_homestay);
         pesanHomestay.setCheckin(checkIn);
         pesanHomestay.setCheckout(checkOut);
         pesanHomestay.setTotalTicket(""+jumlah);
-        homestay.setBusinessPrice(""+harga_homestay);
+        homestay_detail.setBusinessPrice(""+harga_homestay);
+        homestay.setBusinessDetails(homestay_detail);
         pesanHomestay.setHomestay(homestay);
 
 

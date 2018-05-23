@@ -170,27 +170,27 @@ public class DetailBayarHomestayActivity extends AppCompatActivity {
                 pesanan = Hawk.get("PesananTourism");
                 id_tourism = Integer.parseInt(pesanan.getIdTourism());
                 checkinTourism = pesanan.getCheckinTourism().toString();
-                total_harga_semua = harga + (Integer.parseInt(pesanan.getTourism().getBusinessPrice()) * jumlah);
+                total_harga_semua = harga + (Integer.parseInt(pesanan.getTourism().getBusinessDetails().getBusinessPrice()) * jumlah);
             }else {
 
             }
 
             final int finalTotal_harga_semua = total_harga_semua;
             Log.d("Backindbug","DAPET DARI HOMESTAY = " + Utils.getJsonfromUrl(pesanan));
-        Api.getService().booking(id_tourism,id_bisnis,checkin,checkout,checkinTourism,jumlah).
-                enqueue(new Callback<TransaksiResponse>() {
-                    @Override
-                    public void onResponse(Call<TransaksiResponse> call, Response<TransaksiResponse> response) {
-                        if (response.isSuccessful()){
-                            updateCost(response.body().getData().getIdBooking(), finalTotal_harga_semua);
+            Api.getService().booking(id_tourism,id_bisnis,checkin,checkout,checkinTourism,jumlah).
+                    enqueue(new Callback<TransaksiResponse>() {
+                        @Override
+                        public void onResponse(Call<TransaksiResponse> call, Response<TransaksiResponse> response) {
+                            if (response.isSuccessful()){
+                                updateCost(response.body().getData().getIdBooking(), finalTotal_harga_semua);
+                            }
                         }
-                    }
 
-                    @Override
-                    public void onFailure(Call<TransaksiResponse> call, Throwable t) {
+                        @Override
+                        public void onFailure(Call<TransaksiResponse> call, Throwable t) {
 
-                    }
-                });
+                        }
+                    });
         }catch (Exception e){
 
         }
@@ -215,7 +215,7 @@ public class DetailBayarHomestayActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<UpdateCostResponse> call, Throwable t) {
-                    Log.d("Backindbug","GAGAL");
+                Log.d("Backindbug","GAGAL");
 
             }
         });

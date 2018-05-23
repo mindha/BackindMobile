@@ -4,6 +4,7 @@ import backind.backind.Model.PaymentReceipt;
 import backind.backind.Response.BaseResponse;
 import backind.backind.Response.BusinessDetailsResponse;
 import backind.backind.Response.BusinessResponse;
+import backind.backind.Response.EticketResponse;
 import backind.backind.Response.InvoiceResponse;
 import backind.backind.Response.NearbyResponse;
 import backind.backind.Response.CityResponse;
@@ -40,6 +41,9 @@ public interface Service {
     @GET("getMinCity")
     Call<CityResponse> getListCity();
 
+    @GET("getTicketHistory")
+    Call<EticketResponse> getTicketList();
+
     @GET()
     Call<BusinessResponse>getDataTourism(@Url String url);
     @GET()
@@ -75,6 +79,8 @@ public interface Service {
     @FormUrlEncoded
     @POST("updatePassword")
     Call<BaseResponse>updatePassword(@Field("password")String password);
+
+
 
 
 }

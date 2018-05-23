@@ -127,8 +127,7 @@ public class BuktiTransferActivity extends AppCompatActivity {
 
     }
     private void selectImage() {
-        final CharSequence[] items = {"Take Photo", "Choose from Library",
-                "Cancel"};
+        final CharSequence[] items = {"Choose from Library", "Cancel"};
 
         AlertDialog.Builder builder = new AlertDialog.Builder(BuktiTransferActivity.this);
         builder.setTitle("Add Photo!");
@@ -136,10 +135,7 @@ public class BuktiTransferActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int item) {
 
-                if (items[item].equals("Take Photo")) {
-//                    cameraIntent();
-
-                } else if (items[item].equals("Choose from Library")) {
+                if (items[item].equals("Choose from Library")) {
                     galeryPicker();
 
                 } else if (items[item].equals("Cancel")) {
@@ -243,20 +239,6 @@ public class BuktiTransferActivity extends AppCompatActivity {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        } else if (requestCode == REQUEST_CAMERA) {
-//            imgBitmap = (Bitmap) data.getExtras().get("data");
-//            if (mediaPath != null) {
-//                setPic();
-//                galleryAddPic();
-//                mediaPath = null;
-//            }
-//
-//
-//            imgFile = persistImage(imgBitmap, name);
-//            imgFile = compressFile(imgFile);
-
-//            previewImgTicket.setImageBitmap(imgBitmap);
-
         }
 
     }

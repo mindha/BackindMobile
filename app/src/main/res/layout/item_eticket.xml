@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/padding10"
+
+    android:background="@color/colorWhite">
+
+    <LinearLayout
+        android:id="@+id/list_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/code_backind"
+                android:text="#BACKIND2018107"
+                android:fontFamily="@font/montserrat_medium"
+                android:textColor="@color/colorPrimary"
+                android:textSize="18sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/status"
+                    android:text="PAID"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:textColor="@color/colorHitam"
+                    android:textSize="20sp"
+                    android:layout_alignParentRight="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <TextView
+            android:text="Homestay"
+            android:fontFamily="@font/montserrat_regular"
+            android:layout_marginTop="@dimen/padding10"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/name_homestay"
+            android:text="Keren"
+            android:fontFamily="@font/montserrat_medium"
+            android:textColor="@color/colorHitam"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:text="Tourism"
+            android:fontFamily="@font/montserrat_regular"
+            android:layout_width="match_parent"
+            android:layout_marginTop="@dimen/padding10"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/name_tourism"
+            android:text="Kamung Gajah"
+            android:fontFamily="@font/montserrat_medium"
+            android:textColor="@color/colorHitam"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+
+
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>

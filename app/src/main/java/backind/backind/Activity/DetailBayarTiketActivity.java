@@ -65,7 +65,7 @@ public class DetailBayarTiketActivity extends AppCompatActivity {
             Log.d("Backindbug","ERRR = " + e.getMessage());
             e.printStackTrace();
         }
-            Log.d("Backindbug", "DetailBayarTicket ====== id tourism"+id_bisnis);
+        Log.d("Backindbug", "DetailBayarTicket ====== id tourism"+id_bisnis);
 
         //status bar
         Window window = this.getWindow();
@@ -173,7 +173,7 @@ public class DetailBayarTiketActivity extends AppCompatActivity {
                 checkin = pesanan.getCheckin();
                 checkout = pesanan.getCheckout();
                 value = Integer.parseInt(pesanan.getTotalTicket());
-                total_harga_semua = harga + (Integer.parseInt(pesanan.getHomestay().getBusinessPrice()) * value);
+                total_harga_semua = harga + (Integer.parseInt(pesanan.getHomestay().getBusinessDetails().getBusinessPrice()) * value);
 
             }else {
             }
@@ -181,19 +181,19 @@ public class DetailBayarTiketActivity extends AppCompatActivity {
             final int finalTotal_harga_semua = total_harga_semua;
             Log.d("Backindbug","DAPET DARI TOURISM = " + Utils.getJsonfromUrl(pesanan));
             Api.getService().booking(id_bisnis,id_homestay,checkin, checkout,date,value).
-                enqueue(new Callback<TransaksiResponse>() {
-                    @Override
-                    public void onResponse(Call<TransaksiResponse> call, Response<TransaksiResponse> response) {
-                        if(response.isSuccessful()){
-                            updateCost(response.body().getData().getIdBooking(), finalTotal_harga_semua);
+                    enqueue(new Callback<TransaksiResponse>() {
+                        @Override
+                        public void onResponse(Call<TransaksiResponse> call, Response<TransaksiResponse> response) {
+                            if(response.isSuccessful()){
+                                updateCost(response.body().getData().getIdBooking(), finalTotal_harga_semua);
+                            }
                         }
-                    }
 
-                    @Override
-                    public void onFailure(Call<TransaksiResponse> call, Throwable t) {
+                        @Override
+                        public void onFailure(Call<TransaksiResponse> call, Throwable t) {
 
-                    }
-                });
+                        }
+                    });
         }catch (Exception e){
             e.printStackTrace();
         }

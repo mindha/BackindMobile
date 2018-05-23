@@ -129,7 +129,8 @@ public class NearbyActivity extends AppCompatActivity {
                 if(response.isSuccessful()){
                     collapsingToolbar.setTitle(response.body().getData().getLoc().getBusinessName());
                     Glide.with(NearbyActivity.this).load("http://backind.id/storage/"+response.body().getData().getLoc().getBusinessProfilePict()).into(header);
-                    price.setText(response.body().getData().getLoc().getBusinessPrice());
+                    String nilai = response.body().getData().getLoc().getBusinessPrice();
+                    price.setText("Rp "+nilai);
                     nearList = response.body().getData().getNear();
                     final int idDetailBisnis = response.body().getData().getLoc().getIdBusinessDetails();
                     if (id_menu == 1){

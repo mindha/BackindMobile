@@ -154,7 +154,6 @@ public class BusinessDetailActivity extends AppCompatActivity {
     }
 
     private void messageDialog() {
-
         dialog = new Dialog(this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.dialog_review);
@@ -230,11 +229,13 @@ public class BusinessDetailActivity extends AppCompatActivity {
                                     Intent i = new Intent(BusinessDetailActivity.this, BeliTiketActivity.class);
                                     i.putExtra("id_tourism", idDetailBisnis);
                                     i.putExtra("name", title);
+                                    i.putExtra("harga_tourism",response.body().getData().getBusinessDetails().get(0).getBusinessDetails().getBusinessPrice());
                                     startActivity(i);
                                 } else {
                                     Intent i = new Intent(BusinessDetailActivity.this, PesanHomestayActivity.class);
                                     i.putExtra("id_homestay", idDetailBisnis);
                                     i.putExtra("name", title);
+                                    i.putExtra("harga_homestay",response.body().getData().getBusinessDetails().get(0).getBusinessDetails().getBusinessPrice());
                                     startActivity(i);
                                 }
                             } else {

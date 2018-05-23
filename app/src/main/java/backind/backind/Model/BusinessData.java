@@ -51,6 +51,9 @@ public class BusinessData implements Parcelable{
         this.reviews = reviews;
     }
 
+    public BusinessData() {
+    }
+
     protected BusinessData(Parcel in) {
         if (in.readByte() == 0) {
             idBusiness = null;
