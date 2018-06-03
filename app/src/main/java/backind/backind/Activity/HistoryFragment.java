@@ -1,6 +1,7 @@
 package backind.backind.Activity;
 
 
+import android.app.AlertDialog;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -28,6 +29,7 @@ import backind.backind.R;
 import backind.backind.Response.CityResponse;
 import backind.backind.Response.EticketResponse;
 import backind.backind.Service.Api;
+import dmax.dialog.SpotsDialog;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -41,8 +43,7 @@ public class HistoryFragment extends Fragment {
     private EticketAdapter adapter;
     private Button eticket;
     private List<PaymentReceipt> listEticket;
-
-
+    AlertDialog dialog;
 
     public HistoryFragment() {
         // Required empty public constructor
@@ -69,15 +70,20 @@ public class HistoryFragment extends Fragment {
 
         getListEticket();
 
+
         return rootView;
 
     }
 
+
     private void getListEticket(){
+        dialog = new SpotsDialog(getActivity());
+        dialog.show();
         Api.getService().getTicketList().enqueue(new Callback<EticketResponse>() {
             @Override
             public void onResponse(Call<EticketResponse> call, Response<EticketResponse> response) {
                 if(response.isSuccessful()){
+                    dialog.dismiss();
                     listEticket = new ArrayList<PaymentReceipt>();
                     for (List<PaymentReceipt> data : response.body().getData()){
                         for (PaymentReceipt paymentReceipt : data){

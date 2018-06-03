@@ -1,5 +1,6 @@
 package backind.backind.Activity;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
@@ -23,6 +24,7 @@ import android.widget.Toast;
 import backind.backind.R;
 import backind.backind.Response.RegisterResponse;
 import backind.backind.Service.Api;
+import dmax.dialog.SpotsDialog;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -33,6 +35,7 @@ public class RegisterActivity extends AppCompatActivity {
     private TextView txtLogin;
     private Button btnDaftar;
     private EditText Edtname, Edtemail, Edtnohp, Edtpass;
+    AlertDialog dialog;
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,7 +84,10 @@ public class RegisterActivity extends AppCompatActivity {
                             enqueue(new Callback<RegisterResponse>() {
                                 @Override
                                 public void onResponse(Call<RegisterResponse> call, Response<RegisterResponse> response) {
+                                    dialog = new SpotsDialog(RegisterActivity.this);
+                                    dialog.show();
                                     if (response.isSuccessful()) {
+                                        dialog.dismiss();
                                         Edtname.setText(null);
                                         Edtemail.setText(null);
                                         Edtnohp.setText(null);

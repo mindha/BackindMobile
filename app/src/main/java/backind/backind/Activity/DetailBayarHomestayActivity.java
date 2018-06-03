@@ -178,10 +178,11 @@ public class DetailBayarHomestayActivity extends AppCompatActivity {
 
             }
 
-            message = new SpotsDialog(DetailBayarHomestayActivity.this);
-            message.show();
+
             final int finalTotal_harga_semua = total_harga_semua;
             Log.d("Backindbug","DAPET DARI HOMESTAY = " + Utils.getJsonfromUrl(pesanan));
+            message = new SpotsDialog(DetailBayarHomestayActivity.this);
+            message.show();
             Api.getService().booking(id_tourism,id_bisnis,checkin,checkout,checkinTourism,jumlah).
                     enqueue(new Callback<TransaksiResponse>() {
                         @Override
@@ -203,6 +204,8 @@ public class DetailBayarHomestayActivity extends AppCompatActivity {
 
     }
     public void updateCost(final int id_booking, final int harga){
+        message = new SpotsDialog(DetailBayarHomestayActivity.this);
+        message.show();
         Api.getService().getUpdateCost("postUpdateCost/"+id_booking,harga).enqueue(new Callback<UpdateCostResponse>() {
             @Override
             public void onResponse(Call<UpdateCostResponse> call, Response<UpdateCostResponse> response) {

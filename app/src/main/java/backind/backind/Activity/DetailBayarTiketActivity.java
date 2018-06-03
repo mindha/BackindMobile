@@ -1,5 +1,6 @@
 package backind.backind.Activity;
 
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
@@ -27,6 +28,7 @@ import backind.backind.Response.TransaksiResponse;
 import backind.backind.Response.UpdateCostResponse;
 import backind.backind.Service.Api;
 import backind.backind.Utils.Utils;
+import dmax.dialog.SpotsDialog;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -40,6 +42,7 @@ public class DetailBayarTiketActivity extends AppCompatActivity {
     TextView nama, tanggal, jumlah, price;
     String name, date;
     int value, harga, id_booking, id_menu, id_bisnis, hargaSearch;
+    AlertDialog message;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -180,11 +183,16 @@ public class DetailBayarTiketActivity extends AppCompatActivity {
 
             final int finalTotal_harga_semua = total_harga_semua;
             Log.d("Backindbug","DAPET DARI TOURISM = " + Utils.getJsonfromUrl(pesanan));
+            message = new SpotsDialog(DetailBayarTiketActivity.this);
+            message.show();
             Api.getService().booking(id_bisnis,id_homestay,checkin, checkout,date,value).
                     enqueue(new Callback<TransaksiResponse>() {
                         @Override
                         public void onResponse(Call<TransaksiResponse> call, Response<TransaksiResponse> response) {
                             if(response.isSuccessful()){
+                                message.dismiss();
+                                message = new SpotsDialog(DetailBayarTiketActivity.this);
+                                message.show();
                                 updateCost(response.body().getData().getIdBooking(), finalTotal_harga_semua);
                             }
                         }
@@ -200,10 +208,13 @@ public class DetailBayarTiketActivity extends AppCompatActivity {
     }
 
     public void updateCost(final int id_booking, final int harga){
+        message = new SpotsDialog(DetailBayarTiketActivity.this);
+        message.show();
         Api.getService().getUpdateCost("postUpdateCost/"+id_booking,harga).enqueue(new Callback<UpdateCostResponse>() {
             @Override
             public void onResponse(Call<UpdateCostResponse> call, Response<UpdateCostResponse> response) {
                 if(response.isSuccessful()){
+                    message.dismiss();
                     Hawk.put("PesananTourism",null);
                     Hawk.put("PesananHomestay",null);
                     Log.d("Backindbug","id booking="+id_booking);
@@ -223,5 +234,6 @@ public class DetailBayarTiketActivity extends AppCompatActivity {
             }
         });
     }
+
 
 }

@@ -44,7 +44,7 @@ public class BuktiTransferActivity extends AppCompatActivity {
     int status_pay, id_transaksi;
     String statusbayar;
     TextView order_code, total_tagihan, due_date, status_pembayaran;
-    Button done, choose;
+    Button done, choose, nanti;
     ImageView imgPreview;
 
     private static final int REQUEST_CAMERA = 0, SELECT_FILE = 1;    private Uri imgPath;
@@ -90,6 +90,7 @@ public class BuktiTransferActivity extends AppCompatActivity {
         done = findViewById(R.id.done);
         choose = findViewById(R.id.choose);
         imgPreview = findViewById(R.id.img_prev);
+        nanti = findViewById(R.id.nanti);
 
         choose.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -102,6 +103,16 @@ public class BuktiTransferActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 uploadBukti();
+            }
+        });
+
+        nanti.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(BuktiTransferActivity.this, MenuActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.putExtra("action", "history");
+                startActivity(intent);
             }
         });
 
