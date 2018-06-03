@@ -83,7 +83,7 @@ public class NearbyActivity extends AppCompatActivity {
         detail = findViewById(R.id.detail);
 
 
-       setSupportActionBar(toolbar);
+        setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         getListBisnis();

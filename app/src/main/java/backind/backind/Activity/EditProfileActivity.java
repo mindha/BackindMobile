@@ -1,5 +1,6 @@
 package backind.backind.Activity;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
@@ -31,6 +32,7 @@ import backind.backind.R;
 import backind.backind.Response.ProfileResponse;
 import backind.backind.Response.RegisterResponse;
 import backind.backind.Service.Api;
+import dmax.dialog.SpotsDialog;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -43,6 +45,7 @@ public class EditProfileActivity extends AppCompatActivity {
     private User user=null;
     private Button update;
     private Data data = null;
+    AlertDialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,13 +85,19 @@ public class EditProfileActivity extends AppCompatActivity {
                 Api.getService().updateUser(nama.getText().toString(),mail.getText().toString(),telp.getText().toString()).enqueue(new Callback<ProfileResponse>() {
                     @Override
                     public void onResponse(Call<ProfileResponse> call, Response<ProfileResponse> response) {
+                        dialog = new SpotsDialog(EditProfileActivity.this);
+                        dialog.show();
                         if (response.isSuccessful()) {
+                            dialog.dismiss();
                             setNewDataUser(response.body().getName().toString(),
                                     response.body().getEmail().toString(),
                                     response.body().getPhoneNumber().toString());
                             //Hawk.put(Constant.DataLocal.dataUser,response.body());
                             Toast.makeText(EditProfileActivity.this, "Data anda berhasil disimpan", Toast.LENGTH_LONG).show();
-                            //startActivity(new Intent(EditProfileActivity.this, EditProfileActivity.class));
+                            Intent intent = new Intent(EditProfileActivity.this, MenuActivity.class);
+//                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+//                            intent.putExtra("action", "history");
+                            startActivity(intent);
                             setDataUser();
                         }
                     }

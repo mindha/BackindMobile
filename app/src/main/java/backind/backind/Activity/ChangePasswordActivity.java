@@ -1,5 +1,6 @@
 package backind.backind.Activity;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
@@ -22,6 +23,7 @@ import backind.backind.Model.User;
 import backind.backind.R;
 import backind.backind.Response.BaseResponse;
 import backind.backind.Service.Api;
+import dmax.dialog.SpotsDialog;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -31,11 +33,14 @@ public class ChangePasswordActivity extends AppCompatActivity {
     EditText passOld, passNew;
     Button changePass;
     User user = null;
+    AlertDialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_change_password);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         //status bar
         Window window = this.getWindow();
@@ -63,10 +68,13 @@ public class ChangePasswordActivity extends AppCompatActivity {
         changePass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                dialog = new SpotsDialog(ChangePasswordActivity.this);
+                dialog.show();
                 Api.getService().updatePassword(passNew.getText().toString()).enqueue(new Callback<BaseResponse>() {
                     @Override
                     public void onResponse(Call<BaseResponse> call, Response<BaseResponse> response) {
                         if(response.isSuccessful()){
+                            dialog.dismiss();
                             passNew.setText(new_password);
                             Toast.makeText(ChangePasswordActivity.this, "Data anda berhasil disimpan", Toast.LENGTH_LONG).show();
                             startActivity(new Intent(ChangePasswordActivity.this, LoginActivity.class));

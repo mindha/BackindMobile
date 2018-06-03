@@ -111,6 +111,8 @@ public class BeliTiketActivity extends AppCompatActivity implements DatePickerDi
         tourismname.setText(name);
         showDialog();
 
+
+
         buyDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

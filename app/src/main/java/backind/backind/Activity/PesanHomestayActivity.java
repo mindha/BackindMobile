@@ -140,7 +140,7 @@ public class PesanHomestayActivity extends AppCompatActivity implements DatePick
         btnMinus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (n > 0) {
+                if (n > 1) {
                     n--;
                     txtJumlahTiket.setText(String.valueOf(n));
                 } else {
