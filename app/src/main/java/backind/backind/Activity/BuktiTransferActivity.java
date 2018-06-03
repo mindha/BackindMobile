@@ -108,12 +108,15 @@ public class BuktiTransferActivity extends AppCompatActivity {
 
         try{
             order_code.setText(code);
-            total_tagihan.setText(tagihan);
+            String tagih = "Rp "+tagihan+",-";
+            total_tagihan.setText(tagih);
             due_date.setText(duedate);
             if(status_pay == 1){
                 statusbayar = "Paid";
+                status_pembayaran.setTextColor(ContextCompat.getColor(this,R.color.colorGreen));
             }else if (status_pay == 2){
                 statusbayar = "Waiting Payment";
+                status_pembayaran.setTextColor(ContextCompat.getColor(this,R.color.colorOrange));
             }
             status_pembayaran.setText(statusbayar);
 

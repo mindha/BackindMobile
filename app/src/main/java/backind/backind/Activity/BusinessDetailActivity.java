@@ -252,10 +252,10 @@ public class BusinessDetailActivity extends AppCompatActivity {
                     float sumRate = 0;
                     for (Review review : reviewData) {
                         sumRate += Integer.valueOf(review.getRating());
-                        Log.d("aziz", review.getRating());
+                        Log.d("Backindbug", review.getRating());
                     }
                     float avgRate = sumRate / reviewData.size();
-                    Log.d("aziz", avgRate + "");
+                    Log.d("Backindbug", avgRate + "");
                     Toast.makeText(BusinessDetailActivity.this, avgRate + "", Toast.LENGTH_SHORT).show();
                     totalStar.setRating(avgRate);
 
@@ -296,9 +296,7 @@ public class BusinessDetailActivity extends AppCompatActivity {
             case android.R.id.home:
                 finish();
                 break;
-            case R.id.action_settings:
-                Toast.makeText(this, "Setting menu clicked!", Toast.LENGTH_SHORT).show();
-                break;
+
         }
 
         if (item.getTitle() == "Maps") {

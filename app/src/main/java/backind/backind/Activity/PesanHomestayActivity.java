@@ -1,6 +1,5 @@
 package backind.backind.Activity;
 
-import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -15,13 +14,13 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.orhanobut.hawk.Hawk;
+import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -40,7 +39,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class PesanHomestayActivity extends AppCompatActivity {
+public class PesanHomestayActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
     private DatePickerDialog datePickerDialog;
     private SimpleDateFormat dateFormatter;
     private EditText dateCheckIn, dateCheckOut;
@@ -50,6 +49,9 @@ public class PesanHomestayActivity extends AppCompatActivity {
     int n;
     int id_homestay, hargaSearch, id_menu, harga_homestay;
     String name;
+    int dptipyChoose = 0;
+    int days =0;
+    private Calendar checkinChoosen, checkout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,19 +59,19 @@ public class PesanHomestayActivity extends AppCompatActivity {
         setContentView(R.layout.activity_pesan_homestay);
 
         try {
-            hargaSearch = getIntent().getIntExtra("harga_search",5000000);
-            id_menu = getIntent().getIntExtra("id_menu",2);
+            hargaSearch = getIntent().getIntExtra("harga_search", 5000000);
+            id_menu = getIntent().getIntExtra("id_menu", 2);
             String harga = getIntent().getStringExtra("harga_homestay");
             harga_homestay = Integer.parseInt(harga);
-        }catch (Exception e){
+        } catch (Exception e) {
 
         }
 
-        try{
-            id_homestay = getIntent().getIntExtra("id_homestay",0);
+        try {
+            id_homestay = getIntent().getIntExtra("id_homestay", 0);
             name = getIntent().getStringExtra("name");
 
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -79,7 +81,7 @@ public class PesanHomestayActivity extends AppCompatActivity {
         Window window = this.getWindow();
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-        window.setStatusBarColor(ContextCompat.getColor(this,R.color.colorWhite));
+        window.setStatusBarColor(ContextCompat.getColor(this, R.color.colorWhite));
 
         //action bar
         ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#ffffff"));
@@ -92,8 +94,9 @@ public class PesanHomestayActivity extends AppCompatActivity {
 
         dateFormatter = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
 
+
         dateCheckIn = findViewById(R.id.checkin);
-        dateCheckOut =  findViewById(R.id.checkout);
+        dateCheckOut = findViewById(R.id.checkout);
         orderHomestay = findViewById(R.id.pesanHomestay);
         btnMinus = findViewById(R.id.btnMinus);
         btnPlus = findViewById(R.id.btnPlus);
@@ -102,16 +105,28 @@ public class PesanHomestayActivity extends AppCompatActivity {
 
         homestayname.setText(name);
 
+        checkinChoosen = Calendar.getInstance();
+        showDialogcheckin();
+        showDialogcheckout();
+
         dateCheckIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                checkIn();
+                dptipyChoose = 1;
+                showDialogcheckin();
+                datePickerDialog.setVersion(DatePickerDialog.Version.VERSION_2);
+                datePickerDialog.show((PesanHomestayActivity.this).getFragmentManager(), "Datepickerdialog");
+
             }
         });
         dateCheckOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                checkOut();
+                dptipyChoose = 2;
+                showDialogcheckout();
+                datePickerDialog.setVersion(DatePickerDialog.Version.VERSION_2);
+                datePickerDialog.show((PesanHomestayActivity.this).getFragmentManager(), "Datepickerdialog");
+
             }
         });
 
@@ -128,7 +143,7 @@ public class PesanHomestayActivity extends AppCompatActivity {
                 if (n > 0) {
                     n--;
                     txtJumlahTiket.setText(String.valueOf(n));
-                } else  {
+                } else {
                     Context context = getApplicationContext();
                     Toast toast = Toast.makeText(context, "Isi Jumlah Tiket", Toast.LENGTH_SHORT);
                     toast.show();
@@ -152,84 +167,87 @@ public class PesanHomestayActivity extends AppCompatActivity {
         });
     }
 
-    private void checkIn(){
+    private void showDialogcheckin() {
 
-        Calendar newCalendar = Calendar.getInstance();
-
-        datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
-
-            @Override
-            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                Calendar newDate = Calendar.getInstance();
-                newDate.set(year, monthOfYear, dayOfMonth);
-                datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis() + (1000 * 60 * 60));
-                dateCheckIn.setText(dateFormatter.format(newDate.getTime()));
-            }
-
-        },newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
-
-        datePickerDialog.show();
+        Calendar checkin = Calendar.getInstance();
+        datePickerDialog = DatePickerDialog.newInstance(
+                PesanHomestayActivity.this,
+                checkin.get(Calendar.YEAR),
+                checkin.get(Calendar.MONTH),
+                checkin.get(Calendar.DAY_OF_MONTH)
+        );
+        datePickerDialog.setMinDate(checkin);
     }
 
-    private void checkOut(){
+    private void showDialogcheckout() {
 
-        final Calendar newCalendar = Calendar.getInstance();
-
-        datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
-
-            @Override
-            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-
-                Calendar newDate = Calendar.getInstance();
-                newDate.set(year, monthOfYear, dayOfMonth);
-                dateCheckOut.setText(dateFormatter.format(newDate.getTime()));
-            }
-
-        },newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
-
-        datePickerDialog.show();
+        checkout = Calendar.getInstance();
+        checkout.set(Calendar.DAY_OF_MONTH, checkinChoosen.get(Calendar.DAY_OF_MONTH) + 1);
+//        Toast.makeText(this, "Checkin" + checkinChoosen.get(Calendar.DAY_OF_MONTH) + 1, Toast.LENGTH_SHORT).show();
+        datePickerDialog = com.wdullaer.materialdatetimepicker.date.DatePickerDialog.newInstance(
+                PesanHomestayActivity.this,
+                checkout.get(Calendar.YEAR),
+                checkout.get(Calendar.MONTH),
+                checkout.get(Calendar.DAY_OF_MONTH)
+        );
+        datePickerDialog.setMinDate(checkout);
     }
 
-    public void bookingHomestay(){
+    public void bookingHomestay() {
         int id_tourism = 0;
         final String checkIn = dateCheckIn.getText().toString();
         final String checkOut = dateCheckOut.getText().toString();
         final int jumlah = Integer.parseInt(txtJumlahTiket.getText().toString());
-        Log.d("Backindbug","Tes Parameter = " + "id_tourism = " + id_tourism+",\n " +
-                "chekcin = "+ checkIn+", \n " +
-                "checkout = " + checkOut+", \n " +
-                "jumlah = " + jumlah+", \n" +
+
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+
+        try {
+            Date d1 = format.parse(checkIn);
+            Date d2 = format.parse(checkOut);
+            Log.d("Backindbug", "Days "+getDifferenceDays(d1,d2));
+            days = getDifferenceDays(d1,d2);
+            Toast.makeText(this, "ini harinya"+days, Toast.LENGTH_SHORT).show();
+        } catch (ParseException e) {
+            e.printStackTrace();
+            Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+
+
+        Log.d("Backindbug", "Tes Parameter = " + "id_tourism = " + id_tourism + ",\n " +
+                "chekcin = " + checkIn + ", \n " +
+                "checkout = " + checkOut + ", \n " +
+                "jumlah = " + jumlah + ", \n" +
                 "id_homestay = " + id_homestay);
 
         BusinessData homestay = new BusinessData();
 
         BusinessDetails homestay_detail = new BusinessDetails();
         Transaksi pesanHomestay = new Transaksi();
-        pesanHomestay.setIdHomestay(""+id_homestay);
+        pesanHomestay.setIdHomestay("" + id_homestay);
         pesanHomestay.setCheckin(checkIn);
         pesanHomestay.setCheckout(checkOut);
-        pesanHomestay.setTotalTicket(""+jumlah);
-        homestay_detail.setBusinessPrice(""+harga_homestay);
+        pesanHomestay.setTotalTicket("" + jumlah);
+        homestay_detail.setBusinessPrice("" + harga_homestay);
         homestay.setBusinessDetails(homestay_detail);
         pesanHomestay.setHomestay(homestay);
 
 
-        Hawk.put("PesananHomestay",pesanHomestay);
+        Hawk.put("PesananHomestay", pesanHomestay);
 
-        Intent i = new Intent(PesanHomestayActivity.this,DetailBayarHomestayActivity.class);
-        i.putExtra("nama_homestay",name);
-        i.putExtra("checkin",checkIn);
-        i.putExtra("checkout",checkOut);
-        i.putExtra("jumlah",jumlah);
-        i.putExtra("id_menu",id_menu);
-        i.putExtra("id_bisnis",id_homestay);
-        i.putExtra("harga_search",hargaSearch);
-        int harga = harga_homestay * jumlah;
+        Intent i = new Intent(PesanHomestayActivity.this, DetailBayarHomestayActivity.class);
+        i.putExtra("nama_homestay", name);
+        i.putExtra("checkin", checkIn);
+        i.putExtra("checkout", checkOut);
+        i.putExtra("jumlah", jumlah);
+        i.putExtra("id_menu", id_menu);
+        i.putExtra("id_bisnis", id_homestay);
+        i.putExtra("harga_search", hargaSearch);
+        int harga = harga_homestay * (days-1);
         int id_booking = 0;
-        i.putExtra("harga",harga);
-        i.putExtra("id_booking",id_booking);
+        i.putExtra("harga", harga);
+        i.putExtra("id_booking", id_booking);
 
-        Log.d("Backindbug","TESSSS HOMESTAY = " + Utils.getJsonfromUrl(pesanHomestay));
+        Log.d("Backindbug", "TESSSS HOMESTAY = " + Utils.getJsonfromUrl(pesanHomestay));
         startActivity(i);
         /*Api.getService().booking(id_tourism,id_homestay,checkIn, checkOut,"",jumlah).
                 enqueue(new Callback<TransaksiResponse>() {
@@ -264,5 +282,30 @@ public class PesanHomestayActivity extends AppCompatActivity {
                     }
                 });*/
     }
-}
 
+    @Override
+    public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
+        String date = year + "-" + (monthOfYear + 1) + "-" + dayOfMonth;
+        if (dptipyChoose == 1) {
+            dateCheckIn.setText(date);
+            checkinChoosen.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+            checkinChoosen.set(Calendar.MONTH, monthOfYear + 1);
+            checkinChoosen.set(Calendar.YEAR, year);
+            showDialogcheckout();
+        } else if (dptipyChoose == 2) {
+            dateCheckOut.setText(date);
+        }
+
+
+    }
+
+    private int getDifferenceDays(Date d1, Date d2) {
+        int daysdiff=0;
+        long diff = d2.getTime() - d1.getTime();
+        long diffDays = diff / (24 * 60 * 60 * 1000)+1;
+        daysdiff = (int) diffDays;
+        return daysdiff;
+    }
+
+
+}

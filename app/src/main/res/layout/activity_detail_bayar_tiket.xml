@@ -80,31 +80,13 @@
             android:layout_marginBottom="@dimen/dots_height"
             android:textColor="@color/colorHitam"/>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:orientation="horizontal"
-            android:layout_height="wrap_content">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/sisabudget"
-                android:fontFamily="@font/montserrat_medium"
-                android:textColor="@color/colorPink"/>
-            <TextView
-                android:id="@+id/budget"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:text="Rp 20.000,-"
-                android:fontFamily="@font/montserrat_medium"
-                android:textColor="@color/colorPink"/>
-        </LinearLayout>
+
 
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="70dp">
+            android:layout_marginTop="50dp">
             <Button
                 android:id="@+id/cari_homestay"
                 android:layout_width="wrap_content"

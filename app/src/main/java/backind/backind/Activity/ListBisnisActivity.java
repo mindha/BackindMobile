@@ -73,7 +73,7 @@ public class ListBisnisActivity extends AppCompatActivity implements SearchView.
         });*/
 
         //getListBisnisTorism();
-        mViewPager = (ViewPager) findViewById(R.id.container);
+        mViewPager = findViewById(R.id.container);
         setupViewPager(mViewPager);
 
         tabLayout = (TabLayout) findViewById(R.id.tabs);
@@ -129,7 +129,7 @@ public class ListBisnisActivity extends AppCompatActivity implements SearchView.
         final SearchView searchView = (SearchView) item.getActionView();
         EditText searchEditText = searchView.findViewById(android.support.v7.appcompat.R.id.search_src_text);
         searchEditText.setTextColor(getResources().getColor(R.color.white));
-        searchEditText.setText("Masukkan Budget Anda");
+        searchView.setQueryHint("Masukkan Budget Anda");
         searchEditText.setHintTextColor(getResources().getColor(R.color.white));
         searchView.setInputType(InputType.TYPE_CLASS_NUMBER);
         searchView.setOnQueryTextListener(this);

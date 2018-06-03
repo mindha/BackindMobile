@@ -1,5 +1,6 @@
 package backind.backind.Activity;
 
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
@@ -28,6 +29,7 @@ import backind.backind.Response.TransaksiResponse;
 import backind.backind.Response.UpdateCostResponse;
 import backind.backind.Service.Api;
 import backind.backind.Utils.Utils;
+import dmax.dialog.SpotsDialog;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -40,6 +42,7 @@ public class DetailBayarHomestayActivity extends AppCompatActivity {
     String nama_homestay, checkin, checkout;
     TextView nama, masuk, keluar, n, price;
     int jumlah, harga,id_booking, id_menu, hargaSearch, id_bisnis;
+    AlertDialog message;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -175,6 +178,8 @@ public class DetailBayarHomestayActivity extends AppCompatActivity {
 
             }
 
+            message = new SpotsDialog(DetailBayarHomestayActivity.this);
+            message.show();
             final int finalTotal_harga_semua = total_harga_semua;
             Log.d("Backindbug","DAPET DARI HOMESTAY = " + Utils.getJsonfromUrl(pesanan));
             Api.getService().booking(id_tourism,id_bisnis,checkin,checkout,checkinTourism,jumlah).
@@ -182,6 +187,7 @@ public class DetailBayarHomestayActivity extends AppCompatActivity {
                         @Override
                         public void onResponse(Call<TransaksiResponse> call, Response<TransaksiResponse> response) {
                             if (response.isSuccessful()){
+                                message.dismiss();
                                 updateCost(response.body().getData().getIdBooking(), finalTotal_harga_semua);
                             }
                         }
@@ -201,6 +207,7 @@ public class DetailBayarHomestayActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<UpdateCostResponse> call, Response<UpdateCostResponse> response) {
                 if(response.isSuccessful()){
+                    message.dismiss();
                     Hawk.put("PesananTourism",null);
                     Hawk.put("PesananHomestay",null);
                     Log.d("Backindbug","id booking="+id_booking);

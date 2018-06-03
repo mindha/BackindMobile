@@ -1,6 +1,9 @@
 package backind.backind.Activity;
 
-import android.app.DatePickerDialog;
+import android.app.ActionBar;
+//import android.app.DatePickerDialog;
+import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -11,6 +14,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -22,6 +26,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.orhanobut.hawk.Hawk;
+import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -38,7 +43,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class BeliTiketActivity extends AppCompatActivity {
+public class BeliTiketActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
 
     TextView txtJumlahTiket,tourismname;
     ImageButton btnMinus, btnPlus;
@@ -49,6 +54,12 @@ public class BeliTiketActivity extends AppCompatActivity {
     int n;
     int id_tourism, id_menu, hargaSearch, harga_tourism;
     String name;
+
+    private int myear;
+    private int mmonth;
+    private int mday;
+
+    static final int DATE_DIALOG_ID = 999;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,19 +109,24 @@ public class BeliTiketActivity extends AppCompatActivity {
         tourismname = findViewById(R.id.ticketname);
 
         tourismname.setText(name);
+        showDialog();
 
         buyDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showDialog();
+                datePickerDialog.setVersion(DatePickerDialog.Version.VERSION_2);
+                datePickerDialog.show((BeliTiketActivity.this).getFragmentManager(), "Datepickerdialog");
+
             }
         });
 
+//        setCurrentDateOnView();
+//        addListenerOnButton();
 
         btnMinus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (n > 0) {
+                if (n > 1) {
                     n--;
                     txtJumlahTiket.setText(String.valueOf(n));
                 } else  {
@@ -145,22 +161,61 @@ public class BeliTiketActivity extends AppCompatActivity {
     }
 
     public void showDialog(){
-        Calendar newCalendar = Calendar.getInstance();
 
-        datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
-
-            @Override
-            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                Calendar newDate = Calendar.getInstance();
-                newDate.set(year, monthOfYear, dayOfMonth);
-                datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis() + (1000 * 60 * 60));
-                buyDate.setText(dateFormatter.format(newDate.getTime()));
-            }
-
-        },newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
-
-        datePickerDialog.show();
+        Calendar now = Calendar.getInstance();
+        datePickerDialog = DatePickerDialog.newInstance(
+                BeliTiketActivity.this,
+                now.get(Calendar.YEAR),
+                now.get(Calendar.MONTH),
+                now.get(Calendar.DAY_OF_MONTH)
+        );
+        datePickerDialog.setMinDate(now);
+//        Calendar newCalendar = Calendar.getInstance();
+//
+//        datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+//
+//            @Override
+//            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+//                Calendar newDate = Calendar.getInstance();
+//                newDate.set(year, monthOfYear, dayOfMonth);
+//                datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
+////                datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis());
+////                datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis() + (1000 * 60 * 60));
+//                buyDate.setText(dateFormatter.format(newDate.getTime()));
+//            }
+//
+//        },newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
+//
+//        datePickerDialog.show();
     }
+
+    @Override
+    public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
+        String date = year+"-"+(monthOfYear+1)+"-"+dayOfMonth;
+        buyDate.setText(date);
+    }
+
+    // display current date
+    public void setCurrentDateOnView() {
+
+        buyDate = findViewById(R.id.tanggal);
+
+        final Calendar c = Calendar.getInstance();
+        myear = c.get(Calendar.YEAR);
+        mmonth = c.get(Calendar.MONTH);
+        mday = c.get(Calendar.DAY_OF_MONTH);
+
+        // set current date into textview
+        buyDate.setText(new StringBuilder()
+                // Month is 0 based, just add 1
+                .append(myear).append("-").append(mmonth + 1).append("-").append(mday));
+    }
+
+
+
+
+
+
 
     public void bookingTourism(){
         int id_homestay = 0;
@@ -228,4 +283,6 @@ public class BeliTiketActivity extends AppCompatActivity {
                     }
                 });*/
     }
+
+
 }

@@ -1,5 +1,7 @@
 package backind.backind.Activity;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
@@ -11,6 +13,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,6 +27,7 @@ import backind.backind.Service.Api;
 import backind.backind.Utils.Utils;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import dmax.dialog.SpotsDialog;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -36,6 +40,8 @@ public class LoginActivity extends AppCompatActivity {
     private EditText edtUser;
     private EditText edtPass;
     private Data data = null;
+//    private Dialog dialog;
+    AlertDialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,12 +87,15 @@ public class LoginActivity extends AppCompatActivity {
                 else if (edtPass.getText().toString().isEmpty())
                     edtPass.setError("Harus diisi ");
                 else
+                    dialog = new SpotsDialog(LoginActivity.this);
+                    dialog.show();
                     Api.getService().login(edtUser.getText().toString(), edtPass.getText().toString()).enqueue(new Callback<LoginResponse>() {
                         @Override
                         public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
                             Log.d("Backindbug","status = " + response.body().getError());
                             Log.d("Backindbug","response = " + Utils.getJsonfromUrl(response.body()));
                             if (response.isSuccessful()){
+                                dialog.dismiss();
                                 Toast.makeText(LoginActivity.this,"Log In", Toast.LENGTH_LONG).show();
                                 Log.d("ini tokennya", response.body().getData().getToken());
                                 Hawk.put(Constant.TOKEN, "Bearer " + response.body().getData().getToken());
@@ -114,5 +123,25 @@ public class LoginActivity extends AppCompatActivity {
         });
 
     }
+
+//    private void ErrormessageDialog() {
+//        dialog = new Dialog(this);
+//        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+//        dialog.setContentView(R.layout.error_message);
+//
+//        Window window = dialog.getWindow();
+//        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
+//        dialog.show();
+//    }
+//
+//    private void SuccessmessageDialog() {
+//        dialog = new Dialog(this);
+//        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+//        dialog.setContentView(R.layout.success_message);
+//
+//        Window window = dialog.getWindow();
+//        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
+//        dialog.show();
+//    }
 
 }

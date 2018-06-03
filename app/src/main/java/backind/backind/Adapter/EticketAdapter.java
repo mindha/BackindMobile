@@ -2,6 +2,9 @@ package backind.backind.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -23,6 +26,8 @@ import backind.backind.Activity.PaymentDeadlineActivity;
 import backind.backind.Model.PaymentReceipt;
 import backind.backind.R;
 
+import static com.thefinestartist.utils.content.ResourcesUtil.getColor;
+
 public class EticketAdapter extends RecyclerView.Adapter<EticketAdapter.MyViewHolder> {
 
     private Context mContext;
@@ -30,7 +35,7 @@ public class EticketAdapter extends RecyclerView.Adapter<EticketAdapter.MyViewHo
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public LinearLayout list;
-        public TextView kode, homestay, tourism, status;
+        public TextView kode, homestay, tourism, status,txt_homestay, txt_tourism;
 
 
         public MyViewHolder(View view) {
@@ -40,7 +45,8 @@ public class EticketAdapter extends RecyclerView.Adapter<EticketAdapter.MyViewHo
             status =  view.findViewById(R.id.status);
             homestay =  view.findViewById(R.id.name_homestay);
             tourism =  view.findViewById(R.id.name_tourism);
-
+            txt_homestay = view.findViewById(R.id.txt_homestay);
+            txt_tourism = view.findViewById(R.id.txt_tourism);
 
         }
     }
@@ -68,6 +74,7 @@ public class EticketAdapter extends RecyclerView.Adapter<EticketAdapter.MyViewHo
     int n;
     @Override
     public void onBindViewHolder(final MyViewHolder holder, int position) {
+        Drawable myDrawable;
         PaymentReceipt album = eticketList.get(position);
         n = Integer.valueOf(album.getIdTransaksi());
         final int kode = 100+ Integer.valueOf(album.getIdBooking());
@@ -75,9 +82,12 @@ public class EticketAdapter extends RecyclerView.Adapter<EticketAdapter.MyViewHo
         holder.kode.setText(kode_backind);
         final int id_status = Integer.valueOf(album.getStatusTransfer());
         if(id_status == 1){
-            holder.status.setText("PAID");
+            holder.status.setText("Paid");
+            holder.status.setTextColor(ContextCompat.getColor(mContext,R.color.colorGreen));
+
         }else if(id_status ==2){
-            holder.status.setText("WAITING");
+            holder.status.setText("Waiting Payment");
+            holder.status.setTextColor(ContextCompat.getColor(mContext,R.color.colorOrange));
         }
 
         final String duedate = album.getTransaksi().getDuedate();
@@ -90,19 +100,20 @@ public class EticketAdapter extends RecyclerView.Adapter<EticketAdapter.MyViewHo
             holder.tourism.setText(album.getTransaksi().getTourism().getBusinessDetails().getBusinessName().toString());
         } else {
             holder.tourism.setVisibility(View.GONE);
+            holder.txt_tourism.setVisibility(View.GONE);
         }
 
         if (album.getTransaksi().getHomestay() != null){
             holder.homestay.setText(album.getTransaksi().getHomestay().getBusinessDetails().getBusinessName().toString());
         } else {
             holder.homestay.setVisibility(View.GONE);
+            holder.txt_homestay.setVisibility(View.GONE);
         }
 
         holder.list.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 int mPosition = holder.getLayoutPosition();
-                //Toast.makeText(mContext,"Di klik id = " + kotaList.get(mPosition).getIdCity().toString(),Toast.LENGTH_LONG).show();
                 String element = eticketList.get(mPosition).toString();
                 Intent i = new Intent(view.getContext(), BuktiTransferActivity.class);
 

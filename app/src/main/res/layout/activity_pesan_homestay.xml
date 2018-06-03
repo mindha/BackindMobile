@@ -31,25 +31,6 @@
                 android:textColor="@color/colorHitam"
                 android:textSize="30dp" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:orientation="horizontal"
-                android:layout_height="wrap_content">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/budget"
-                    android:fontFamily="@font/montserrat_medium"
-                    android:textColor="@color/colorPink"/>
-                <TextView
-                    android:id="@+id/budget"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:text="Rp 20.000,-"
-                    android:fontFamily="@font/montserrat_medium"
-                    android:textColor="@color/colorPink"/>
-            </LinearLayout>
 
             <TextView
                 android:id="@+id/homestayname"
@@ -59,7 +40,7 @@
                 android:text="Vila Manis"
                 android:fontFamily="@font/montserrat_regular"
                 android:textColor="@color/colorHitam"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="20dp"
                 android:textSize="20dp" />
             <TextView
                 android:layout_width="match_parent"
@@ -148,7 +129,7 @@
                 android:textAllCaps="false"
                 android:textSize="20dp"
                 android:fontFamily="@font/montserrat_medium"
-                android:layout_marginTop="80dp"
+                android:layout_marginTop="40dp"
                 />
 
         </LinearLayout>

@@ -94,8 +94,6 @@ public class PaymentDeadlineActivity extends AppCompatActivity {
 
         getDataTransaction();
 
-
-
     }
 
     public void getDataTransaction(){
@@ -108,8 +106,8 @@ public class PaymentDeadlineActivity extends AppCompatActivity {
                     int kode = 100;
                     final String batas_tanggal = response.body().getData().get(0).getDuedate();
                     int code= kode+id_booking;
-                    final String total_code = String.valueOf(response.body().getData().get(0).getTotalCost());
-                    final String code_order = "#BACKIND"+code;
+                    final String total_code = "Rp "+ String.valueOf(response.body().getData().get(0).getTotalCost());
+                    final String code_order = "#BACKIND2018"+code;
                     String nama = response.body().getData().get(0).getUser().getName();
                     String email = response.body().getData().get(0).getUser().getEmail();
                     String telp = response.body().getData().get(0).getUser().getPhoneNumber();

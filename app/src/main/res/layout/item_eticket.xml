@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="@dimen/padding10"
-
+    android:layout_marginBottom="@dimen/padding10"
     android:background="@color/colorWhite">
 
     <LinearLayout
@@ -29,10 +29,10 @@
                 android:layout_height="wrap_content">
                 <TextView
                     android:id="@+id/status"
-                    android:text="PAID"
+                    android:text="Waiting Payment"
                     android:fontFamily="@font/montserrat_medium"
                     android:textColor="@color/colorHitam"
-                    android:textSize="20sp"
+                    android:textSize="16sp"
                     android:layout_alignParentRight="true"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
@@ -42,6 +42,7 @@
 
         <TextView
             android:text="Homestay"
+            android:id="@+id/txt_homestay"
             android:fontFamily="@font/montserrat_regular"
             android:layout_marginTop="@dimen/padding10"
             android:layout_width="match_parent"
@@ -56,6 +57,7 @@
             android:layout_height="wrap_content" />
         <TextView
             android:text="Tourism"
+            android:id="@+id/txt_tourism"
             android:fontFamily="@font/montserrat_regular"
             android:layout_width="match_parent"
             android:layout_marginTop="@dimen/padding10"
