@@ -206,7 +206,7 @@ public class PesanHomestayActivity extends AppCompatActivity implements DatePick
             Date d2 = format.parse(checkOut);
             Log.d("Backindbug", "Days "+getDifferenceDays(d1,d2));
             days = getDifferenceDays(d1,d2);
-            Toast.makeText(this, "ini harinya"+days, Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Lama Menginap "+ (days-1), Toast.LENGTH_SHORT).show();
         } catch (ParseException e) {
             e.printStackTrace();
             Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();

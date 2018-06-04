@@ -196,7 +196,7 @@ public class PaymentDeadlineActivity extends AppCompatActivity {
                         tourism_name.setText(tourism);
                         tourism_price.setText(total_all_tourism);
                         date_ticket.setText(date_tourism);
-                        number_ticket.setText(value);
+                        number_ticket.setText(value+" Tiket");
                     }catch (Exception e){
 
                     }
@@ -205,7 +205,7 @@ public class PaymentDeadlineActivity extends AppCompatActivity {
                         homestay_name.setText(name_homestay);
                         homestay_price.setText(total_all_homestay);
                         date_booking.setText(day_homestay);
-                        number_people.setText(value);
+                        number_people.setText(value+ " Orang");
                     }catch (Exception e){
 
                     }
