@@ -51,7 +51,7 @@ public class BeliTiketActivity extends AppCompatActivity implements DatePickerDi
     EditText buyDate;
     private DatePickerDialog datePickerDialog;
     private SimpleDateFormat dateFormatter;
-    int n;
+    int n = 1;
     int id_tourism, id_menu, hargaSearch, harga_tourism;
     String name;
 

@@ -46,7 +46,7 @@ public class PesanHomestayActivity extends AppCompatActivity implements DatePick
     private Button orderHomestay;
     ImageButton btnMinus, btnPlus;
     TextView txtJumlahTiket, homestayname;
-    int n;
+    int n = 1;
     int id_homestay, hargaSearch, id_menu, harga_homestay;
     String name;
     int dptipyChoose = 0;

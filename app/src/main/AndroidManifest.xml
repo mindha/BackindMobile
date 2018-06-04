@@ -64,7 +64,7 @@
         <activity android:name=".Activity.BuktiTransferActivity" />
         <activity android:name=".Activity.ChangePasswordActivity" />
         <activity android:name=".Activity.ListEticketActivity" />
-        <activity android:name=".Activity.PaidTicketActivity"></activity>
+        <activity android:name=".Activity.PaidTicketActivity" />
     </application>
 
 </manifest>

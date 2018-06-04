@@ -41,8 +41,8 @@ public class TourismAdapter extends RecyclerView.Adapter<TourismAdapter.MyViewHo
                 @Override
                 public void onClick(View view) {
                     int mPosition = getLayoutPosition();
-                    Toast.makeText(mContext,"Di klik id = " + tourismList.get(mPosition).getIdBusinessDetails().toString(),Toast.LENGTH_LONG).show();
-                    Toast.makeText(mContext,"Di klik harga search = " + hargaSearch,Toast.LENGTH_LONG).show();
+                    //Toast.makeText(mContext,"Di klik id = " + tourismList.get(mPosition).getIdBusinessDetails().toString(),Toast.LENGTH_LONG).show();
+                    //Toast.makeText(mContext,"Di klik harga search = " + hargaSearch,Toast.LENGTH_LONG).show();
                     String element = tourismList.get(mPosition).toString();
                     Toast.makeText(view.getContext(), tourism.getText(), Toast.LENGTH_SHORT).show();
                     Intent i = new Intent(view.getContext(), NearbyActivity.class);

@@ -5,9 +5,12 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.graphics.Palette;
 import android.support.v7.widget.LinearLayoutManager;
@@ -56,12 +59,14 @@ public class BusinessDetailActivity extends AppCompatActivity {
     private Menu collapseMenu;
     private Button btnOrder;
     private ImageView review, header;
+    private  FloatingActionButton fab;
     private Dialog dialog;
     private TextView price, bukatutup, desc, address, number_reviews;
     private RatingBar totalStar;
     private List<Review> reviewData = null;
     public ReviewAdapter adapter = null;
     private User user = null;
+    String longitute,latitute;
 
     int id_detail_bisnis, hargaSearch, id_user;
     private boolean appBarExpanded = true;
@@ -110,6 +115,8 @@ public class BusinessDetailActivity extends AppCompatActivity {
 
         adapter = new ReviewAdapter(BusinessDetailActivity.this);
         recList.setAdapter(adapter);
+
+        fab = findViewById(R.id.maps);
 
 
         Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.kampung_gajah);
@@ -209,6 +216,8 @@ public class BusinessDetailActivity extends AppCompatActivity {
                     String openclose = "Buka Jam " + response.body().getData().getBusinessDetails().get(0).getBusinessDetails().getBusinessOpenTime() + " - Tutup Jam " + response.body().getData().getBusinessDetails().get(0).getBusinessDetails().getBusinessCloseTime();
                     String alamat = response.body().getData().getBusinessDetails().get(0).getBusinessDetails().getBusinessAddress();
                     String n_review = String.valueOf(response.body().getData().getBusinessDetails().get(0).getReviews().size());
+                    longitute = response.body().getData().getBusinessDetails().get(0).getBusinessDetails().getBusinessLang() ;
+                    latitute = response.body().getData().getBusinessDetails().get(0).getBusinessDetails().getBusinessLat();
                     collapsingToolbar.setTitle(title);
                     Glide.with(BusinessDetailActivity.this).load("http://backind.id/storage/" + response.body().getData().getBusinessDetails().get(0).getBusinessDetails().getBusinessProfilePict()).into(header);
                     price.setText(harga);
@@ -220,6 +229,19 @@ public class BusinessDetailActivity extends AppCompatActivity {
                     reviewData = response.body().getData().getBusinessDetails().get(0).getReviews();
                     final int idDetailBisnis = response.body().getData().getBusinessDetails().get(0).getBusinessDetails().getIdBusinessDetails();
                     final int idmenu = Integer.valueOf(response.body().getData().getBusinessDetails().get(0).getIdMenu());
+
+                    fab.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+//                        .setAction("Action", null).show();
+                            String uri = "http://maps.google.com/maps?daddr=" + latitute.trim() + "," + longitute.trim();
+                            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
+                            intent.setPackage("com.google.android.apps.maps");
+                            startActivity(intent);
+                        }
+                    });
+
                     btnOrder.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
@@ -256,7 +278,7 @@ public class BusinessDetailActivity extends AppCompatActivity {
                     }
                     float avgRate = sumRate / reviewData.size();
                     Log.d("Backindbug", avgRate + "");
-                    Toast.makeText(BusinessDetailActivity.this, avgRate + "", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(BusinessDetailActivity.this, avgRate + "", Toast.LENGTH_SHORT).show();
                     totalStar.setRating(avgRate);
 
                 }
@@ -300,7 +322,11 @@ public class BusinessDetailActivity extends AppCompatActivity {
         }
 
         if (item.getTitle() == "Maps") {
-            Toast.makeText(this, "Maps menu clicked!", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, "Maps menu clicked!", Toast.LENGTH_SHORT).show();
+            String uri = "http://maps.google.com/maps?daddr=" + latitute.trim() + "," + longitute.trim();
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
+            intent.setPackage("com.google.android.apps.maps");
+            startActivity(intent);
         }
         return super.onOptionsItemSelected(item);
     }
