@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorWhite"
+    tools:context=".Activity.UsedTicketActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Thank For Your Purchase!"
+            android:textAlignment="center"
+            android:fontFamily="@font/montserrat_regular"
+            />
+        <TextView
+            android:id="@+id/status"
+            android:layout_width="match_parent"
+            android:textAlignment="center"
+            android:layout_height="wrap_content"
+            android:text="PAID"
+            android:layout_marginTop="@dimen/padding10"
+            android:layout_alignParentRight="true"
+            android:fontFamily="@font/montserrat_medium"
+            android:textColor="@color/colorGreen"
+            android:textSize="30sp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Nomor Tagihan"
+            android:textStyle="italic"
+            android:layout_marginBottom="@dimen/padding5"
+            android:textAlignment="center"
+            android:fontFamily="@font/montserrat_regular"
+            />
+
+        <TextView
+            android:id="@+id/id_booking"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="#BACKIND2018"
+            android:textSize="22sp"
+            android:fontFamily="@font/montserrat_medium"
+            android:textColor="@color/colorHitam"
+            android:textAlignment="center"/>
+
+
+
+        <TextView
+            android:id="@+id/totals"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Rp 300.000,-"
+            android:textSize="18sp"
+            android:layout_marginTop="@dimen/padding5"
+            android:fontFamily="@font/montserrat_medium"
+            android:textColor="@color/colorPink"
+            android:textAlignment="center"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nama Pemesan"
+            android:textStyle="italic"
+            android:layout_marginLeft="@dimen/margin20"
+            android:layout_marginTop="30dp"
+            android:fontFamily="@font/montserrat_regular"/>
+
+        <TextView
+            android:id="@+id/name_user"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin20"
+            android:layout_marginTop="@dimen/padding5"
+            android:fontFamily="@font/montserrat_medium"
+            android:text="Saka Gelantara"
+            android:textColor="@color/colorHitam"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/txt_homestay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Homestay"
+            android:textStyle="italic"
+            android:layout_marginLeft="@dimen/margin20"
+            android:layout_marginTop="@dimen/padding10"
+            android:fontFamily="@font/montserrat_regular"/>
+
+        <TextView
+            android:id="@+id/name_homestay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Vila Manis"
+            android:layout_marginLeft="@dimen/margin20"
+            android:fontFamily="@font/montserrat_medium"
+            android:layout_marginTop="@dimen/padding5"
+            android:textColor="@color/colorHitam"
+            android:textSize="18sp"/>
+
+        <TextView
+            android:id="@+id/date_homestay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2018-10-10 sampai 2018-10-15"
+            android:layout_alignParentRight="true"
+            android:fontFamily="@font/montserrat_regular"
+            android:layout_marginLeft="@dimen/margin20"
+            android:layout_marginTop="@dimen/padding5"
+            android:textColor="@color/colorHitam"
+            android:textSize="14sp"/>
+
+        <TextView
+            android:id="@+id/txt_tourism"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tempat Wisata"
+            android:textStyle="italic"
+            android:layout_marginLeft="@dimen/margin20"
+            android:layout_marginTop="@dimen/padding10"
+            android:fontFamily="@font/montserrat_regular"/>
+
+        <TextView
+            android:id="@+id/name_tourism"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Kampung Gajah"
+            android:fontFamily="@font/montserrat_medium"
+            android:layout_marginLeft="@dimen/margin20"
+            android:layout_marginTop="@dimen/padding5"
+            android:textColor="@color/colorHitam"
+            android:textSize="18sp"/>
+
+        <TextView
+            android:id="@+id/date_tourism"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2018-10-10"
+            android:layout_alignParentRight="true"
+            android:fontFamily="@font/montserrat_regular"
+            android:layout_marginLeft="@dimen/margin20"
+            android:layout_marginTop="@dimen/padding5"
+            android:textColor="@color/colorHitam"
+            android:textSize="14sp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Jumlah Orang"
+            android:textStyle="italic"
+            android:layout_marginLeft="@dimen/margin20"
+            android:layout_marginTop="@dimen/padding10"
+            android:fontFamily="@font/montserrat_regular"/>
+
+        <TextView
+            android:id="@+id/jumlah_orang"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="10"
+            android:textColor="@color/colorHitam"
+            android:textSize="18sp"
+            android:layout_marginLeft="@dimen/margin20"
+            android:layout_marginTop="@dimen/padding5"
+            android:layout_marginBottom="@dimen/margin20"
+            android:fontFamily="@font/montserrat_medium"/>
+
+        <Button
+            android:id="@+id/review_homestay"
+            android:background="@drawable/btn_style_purple"
+            android:textAllCaps="false"
+            android:textColor="@color/colorWhite"
+            android:fontFamily="@font/montserrat_medium"
+            android:paddingRight="@dimen/padding10"
+            android:paddingLeft="@dimen/padding10"
+            android:layout_marginTop="@dimen/padding10"
+            android:layout_marginLeft="@dimen/margin20"
+            android:layout_marginRight="@dimen/margin20"
+            android:paddingTop="@dimen/padding5"
+            android:paddingBottom="@dimen/padding5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Review Homestay"/>
+
+        <Button
+            android:id="@+id/review_tourism"
+            android:background="@drawable/btn_style_purple"
+            android:textAllCaps="false"
+            android:textColor="@color/colorWhite"
+            android:fontFamily="@font/montserrat_medium"
+            android:paddingRight="@dimen/padding10"
+            android:paddingLeft="@dimen/padding10"
+            android:paddingTop="@dimen/padding5"
+            android:paddingBottom="@dimen/padding5"
+            android:layout_marginTop="@dimen/padding10"
+            android:layout_marginLeft="@dimen/margin20"
+            android:layout_marginRight="@dimen/margin20"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Review Tourism"/>
+
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>

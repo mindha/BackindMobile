@@ -24,6 +24,7 @@ import backind.backind.Activity.BuktiTransferActivity;
 import backind.backind.Activity.ListBisnisActivity;
 import backind.backind.Activity.PaidTicketActivity;
 import backind.backind.Activity.PaymentDeadlineActivity;
+import backind.backind.Activity.UsedTicketActivity;
 import backind.backind.Model.PaymentReceipt;
 import backind.backind.R;
 
@@ -92,6 +93,9 @@ public class EticketAdapter extends RecyclerView.Adapter<EticketAdapter.MyViewHo
         }else if(id_status ==2){
             holder.status.setText("Waiting Payment");
             holder.status.setTextColor(ContextCompat.getColor(mContext,R.color.colorOrange));
+        }else if(id_status ==4){
+            holder.status.setText("Used");
+            holder.status.setTextColor(ContextCompat.getColor(mContext,R.color.colorPink));
         }
 
         final String duedate = album.getTransaksi().getDuedate();
@@ -102,13 +106,17 @@ public class EticketAdapter extends RecyclerView.Adapter<EticketAdapter.MyViewHo
          String in_homestay = null;
          String out_homestay = null;
         String date_tourism = null;
+        int id_business = 0;
+        int id_user = 0;
 
 
         if (album.getTransaksi().getTourism() != null){
-
             holder.tourism.setText(album.getTransaksi().getTourism().getBusinessDetails().getBusinessName().toString());
             nama_tourism = album.getTransaksi().getTourism().getBusinessDetails().getBusinessName();
             date_tourism = String.valueOf(album.getTransaksi().getCheckinTourism());
+            id_business = album.getTransaksi().getTourism().getBusinessDetails().getIdBusinessDetails();
+            id_user = album.getTransaksi().getUser().getIdUser();
+
 
         } else {
             holder.tourism.setVisibility(View.GONE);
@@ -120,6 +128,11 @@ public class EticketAdapter extends RecyclerView.Adapter<EticketAdapter.MyViewHo
             nama_homestay = album.getTransaksi().getHomestay().getBusinessDetails().getBusinessName();
             in_homestay = album.getTransaksi().getCheckin();
             out_homestay = album.getTransaksi().getCheckout();
+            id_business = album.getTransaksi().getHomestay().getBusinessDetails().getIdBusinessDetails();
+            //Toast.makeText(mContext, "id bisnis" +id_business, Toast.LENGTH_SHORT).show();
+            id_user = album.getTransaksi().getUser().getIdUser();
+            //Toast.makeText(mContext, "id user" +id_user, Toast.LENGTH_SHORT).show();
+
         } else {
             holder.homestay.setVisibility(View.GONE);
             holder.txt_homestay.setVisibility(View.GONE);
@@ -130,6 +143,8 @@ public class EticketAdapter extends RecyclerView.Adapter<EticketAdapter.MyViewHo
         final String finalDate_tourism = date_tourism;
         final String finalIn_homestay = in_homestay;
         final String finalOut_homestay = out_homestay;
+        final int finalId_business = id_business;
+        final int finalId_user = id_user;
         holder.list.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -140,6 +155,8 @@ public class EticketAdapter extends RecyclerView.Adapter<EticketAdapter.MyViewHo
                     i.putExtra("id_transaksi", Integer.parseInt(eticketList.get(mPosition).getIdTransaksi().toString()));
                     i.putExtra("duedate",duedate);
                     i.putExtra("jumlah_tagihan",tagih);
+                    i.putExtra("id_business", finalId_business);
+                    i.putExtra("id_user", finalId_user);
                     i.putExtra("eticket",kode_backind);
                     i.putExtra("name_user",String.valueOf(album.getTransaksi().getUser().getName()));
                     i.putExtra("name_homestay", finalNama_homestay);
@@ -158,6 +175,25 @@ public class EticketAdapter extends RecyclerView.Adapter<EticketAdapter.MyViewHo
                     i.putExtra("eticket",kode_backind);
                     i.putExtra("status",id_status);
                     view.getContext().startActivity(i);
+
+                }else if(id_status==4){
+                    Intent i = new Intent(view.getContext(), UsedTicketActivity.class);
+                    i.putExtra("id_transaksi", Integer.parseInt(eticketList.get(mPosition).getIdTransaksi().toString()));
+                    i.putExtra("duedate",duedate);
+                    i.putExtra("jumlah_tagihan",tagih);
+                    i.putExtra("eticket",kode_backind);
+                    i.putExtra("id_business", finalId_business);
+                    i.putExtra("id_user", finalId_user);
+                    i.putExtra("name_user",String.valueOf(album.getTransaksi().getUser().getName()));
+                    i.putExtra("name_homestay", finalNama_homestay);
+                    i.putExtra("name_tourism", finalNama_tourism);
+                    i.putExtra("check_in", finalIn_homestay);
+                    i.putExtra("check_out", finalOut_homestay);
+                    i.putExtra("date_tiket", finalDate_tourism);
+                    i.putExtra("jumlah_orang",album.getTransaksi().getTotalTicket());
+
+                    view.getContext().startActivity(i);
+
                 }
 
             }
