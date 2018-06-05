@@ -144,19 +144,19 @@ public class BusinessDetailActivity extends AppCompatActivity {
 
         btnOrder = findViewById(R.id.btnOrder);
 
-        review.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                boolean statusLogin = Hawk.get("statusLogin", false);
-                if (statusLogin) {
-                    messageDialog();
-                } else {
-                    Toast.makeText(BusinessDetailActivity.this, "Silahkan login terlebih dahulu", Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(BusinessDetailActivity.this, LoginActivity.class));
-                    finish();
-                }
-            }
-        });
+//        review.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                boolean statusLogin = Hawk.get("statusLogin", false);
+//                if (statusLogin) {
+//                    messageDialog();
+//                } else {
+//                    Toast.makeText(BusinessDetailActivity.this, "Silahkan login terlebih dahulu", Toast.LENGTH_SHORT).show();
+//                    startActivity(new Intent(BusinessDetailActivity.this, LoginActivity.class));
+//                    finish();
+//                }
+//            }
+//        });
 
     }
 

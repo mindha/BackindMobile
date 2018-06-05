@@ -17,6 +17,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.orhanobut.hawk.Hawk;
@@ -189,13 +190,17 @@ public class DetailBayarHomestayActivity extends AppCompatActivity {
                         public void onResponse(Call<TransaksiResponse> call, Response<TransaksiResponse> response) {
                             if (response.isSuccessful()){
                                 message.dismiss();
-                                updateCost(response.body().getData().getIdBooking(), finalTotal_harga_semua);
+                                if(response.body().getError()){
+                                    Toast.makeText(DetailBayarHomestayActivity.this,response.body().getMessage().toString(),Toast.LENGTH_LONG).show();
+                                }else{
+                                    updateCost(response.body().getData().getIdBooking(), finalTotal_harga_semua);
+                                }
                             }
                         }
 
                         @Override
                         public void onFailure(Call<TransaksiResponse> call, Throwable t) {
-
+                            Log.d("Backindbug","ERR = " + t.getMessage());
                         }
                     });
         }catch (Exception e){

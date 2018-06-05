@@ -74,7 +74,13 @@ public interface Service {
 
     @FormUrlEncoded
     @POST("postAddBooking")
-    Call<TransaksiResponse> booking(@Field("tourism")int id_tourism, @Field("homestay")int id_homestay, @Field("checkin") String checkin, @Field("checkout")String checkout, @Field("checkin_tourism") String checkin_tourism, @Field("total_ticket") int total_ticket);
+    Call<TransaksiResponse> booking(
+            @Field("tourism")int id_tourism,
+            @Field("homestay")int id_homestay,
+            @Field("checkin") String checkin,
+            @Field("checkout")String checkout,
+            @Field("checkin_tourism") String checkin_tourism,
+            @Field("total_ticket") int total_ticket);
 
     @FormUrlEncoded
     @POST("updatePassword")
