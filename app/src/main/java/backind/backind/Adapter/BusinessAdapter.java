@@ -13,6 +13,8 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,7 +32,7 @@ public class BusinessAdapter extends RecyclerView.Adapter<BusinessAdapter.MyView
     private List<Near> bisnisList = new ArrayList<>();
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView labelName, labelDesc;
+        public TextView labelName, labelDesc, distance;
         public ImageView labelPic;
         public LinearLayout listItem;
 
@@ -40,6 +42,7 @@ public class BusinessAdapter extends RecyclerView.Adapter<BusinessAdapter.MyView
             labelName   =  view.findViewById(R.id.name);
             labelDesc   = view.findViewById(R.id.harga);
             listItem = view.findViewById(R.id.item);
+            distance = view.findViewById(R.id.distance);
 
             listItem.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -90,6 +93,10 @@ public class BusinessAdapter extends RecyclerView.Adapter<BusinessAdapter.MyView
         n = Integer.valueOf(album.getIdBusinessDetails());
         holder.labelName.setText(album.getBusinessName());
         holder.labelDesc.setText("Rp " + album.getBusinessPrice() + ",-");
+        double angka= Double.valueOf(album.getDistance());
+        NumberFormat formatter = new DecimalFormat("#0.00");
+        holder.distance.setText(formatter.format(angka)+" km");
+
 
 //        i.putExtra("id_bisnis", Integer.parseInt(kotaList.get(mPosition).getIdCity().toString()));
 

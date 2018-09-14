@@ -164,9 +164,11 @@ public class UsedTicketActivity extends AppCompatActivity {
             public void onResponse(Call<ReviewResponse> call, Response<ReviewResponse> response) {
                 if (response.isSuccessful()) {
                     dialog.dismiss();
-                    Toast.makeText(UsedTicketActivity.this, "Berhasil add review", Toast.LENGTH_SHORT).show();
-                } else {
-                    dialog.dismiss();
+                    if (response.body().getError()) {
+                        Toast.makeText(UsedTicketActivity.this, response.body().getMessage().toString(), Toast.LENGTH_LONG).show();
+                    } else {
+                        Toast.makeText(UsedTicketActivity.this, "Berhasil add review", Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
 
